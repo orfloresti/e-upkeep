@@ -139,21 +139,23 @@ ApplicationWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             width:  widthDialog - 40
             Column{
-                spacing: 20
                 width: root.widthDialog
-
                 Switch{
+                    id: screenOption
+                    text: qsTr("Full screen")
+                    onClicked: fullScreen(screenOption.checked)
 
+                    function fullScreen(screenState){
+                        if(screenState === true){ showFullScreen()}
+                        else{showNormal()}
+                    }
                 }
                 Switch{
-
+                    text: qsTr("Theme")
                 }
             }
 
         }
-
-
-
     }
 
     Dialog {
@@ -186,7 +188,7 @@ ApplicationWindow {
                 }
                 Label{
                     width: aboutDialog.availableWidth
-                    text: "Paper Icons: by Sam Hewitt" // is licensed under CC-SA-4.0"
+                    text: "Paper Icons: by Sam Hewitt" // is licensed under CC-SA-4.0
                     wrapMode: Label.Wrap
                     font.pixelSize: 12
                 }
