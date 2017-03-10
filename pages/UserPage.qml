@@ -11,6 +11,70 @@ Page {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
+        Page {
+
+            ListView {
+                width: swipeView.width
+                height: swipeView.height
+
+                model: ListModel {
+                    ListElement { password: "500001974"; name: "Orlando Flores Teomitzi"; typeUser: "LabUser" }
+                    ListElement { password: "7149"; name: "Vicente Martínez Villegas"; typeUser: "LabUser" }
+
+                }
+                delegate: ItemDelegate {
+                    id: userDelegate
+                    width: parent.width
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    height: textheight.height + 30
+
+                    RowLayout{
+                        anchors.fill: userDelegate
+
+                        Item{
+                            Layout.fillHeight:  true
+                            Layout.leftMargin: (userImagen.width / 2 ) + 7
+                            Layout.rightMargin: (userImagen.width / 2 ) + 4
+
+                            Image {
+                                width: 50
+                                height: 50
+                                id: userImagen
+                                anchors.centerIn: parent
+                                source: "qrc:/images/avatar-default.png"
+                            }
+                        }
+
+                        ColumnLayout{
+                            id: textheight
+
+                            Label{
+                                text: password
+                                wrapMode: Label.Wrap
+                                font.pixelSize: 16
+                                font.bold: true
+
+                                Layout.fillWidth: true
+
+                            }
+                            Label{
+                                text: name + ", " + typeUser
+                                wrapMode: Label.Wrap
+                                font.pixelSize: 12
+
+                                Layout.fillWidth: true
+
+                            }
+                        }
+                    }
+
+                    onClicked: {
+                        console.log("Click")
+                    }
+                }
+            }
+
+        }
         ScrollablePage {
 
                 ColumnLayout{
@@ -80,71 +144,6 @@ Page {
 
             }
 
-
-        Page {
-
-            ListView {
-                width: swipeView.width
-                height: swipeView.height
-
-                model: ListModel {
-                    ListElement { password: "500001974"; name: "Orlando Flores Teomitzi"; typeUser: "LabUser" }
-                    ListElement { password: "7149"; name: "Vicente Martínez Villegas"; typeUser: "LabUser" }
-
-                }
-                delegate: Button{
-                    id: userDelegate
-                    width: parent.width - space * 2
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: textheight.height + 30
-
-                    RowLayout{
-                        anchors.fill: userDelegate
-
-                        Item{
-                            Layout.fillHeight:  true
-                            Layout.leftMargin: (userImagen.width / 2 ) + 10
-                            Layout.rightMargin: (userImagen.width / 2 ) + 7
-
-                            Image {
-                                width: 50
-                                height: 50
-                                id: userImagen
-                                anchors.centerIn: parent
-                                source: "qrc:/images/avatar-default.png"
-                            }
-                        }
-
-                        ColumnLayout{
-                            id: textheight
-
-                            Label{
-                                text: password
-                                wrapMode: Label.Wrap
-                                font.pixelSize: 16
-                                font.bold: true
-
-                                Layout.fillWidth: true
-
-                            }
-                            Label{
-                                text: name + ", " + typeUser
-                                wrapMode: Label.Wrap
-                                font.pixelSize: 12
-
-                                Layout.fillWidth: true
-
-                            }
-                        }
-                    }
-
-                }
-            }
-
-        }
-
-
-
     }
     header: TabBar{
         id: tabBar
@@ -152,16 +151,17 @@ Page {
 
         TabButton {
             Label{
+                text: qsTr("List")
+                anchors.centerIn: parent
+            }
+        }
+
+        TabButton {
+            Label{
                 text: qsTr("New")
                 anchors.centerIn: parent
             }
 
-        }
-        TabButton {
-            Label{
-                text: qsTr("List")
-                anchors.centerIn: parent
-            }
         }
 
     }
