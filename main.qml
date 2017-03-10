@@ -4,6 +4,9 @@ import QtQuick.Layouts 1.3
 import QtQuick.Window 2.0
 
 ApplicationWindow {
+
+    property int widthDialog: Math.min(root.width, root.height) / 3 * 2
+
     id: root
     visible: true
     //visibility: Window.FullScreen
@@ -156,8 +159,8 @@ ApplicationWindow {
         modal: true
         focus: true
         x: (root.width - width) / 2
-        y: (root.height - height) / 2
-        width: Math.min(root.width, root.height) / 3 * 2
+        y: root.height / 4
+        width: widthDialog
         title: "About"
 
         Column {
@@ -180,6 +183,7 @@ ApplicationWindow {
                 width: aboutDialog.availableWidth
                 text: "Paper Icons: by Sam Hewitt" // is licensed under CC-SA-4.0"
                 wrapMode: Label.Wrap
+                font.pixelSize: 12
             }
 
         }
