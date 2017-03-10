@@ -5,12 +5,12 @@
         <file>icons/back.png</file>
         <file>icons/drawer.png</file>
         <file>icons/menu.png</file>
-        <file>icons/network-workgroup.png</file>
+        <file>icons/emblem-synchronizing.png</file>
         <file>images/applications-accessories.png</file>
         <file>images/avatar-default.png</file>
         <file>pages/ReportPage.qml</file>
         <file>pages/ScrollablePage.qml</file>
         <file>pages/UserPage.qml</file>
-        <file>network-workgroup.ico</file>
+        <file>emblem-synchronizing.ico</file>
     </qresource>
 </RCC>

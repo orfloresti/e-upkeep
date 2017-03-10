@@ -28,7 +28,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_ICONS = network-workgroup.ico
+RC_ICONS = emblem-synchronizing.ico
 
 DISTFILES += \
     android/AndroidManifest.xml \
