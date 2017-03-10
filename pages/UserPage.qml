@@ -1,12 +1,14 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
+import Qt.labs.settings 1.0
 
 Page {
     property int space: 10
 
     SwipeView {
         id: swipeView
+
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
@@ -80,12 +82,36 @@ Page {
             }
 
 
-        ScrollablePage {
+        Page {
 
-            ColumnLayout {
+            Component{
+                id: userDelegate
 
+                Frame{
+                    width: parent.width
+                    //height: userData.height
+                    Column{
+                        id: userData
+                        Label{text: password}
+                        Label{text: name}
+                        Label{text: typeUser}
+                    }
+                }
             }
+
+            ListView {
+                anchors.fill: parent
+                model: ListModel {
+                    ListElement { password: "500001974"; name: "Orlando Flores Teomitzi"; typeUser: "LabUser" }
+                    ListElement { password: "7149"; name: "Vicente Martínez Villegas"; typeUser: "LabUser" }
+
+                }
+                delegate: userDelegate
+            }
+
         }
+
+
 
     }
     header: TabBar{

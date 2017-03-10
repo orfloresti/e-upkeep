@@ -131,7 +131,7 @@ ApplicationWindow {
         focus: true
         id: settingsDialog
         x: (root.width - width) / 2
-        y: root.height  / 4
+        y: (root.height - height) / 2
         width: widthDialog
         title: "Settings"
 
@@ -150,9 +150,7 @@ ApplicationWindow {
                         else{showNormal()}
                     }
                 }
-                Switch{
-                    text: qsTr("Theme")
-                }
+
             }
 
         }
@@ -163,7 +161,7 @@ ApplicationWindow {
         modal: true
         focus: true
         x: (root.width - width) / 2
-        y: root.height / 4
+        y: ((root.height - height) / 2)
         width: widthDialog
         title: "About"
 
@@ -196,7 +194,5 @@ ApplicationWindow {
             }
         }
     }
-
-
 }
 
