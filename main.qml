@@ -131,26 +131,28 @@ ApplicationWindow {
         focus: true
         id: settingsDialog
         x: (root.width - width) / 2
-        y: (root.height - height) / 2
-        width: Math.min(root.width, root.height) / 4 * 2
+        y: root.height  / 4
+        width: widthDialog
         title: "Settings"
 
-        GridLayout {
-            columns: 1
-            rowSpacing: 10
-            columnSpacing: 40
-            Switch {
-                Layout.fillWidth: true
-                id: screenOption
-                text: qsTr("Full screen")
-                onClicked: fullScreen(screenOption.checked)
+        Frame{
+            anchors.horizontalCenter: parent.horizontalCenter
+            width:  widthDialog - 40
+            Column{
+                spacing: 20
+                width: root.widthDialog
 
-                function fullScreen(screenState){
-                    if(screenState === true){ showFullScreen()}
-                    else{showNormal()}
+                Switch{
+
+                }
+                Switch{
+
                 }
             }
+
         }
+
+
 
     }
 
@@ -163,29 +165,33 @@ ApplicationWindow {
         width: widthDialog
         title: "About"
 
-        Column {
-            id: aboutColumn
-            spacing: 20
+        Frame{
+            anchors.horizontalCenter: parent.horizontalCenter
+            width:  widthDialog - 40
+            Column {
+                id: aboutColumn
+                spacing: 20
 
-            Label {
-                width: aboutDialog.availableWidth
-                text: "Feedback a tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
-                wrapMode: Label.Wrap
-                font.pixelSize: 12
-            }
-            Label {
-                width: aboutDialog.availableWidth
-                text: "Based on Qt 5.8"
-                wrapMode: Label.Wrap
-                font.pixelSize: 12
-            }
-            Label{
-                width: aboutDialog.availableWidth
-                text: "Paper Icons: by Sam Hewitt" // is licensed under CC-SA-4.0"
-                wrapMode: Label.Wrap
-                font.pixelSize: 12
-            }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "Feedback a tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 12
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "Based on Qt 5.8"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 12
+                }
+                Label{
+                    width: aboutDialog.availableWidth
+                    text: "Paper Icons: by Sam Hewitt" // is licensed under CC-SA-4.0"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 12
+                }
 
+            }
         }
     }
 
