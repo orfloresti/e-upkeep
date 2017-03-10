@@ -1,7 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
-import Qt.labs.settings 1.0
 
 Page {
     property int space: 10
@@ -84,29 +83,62 @@ Page {
 
         Page {
 
-            Component{
-                id: userDelegate
-
-                Frame{
-                    width: parent.width
-                    //height: userData.height
-                    Column{
-                        id: userData
-                        Label{text: password}
-                        Label{text: name}
-                        Label{text: typeUser}
-                    }
-                }
-            }
-
             ListView {
-                anchors.fill: parent
+                width: swipeView.width
+                height: swipeView.height
+
                 model: ListModel {
                     ListElement { password: "500001974"; name: "Orlando Flores Teomitzi"; typeUser: "LabUser" }
                     ListElement { password: "7149"; name: "Vicente Martínez Villegas"; typeUser: "LabUser" }
 
                 }
-                delegate: userDelegate
+                delegate: Button{
+                    id: userDelegate
+                    width: parent.width - space * 2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    height: textheight.height + 30
+
+                    RowLayout{
+                        anchors.fill: userDelegate
+
+                        Item{
+                            Layout.fillHeight:  true
+                            Layout.leftMargin: (userImagen.width / 2 ) + 10
+                            Layout.rightMargin: (userImagen.width / 2 ) + 7
+
+                            Image {
+                                width: 50
+                                height: 50
+                                id: userImagen
+                                anchors.centerIn: parent
+                                source: "qrc:/images/avatar-default.png"
+                            }
+                        }
+
+                        ColumnLayout{
+                            id: textheight
+
+                            Label{
+                                text: password
+                                wrapMode: Label.Wrap
+                                font.pixelSize: 16
+                                font.bold: true
+
+                                Layout.fillWidth: true
+
+                            }
+                            Label{
+                                text: name + ", " + typeUser
+                                wrapMode: Label.Wrap
+                                font.pixelSize: 12
+
+                                Layout.fillWidth: true
+
+                            }
+                        }
+                    }
+
+                }
             }
 
         }
