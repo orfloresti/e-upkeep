@@ -129,8 +129,8 @@ Page {
                     }
 
                     Button{
-                        Text{
-                            color: "white"
+                        Label{
+                            //color: "white"
                             text: "Save"
                             anchors.centerIn: parent
                         }
@@ -145,9 +145,10 @@ Page {
             }
 
     }
-    header: TabBar{
+    footer:  TabBar{
         id: tabBar
         currentIndex: swipeView.currentIndex
+
 
         TabButton {
             Label{

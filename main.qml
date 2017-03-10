@@ -17,6 +17,7 @@ ApplicationWindow {
 
     header: ToolBar{
 
+
         RowLayout{
             spacing: 20
             anchors.fill: parent
@@ -138,8 +139,9 @@ ApplicationWindow {
         Frame{
             anchors.horizontalCenter: parent.horizontalCenter
             width:  widthDialog - 40
-            Column{
+            ColumnLayout{
                 width: root.widthDialog
+
                 Switch{
                     id: screenOption
                     text: qsTr("Full screen")
@@ -155,7 +157,6 @@ ApplicationWindow {
 
         }
     }
-
     Dialog {
         id: aboutDialog
         modal: true
@@ -171,7 +172,7 @@ ApplicationWindow {
 
             Label {
                 width: aboutDialog.availableWidth
-                text: "Feedback a tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
+                text: "Feedback is a tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
                 wrapMode: Label.Wrap
                 font.pixelSize: 12
             }
