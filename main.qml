@@ -25,15 +25,16 @@ ApplicationWindow {
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
                     source: stackView.depth > 1 ? "qrc:/icons/back.png" : "qrc:/icons/drawer.png"
-                    //source:"qrc:/icons/drawer.png"
                 }
 
                 onClicked: {
                     if (stackView.depth > 1) {
                         stackView.pop()
                         listView.currentIndex = -1
+                        console.log(listView.currentIndex)
                     } else {
                         drawer.open()
+                        console.log(listView.currentIndex)
                     }
                 }
 
@@ -115,20 +116,21 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
 
-        initialItem: Pane {
-            id: pane
 
+        initialItem: Pane{
+            id: pane
         }
     }
 
 
     Dialog {
         id: aboutDialog
-        modal: true
         focus: true
-        x: (root.width - width) / 2
-        y: ((root.height - height) / 2)
-        width: Math.min(root.width, root.height) / 3 * 2
+        modal: true
+        width: parent.width/1.5
+        height: parent.height/1.5
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
         title: "About"
 
         Column {

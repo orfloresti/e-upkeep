@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 Page {
+    property bool fullScreenState: false
+
     Flickable {
         width: parent.width
         height: parent.height
@@ -14,13 +16,19 @@ Page {
             width: parent.width
 
             SwitchDelegate{
+                position : fullScreenState
                 id: screenOption
                 text: qsTr("Full screen")
                 Layout.fillWidth: true
                 onClicked: fullScreen(screenOption.checked)
                 function fullScreen(screenState){
-                    if(screenState === true){ showFullScreen()}
-                    else{showNormal()}
+                    if(screenState === true) {
+                        showFullScreen()
+                        fullScreenState = true
+                    }
+                    else{
+                        showNormal()
+                    }
                 }
             }
         }

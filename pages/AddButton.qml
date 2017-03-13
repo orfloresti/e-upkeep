@@ -14,7 +14,7 @@ MouseArea{
     Rectangle{
         id: colorButton
         implicitWidth: 50
-        implicitHeight: width
+        implicitHeight: width        
         radius: width * 0.5
         color: "Teal"
         Label{
