@@ -75,11 +75,17 @@ Page {
             }
 
         }
-        ScrollablePage {
+
+        Page {
+            Flickable {
+                width: parent.width
+                height: parent.height
+                contentWidth: parent.width
+                contentHeight: column.height
 
                 ColumnLayout{
-                    width: swipeView.width
-                    //height: swipeView.height
+                    id: column
+                    width: parent.width
 
                     Item{
                         id: userItem
@@ -145,6 +151,7 @@ Page {
                 }
 
             }
+        }
 
     }
     footer:  TabBar{
