@@ -57,6 +57,6 @@ Page {
             width: parent.width
         }
 
-        ScrollIndicator.vertical: ScrollIndicator { }
+        //ScrollIndicator.vertical: ScrollIndicator { }
     }
 }

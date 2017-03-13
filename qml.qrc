@@ -12,5 +12,6 @@
         <file>pages/ScrollablePage.qml</file>
         <file>pages/UserPage.qml</file>
         <file>emblem-synchronizing.ico</file>
+        <file>pages/SettingsPage.qml</file>
     </qresource>
 </RCC>

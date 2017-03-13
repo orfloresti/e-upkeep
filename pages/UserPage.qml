@@ -78,6 +78,8 @@ Page {
         ScrollablePage {
 
                 ColumnLayout{
+                    width: swipeView.width
+                    //height: swipeView.height
 
                     Item{
                         id: userItem

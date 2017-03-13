@@ -66,10 +66,6 @@ ApplicationWindow {
                     transformOrigin: Menu.TopRight
 
                     MenuItem {
-                        text: "Settings"
-                        onTriggered: settingsDialog.open()
-                    }
-                    MenuItem {
                         text: "About"
                         onTriggered: aboutDialog.open()
                     }
@@ -110,6 +106,7 @@ ApplicationWindow {
             model: ListModel {
                 ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
                 ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
+                ListElement { title: "Settings"; source: "qrc:/pages/SettingsPage.qml"}
 
             }
 
@@ -127,36 +124,7 @@ ApplicationWindow {
         }
     }
 
-    Dialog {
-        modal: true
-        focus: true
-        id: settingsDialog
-        x: (root.width - width) / 2
-        y: (root.height - height) / 2
-        width: widthDialog
-        title: "Settings"
 
-        Frame{
-            anchors.horizontalCenter: parent.horizontalCenter
-            width:  widthDialog - 40
-            ColumnLayout{
-                width: root.widthDialog
-
-                Switch{
-                    id: screenOption
-                    text: qsTr("Full screen")
-                    onClicked: fullScreen(screenOption.checked)
-
-                    function fullScreen(screenState){
-                        if(screenState === true){ showFullScreen()}
-                        else{showNormal()}
-                    }
-                }
-
-            }
-
-        }
-    }
     Dialog {
         id: aboutDialog
         modal: true
