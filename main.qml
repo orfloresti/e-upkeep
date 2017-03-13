@@ -5,8 +5,6 @@ import QtQuick.Window 2.0
 
 ApplicationWindow {
 
-    property int widthDialog: Math.min(root.width, root.height) / 3 * 2
-
     id: root
     visible: true
     //visibility: Window.FullScreen
@@ -16,7 +14,6 @@ ApplicationWindow {
     title: qsTr("Feedback")
 
     header: ToolBar{
-
 
         RowLayout{
             spacing: 20
@@ -131,7 +128,7 @@ ApplicationWindow {
         focus: true
         x: (root.width - width) / 2
         y: ((root.height - height) / 2)
-        width: widthDialog
+        width: Math.min(root.width, root.height) / 3 * 2
         title: "About"
 
         Column {
