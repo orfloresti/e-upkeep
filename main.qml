@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Window 2.0
 
 ApplicationWindow {
+    property bool fullScreenState: false
 
     id: root
     visible: true
@@ -62,10 +63,13 @@ ApplicationWindow {
                     id: optionsMenu
                     x: parent.width - width
                     transformOrigin: Menu.TopRight
-
                     MenuItem {
                         text: "About"
                         onTriggered: aboutDialog.open()
+                    }
+                    MenuItem{
+                        text:"Settings"
+                        onTriggered: settingsDialog.open()
                     }
                     MenuItem {
                         text: "Close"
@@ -104,7 +108,7 @@ ApplicationWindow {
             model: ListModel {
                 ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
                 ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
-                ListElement { title: "Settings"; source: "qrc:/pages/SettingsPage.qml"}
+                ListElement { title: "Inventory"; source: "qrc:/pages/InventoryPage.qml"}
 
             }
 
@@ -119,6 +123,15 @@ ApplicationWindow {
 
         initialItem: Pane{
             id: pane
+
+            Item {
+                id: addbuton
+                Loader{
+                    source: "qrc:/pages/AddButton.qml"
+                    x: root.width - (width + width/2)
+                    y: root.height - (height*2.5)
+                }
+            }
         }
     }
 
@@ -133,7 +146,7 @@ ApplicationWindow {
         y: (parent.height - height) / 2
         title: "About"
 
-        Column {
+        Column{
             id: aboutColumn
             spacing: 20
 
@@ -156,6 +169,38 @@ ApplicationWindow {
                 font.pixelSize: 12
             }
 
+        }
+
+    }
+
+    Dialog {
+        id: settingsDialog
+        focus: true
+        modal: true
+        width: parent.width/1.5
+        height: parent.height/1.5
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        title: "About"
+        ColumnLayout{
+            id: column
+            width: parent.width
+            SwitchDelegate{
+                position : fullScreenState
+                id: screenOption
+                text: qsTr("Full screen")
+                Layout.fillWidth: true
+                onClicked: fullScreen(screenOption.checked)
+                function fullScreen(screenState){
+                    if(screenState === true) {
+                        showFullScreen()
+                        fullScreenState = true
+                    }
+                    else{
+                        showNormal()
+                    }
+                }
+            }
         }
 
     }

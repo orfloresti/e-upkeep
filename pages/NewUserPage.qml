@@ -4,7 +4,10 @@ import QtQuick.Controls 2.1
 
 
 Flickable {
-    property int space: 10
+    property int space: 20
+    property int passwordUser
+    property string nameUser
+    property string typeUser
 
     width: parent.width
     height: parent.height
@@ -32,19 +35,39 @@ Flickable {
             }
         }
 
-        Label {
-            text: "Password"
+        RowLayout{
+            spacing: space
             Layout.fillWidth: true
             Layout.leftMargin: space
             Layout.rightMargin: space
-        }
-        TextField {
-            id: passwordFiel
-            selectByMouse: true
-            placeholderText: "Password"
-            Layout.fillWidth: true
-            Layout.leftMargin: space
-            Layout.rightMargin: space
+
+            ColumnLayout{
+                Label {
+                    text: "Password"
+                    Layout.fillWidth: true
+                }
+                TextField {
+                    id: passwordField
+                    selectByMouse: true
+                    placeholderText: "Password"
+                    Layout.fillWidth: true
+
+                }
+            }
+
+            ColumnLayout{
+                Label {
+                    text: "User"
+                    Layout.fillWidth: true
+                }
+                ComboBox{
+                    id: typeUserField
+                    currentIndex: -1
+                    model:["Laboratory", "Plant"]
+                    Layout.fillWidth: true
+                }
+            }
+
 
         }
 
@@ -55,7 +78,7 @@ Flickable {
             Layout.rightMargin: space
         }
         TextField {
-            id: name
+            id: nameField
             selectByMouse: true
             placeholderText: "Name"
             Layout.fillWidth: true
@@ -64,6 +87,16 @@ Flickable {
 
         }
         Button{
+            id: save
+            Label{
+                anchors.centerIn: parent
+                text: "Save"
+                color: "Black"
+
+            }
+            Layout.fillWidth: true
+            Layout.leftMargin: space
+            Layout.rightMargin: space
 
         }
 
