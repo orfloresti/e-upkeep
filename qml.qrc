@@ -11,8 +11,6 @@
         <file>pages/ReportPage.qml</file>
         <file>pages/UserPage.qml</file>
         <file>emblem-synchronizing.ico</file>
-        <file>pages/NewUserPage.qml</file>
         <file>pages/AddButton.qml</file>
-        <file>pages/UserList.qml</file>
     </qresource>
 </RCC>
