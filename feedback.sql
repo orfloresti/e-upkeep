@@ -61,19 +61,25 @@ CREATE TABLE BuildingZone(
 );
 
 CREATE TABLE Arrive(
-  dateArrive TEXT,
+  year INTEGER,
+  month INTEGER,
+  day INTEGER,
   numberControl INTEGER,
-  userPassword TEXT,
-  PRIMARY KEY(dateArrive, numberControl),
-  FOREIGN KEY(userPassword) REFERENCES User(password)
+  labUser TEXT,
+  plantUser TEXT,
+  PRIMARY KEY(year, month, day, numberControl),
+  FOREIGN KEY(labUser, plantUser) REFERENCES User(password, password)
 );
 
 CREATE TABLE Out(
-  dataOut TEXT,
+  year INTEGER,
+  month INTEGER,
+  day INTEGER,
   numberControl INTEGER,
-  userPassword TEXT,
-  PRIMARY KEY(dataOut, numberControl),
-  FOREIGN KEY(userPassword) REFERENCES User(password)
+  labUser TEXT,
+  plantUser TEXT,
+  PRIMARY KEY(year, month, day, numberControl),
+  FOREIGN KEY(labUser, plantUser) REFERENCES User(password, password)
 );
 
 CREATE TABLE Report(

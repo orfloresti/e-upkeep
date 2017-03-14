@@ -1,4 +1,4 @@
-QT += qml quick
+QT += qml quick sql
 
 CONFIG += c++11
 
@@ -40,3 +40,5 @@ DISTFILES += \
     android/gradlew.bat
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+HEADERS +=
