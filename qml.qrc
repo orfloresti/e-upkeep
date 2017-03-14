@@ -12,5 +12,7 @@
         <file>pages/UserPage.qml</file>
         <file>emblem-synchronizing.ico</file>
         <file>pages/AddButton.qml</file>
+        <file>pages/TypePage.qml</file>
+        <file>feedback.sql</file>
     </qresource>
 </RCC>

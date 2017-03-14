@@ -4,10 +4,6 @@ import QtQuick.Controls 2.1
 
 Page {
     property int space: 20
-    property int passwordUser
-    property string nameUser
-    property string typeUser
-
 
     SwipeView {
         id: swipeView
@@ -106,6 +102,10 @@ Page {
                         Layout.leftMargin: space
                         Layout.rightMargin: space
 
+                        onClicked: {
+                            console.log("\nPassword: " +passwordField.text + "\nUser: " + typeUserField.currentText+ "\nName: " + nameField.text)
+                        }
+
                     }
 
                 }
@@ -117,11 +117,10 @@ Page {
         Page {
             ColumnLayout{
                 width: parent.width
+
                 Component{
                     id: userDelegate
-
                     ItemDelegate {
-
                         width: parent.width
                         height: userImage.height + 15
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -163,26 +162,27 @@ Page {
                             }
                         }
                         onClicked: {
-                            console.log(swipeView.currentIndex)
+                            console.log(index)
                         }
                    }
 
                 }
 
                 ListModel {
-                    id: userList
+                    id: userListModel
                     ListElement { password: "500001974"; name: "Orlando Flores Teomitzi"; typeUser: "LabUser" }
                     ListElement { password: "7149"; name: "Vicente Martínez Villegas"; typeUser: "LabUser" }
                     ListElement { password: "500000000"; name: "Usuario"; typeUser: "PlantUser" }
                 }
 
                 ListView {
+                    id: userList
                     Layout.fillWidth: true
                     //Layout.fillHeight: true
                     //width: swipeView.width
                     height: swipeView.height
                     focus: true
-                    model: userList
+                    model: userListModel
                     delegate: userDelegate
                 }
             }

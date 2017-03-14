@@ -2,9 +2,9 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.0
+import QtQuick.LocalStorage 2.0
 
 ApplicationWindow {
-    property bool fullScreenState: false
 
     id: root
     visible: true
@@ -13,6 +13,13 @@ ApplicationWindow {
     height: 600
 
     title: qsTr("Feedback")
+
+
+    Item {
+        Component.onCompleted: {
+            var db = LocalStorage.openDatabaseSync("Feedback", "3.0", "Feedback database", 10000);
+        }
+    }
 
     header: ToolBar{
 
@@ -32,10 +39,9 @@ ApplicationWindow {
                     if (stackView.depth > 1) {
                         stackView.pop()
                         listView.currentIndex = -1
-                        console.log(listView.currentIndex)
                     } else {
                         drawer.open()
-                        console.log(listView.currentIndex)
+
                     }
                 }
 
@@ -108,7 +114,7 @@ ApplicationWindow {
             model: ListModel {
                 ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
                 ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
-                ListElement { title: "Inventory"; source: "qrc:/pages/InventoryPage.qml"}
+                ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
 
             }
 
@@ -119,8 +125,6 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-
-
         initialItem: Pane{
             id: pane
 
@@ -185,8 +189,7 @@ ApplicationWindow {
         ColumnLayout{
             id: column
             width: parent.width
-            SwitchDelegate{
-                position : fullScreenState
+            SwitchDelegate{                
                 id: screenOption
                 text: qsTr("Full screen")
                 Layout.fillWidth: true
@@ -194,7 +197,6 @@ ApplicationWindow {
                 function fullScreen(screenState){
                     if(screenState === true) {
                         showFullScreen()
-                        fullScreenState = true
                     }
                     else{
                         showNormal()
