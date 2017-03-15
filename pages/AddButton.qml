@@ -7,9 +7,9 @@ MouseArea{
     width: colorButton.width
     height: colorButton.height
 
-    onEntered: { colorButton.color="#006767"}
+    onEntered: { colorButton.color="#007580"}
     onExited: {colorButton.color="Teal"}
-    onPressed: {colorButton.color="#003434"}
+    onPressed: {colorButton.color="#006767"}
 
     Rectangle{
         id: colorButton

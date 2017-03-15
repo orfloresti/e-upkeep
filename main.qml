@@ -14,7 +14,6 @@ ApplicationWindow {
 
     title: qsTr("Feedback")
 
-
     Item {
         Component.onCompleted: {
             var db = LocalStorage.openDatabaseSync("Feedback", "3.0", "Feedback database", 10000);
@@ -32,16 +31,16 @@ ApplicationWindow {
                     fillMode: Image.Pad
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
-                    source: stackView.depth > 1 ? "qrc:/icons/back.png" : "qrc:/icons/drawer.png"
+                    source: stackView.depth == 1 ?  "qrc:/icons/drawer.png" : "qrc:/icons/back.png"
                 }
 
                 onClicked: {
                     if (stackView.depth > 1) {
                         stackView.pop()
-                        listView.currentIndex = -1
-                    } else {
+                        console.log(stackView.depth)
+                    } else {                        
                         drawer.open()
-
+                        console.log(stackView.depth)
                     }
                 }
 
@@ -108,13 +107,15 @@ ApplicationWindow {
                     listView.currentIndex = index
                     stackView.push(model.source)
                     drawer.close()
+                    console.log(stackView.depth)
                 }
             }
 
             model: ListModel {
                 ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
-                ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
+                ListElement { title: "User"; source: "qrc:/pages/UserListPage.qml" }
                 ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
+                ListElement { title: "New User"; source: "qrc:/pages/NewUserPage.qml"}
 
             }
 
@@ -125,17 +126,8 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: Pane{
-            id: pane
+        initialItem: Page{
 
-            Item {
-                id: addbuton
-                Loader{
-                    source: "qrc:/pages/AddButton.qml"
-                    x: root.width - (width + width/2)
-                    y: root.height - (height*2.5)
-                }
-            }
         }
     }
 
@@ -185,7 +177,7 @@ ApplicationWindow {
         height: parent.height/1.5
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
-        title: "About"
+        title: "Settings"
         ColumnLayout{
             id: column
             width: parent.width
