@@ -1,18 +1,20 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
-
+/*
 Flickable {
     property int space: 20
 
     id: root
     contentHeight: page.height
     ScrollIndicator.vertical: ScrollIndicator { }
-
+*/
     Page{
+        property int space: 20
         id: page
-        width: root.width
-        height: root.height * 1.01
+
+        //width: root.width
+        //height: root.height * 1.01
 
         ColumnLayout{
             id: column
@@ -111,4 +113,4 @@ Flickable {
         }
     }
 
-}
+//}

@@ -6,9 +6,10 @@ import QtQuick.LocalStorage 2.0
 
 ApplicationWindow {
 
-    id: root
+    property string titleLabelText
+
+    id: window
     visible: true
-    //visibility: Window.FullScreen
     width: 800
     height: 600
 
@@ -48,13 +49,14 @@ ApplicationWindow {
 
             Label {
                 id: titleLabel
-                text: listView.currentItem ? listView.currentItem.text : "Feedback"
+                text: titleLabelText //listView.currentItem ? listView.currentItem.text : "Feedback"
                 font.pixelSize: 20
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Layout.fillWidth: true
             }
+
             ToolButton {
                 contentItem: Image {
                     fillMode: Image.Pad
@@ -88,8 +90,8 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: Math.min(root.width, root.height) / 3 * 2
-        height: root.height
+        width: Math.min(window.width, window.height) / 3 * 2
+        height: window.height
         dragMargin: stackView.depth > 1 ? 0 : undefined
 
         ListView {
@@ -115,8 +117,6 @@ ApplicationWindow {
                 ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
                 ListElement { title: "User"; source: "qrc:/pages/UserListPage.qml" }
                 ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
-                ListElement { title: "New User"; source: "qrc:/pages/NewUserPage.qml"}
-
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
@@ -127,6 +127,9 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
         initialItem: Page{
+            Component.onCompleted:  {
+                window.titleLabelText = "Feedback"
+            }
 
         }
     }

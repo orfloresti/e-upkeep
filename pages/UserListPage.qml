@@ -19,12 +19,34 @@ Page{
                 id: userDelegate
 
                 SwipeDelegate{
+                    //id: swipeDelegate
                     width: parent.width
                     height: userImage.height + 20
                     anchors.horizontalCenter: parent.horizontalCenter
-                    swipe.left: removeComponent
 
-                    contentItem:RowLayout{
+                    swipe.left: Component {
+
+                        Rectangle {
+                            id: userDelete
+                            color: SwipeDelegate.pressed ?  "#585858" : "#848484"
+                            width: parent.width -80
+                            height: parent.height
+                            clip: true
+                            Label {
+                                //font.pixelSize: swipeDelegate.font.pixelSize
+                                text: "Click to remove"
+                                color: "white"
+                                anchors.centerIn: parent
+                            }
+
+                            SwipeDelegate.onClicked: {
+                                console.log("Delete user : " + index)
+                                userListModel.remove(index)
+                            }
+                        }
+                    }
+
+                    contentItem: RowLayout{
                         //anchors.fill: parent
 
                         Item{
@@ -42,7 +64,7 @@ Page{
                         }
 
                         ColumnLayout{
-
+                            Layout.leftMargin: 10
                             Label{
                                 text: password
                                 wrapMode: Label.Wrap
@@ -67,28 +89,8 @@ Page{
                         }
                     }
 
-                    Component {
-                        id: removeComponent
-
-                        Rectangle {
-                            color: SwipeDelegate.pressed ?  "#585858" : "#848484"
-                            width: parent.width
-                            height: parent.height
-                            clip: true
-
-                            SwipeDelegate.onClicked: userListModel.remove(index)
-
-                            Label {
-                                //font.pixelSize: swipeDelegate.font.pixelSize
-                                text: "Remove"
-                                color: "white"
-                                anchors.centerIn: parent
-                            }
-                        }
-                    }
-
                     onClicked: {
-                        console.log(index)
+                        console.log("The user : " + index)
                     }
                 }
 
