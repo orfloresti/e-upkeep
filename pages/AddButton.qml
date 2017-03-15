@@ -2,14 +2,14 @@ import QtQuick 2.5
 import QtQuick.Controls 2.1
 
 MouseArea{
-    id: addButton
-    hoverEnabled: true
+    id: addButton    
     width: colorButton.width
     height: colorButton.height
 
-    onEntered: { colorButton.color="#006767"}
+    hoverEnabled: true
+    onEntered: { colorButton.color="#007580"}
     onExited: {colorButton.color="Teal"}
-    onPressed: {colorButton.color="#003434"}
+    onPressed: {colorButton.color="#006767"}
 
     Rectangle{
         id: colorButton

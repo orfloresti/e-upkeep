@@ -6,14 +6,14 @@ import QtQuick.LocalStorage 2.0
 
 ApplicationWindow {
 
-    id: root
+    property string titleLabelText
+
+    id: window
     visible: true
-    //visibility: Window.FullScreen
     width: 800
     height: 600
 
     title: qsTr("Feedback")
-
 
     Item {
         Component.onCompleted: {
@@ -32,16 +32,16 @@ ApplicationWindow {
                     fillMode: Image.Pad
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
-                    source: stackView.depth > 1 ? "qrc:/icons/back.png" : "qrc:/icons/drawer.png"
+                    source: stackView.depth == 1 ?  "qrc:/icons/drawer.png" : "qrc:/icons/back.png"
                 }
 
                 onClicked: {
                     if (stackView.depth > 1) {
                         stackView.pop()
-                        listView.currentIndex = -1
-                    } else {
+                        console.log(stackView.depth)
+                    } else {                        
                         drawer.open()
-
+                        console.log(stackView.depth)
                     }
                 }
 
@@ -49,13 +49,14 @@ ApplicationWindow {
 
             Label {
                 id: titleLabel
-                text: listView.currentItem ? listView.currentItem.text : "Feedback"
+                text: titleLabelText //listView.currentItem ? listView.currentItem.text : "Feedback"
                 font.pixelSize: 20
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Layout.fillWidth: true
             }
+
             ToolButton {
                 contentItem: Image {
                     fillMode: Image.Pad
@@ -89,8 +90,8 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: Math.min(root.width, root.height) / 3 * 2
-        height: root.height
+        width: Math.min(window.width, window.height) / 3 * 2
+        height: window.height
         dragMargin: stackView.depth > 1 ? 0 : undefined
 
         ListView {
@@ -108,14 +109,14 @@ ApplicationWindow {
                     listView.currentIndex = index
                     stackView.push(model.source)
                     drawer.close()
+                    console.log(stackView.depth)
                 }
             }
 
             model: ListModel {
                 ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
-                ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
+                ListElement { title: "User"; source: "qrc:/pages/UserListPage.qml" }
                 ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
-
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
@@ -125,17 +126,11 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: Pane{
-            id: pane
-
-            Item {
-                id: addbuton
-                Loader{
-                    source: "qrc:/pages/AddButton.qml"
-                    x: root.width - (width + width/2)
-                    y: root.height - (height*2.5)
-                }
+        initialItem: Page{
+            Component.onCompleted:  {
+                window.titleLabelText = "Feedback"
             }
+
         }
     }
 
@@ -185,7 +180,7 @@ ApplicationWindow {
         height: parent.height/1.5
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
-        title: "About"
+        title: "Settings"
         ColumnLayout{
             id: column
             width: parent.width
