@@ -6,14 +6,27 @@ import QtQuick.LocalStorage 2.0
 
 ApplicationWindow {
 
-    property string titleLabelText
+    property string appName: "Feedback"
+    property string pageLabel
+    property int pageIndex: -1
+
+    signal setPageLabel(string Pagelabel)
+    signal setPageIndex(int Pageindex)
+
+    onSetPageLabel: {
+        pageLabel = Pagelabel
+    }
+
+    onSetPageIndex: {
+        pageIndex = Pageindex
+    }
 
     id: window
     visible: true
     width: 800
     height: 600
 
-    title: qsTr("Feedback")
+    title: appName
 
     Item {
         Component.onCompleted: {
@@ -35,13 +48,14 @@ ApplicationWindow {
                     source: stackView.depth == 1 ?  "qrc:/icons/drawer.png" : "qrc:/icons/back.png"
                 }
 
-                onClicked: {
+                onClicked: function iconReturn(){
                     if (stackView.depth > 1) {
                         stackView.pop()
-                        console.log(stackView.depth)
+                        pageLabel = pageListModel.get(pageIndex).title
+                        if(stackView.depth == 1){pageLabel = appName}
+
                     } else {                        
                         drawer.open()
-                        console.log(stackView.depth)
                     }
                 }
 
@@ -49,7 +63,7 @@ ApplicationWindow {
 
             Label {
                 id: titleLabel
-                text: titleLabelText //listView.currentItem ? listView.currentItem.text : "Feedback"
+                text: pageIndex > -1 ? pageLabel : appName
                 font.pixelSize: 20
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
@@ -106,30 +120,34 @@ ApplicationWindow {
                 text: model.title
                 highlighted: ListView.isCurrentItem
                 onClicked: {
-                    listView.currentIndex = index
-                    stackView.push(model.source)
+                    window.setPageIndex(index)
+                    console.log(pageIndex)
+                    pageLabel = pageListModel.get(pageIndex).title
+                    stackView.push(model.source)                    
                     drawer.close()
-                    console.log(stackView.depth)
                 }
             }
 
-            model: ListModel {
-                ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
-                ListElement { title: "User"; source: "qrc:/pages/UserListPage.qml" }
-                ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
-            }
+            model: pageListModel
 
             ScrollIndicator.vertical: ScrollIndicator { }
         }
+    }
+
+    ListModel {
+        id: pageListModel
+        ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
+        ListElement { title: "User"; source: "qrc:/pages/UserListPage.qml" }
+        ListElement { title: "Component"; source:"" }
+        ListElement { title: "Device"; source:"" }
+        ListElement { title: "Map"; source:"" }
+        ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
     }
 
     StackView {
         id: stackView
         anchors.fill: parent
         initialItem: Page{
-            Component.onCompleted:  {
-                window.titleLabelText = "Feedback"
-            }
 
         }
     }

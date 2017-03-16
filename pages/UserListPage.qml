@@ -26,7 +26,7 @@ Page{
                 SwipeDelegate{
                     //id: swipeDelegate
                     width: parent.width
-                    height: userImage.height + 20
+                    height: userDescription.height + 20
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     swipe.left: Component {
@@ -48,7 +48,7 @@ Page{
                         }
                     }
 
-                    contentItem: RowLayout{
+                    contentItem: RowLayout{                        
                         //anchors.fill: parent
 
                         Item{
@@ -66,6 +66,7 @@ Page{
                         }
 
                         ColumnLayout{
+                            id: userDescription
                             Layout.leftMargin: 10
                             Label{
                                 text: password
@@ -119,22 +120,22 @@ Page{
     }
 
     AddButton{
-
-        //userType = userListModel.get(index).typeUser
-
+        id: addUserButton
         x: root.width - (width + width/2)
         y: root.height - (height + height/2)
+        NumberAnimation on y { from: root.height; to: root.height - (75); duration: 500 }
+
         onClicked: {
             flickableUserPage.newUser()
             stackView.push(flickableUserPage)
-            console.log(stackView.depth)
+            //console.log(stackView.depth)
         }
 
     }
 
     function userPageOption(position,index){
         if(position===0){
-            //console.log("Edit user index: " )
+            console.log("Edit user" )
             userPassword = userListModel.get(index).password
             userName = userListModel.get(index).name
             //userType = userListModel.get(index).typeUser
@@ -142,12 +143,10 @@ Page{
             stackView.push(flickableUserPage)
 
         }else{
-            console.log("Delete user index: " + index)
+            console.log("Delete user")
             userListModel.remove(index)
         }
     }
-
-
 
     Flickable {
         id: flickableUserPage
@@ -159,11 +158,17 @@ Page{
         signal newUser
 
         onEditUser: {
+            pageLabel = "Edit user"
+            window.setPageLabel(pageLabel)
+
             passwordField.text = userPassword
             nameField.text = userName
             //typeUserField.text = userType
         }
         onNewUser: {
+            pageLabel = "New user"
+            window.setPageLabel(pageLabel)
+
             passwordField.text = ""
             nameField.text = ""
             //typeUserField.text = userType
