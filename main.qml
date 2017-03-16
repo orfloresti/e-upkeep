@@ -9,6 +9,7 @@ ApplicationWindow {
     property string appName: "Feedback"
     property string pageLabel
     property int pageIndex: -1
+    property var db
 
     signal setPageLabel(string Pagelabel)
     signal setPageIndex(int Pageindex)
@@ -30,7 +31,19 @@ ApplicationWindow {
 
     Item {
         Component.onCompleted: {
-            var db = LocalStorage.openDatabaseSync("Feedback", "3.0", "Feedback database", 10000);
+            db = LocalStorage.openDatabaseSync("Feedback", "3.0", "Feedback database", 10000);
+
+            db.transaction(
+                        function(tx) {
+                            var rs = tx.executeSql('SELECT * FROM TypeUser')
+
+                            var r = ""
+                            for(var i =0; i < rs.rows.length; i++){
+                                r += rs.rows.item(i).description + "\n"
+                            }
+                            console.log(r)
+                        }
+                        )
         }
     }
 
