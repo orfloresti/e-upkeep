@@ -12,7 +12,6 @@
         <file>emblem-synchronizing.ico</file>
         <file>pages/AddButton.qml</file>
         <file>pages/TypePage.qml</file>
-        <file>feedback.sql</file>
         <file>pages/UserListPage.qml</file>
         <file>icons/back_dark.png</file>
         <file>icons/drawer_dark.png</file>
