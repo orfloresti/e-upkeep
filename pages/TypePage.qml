@@ -7,46 +7,76 @@ Flickable {
     property string titleDialog
     property string textDialog
 
-
     id: root
     contentHeight: page.height
     ScrollIndicator.vertical: ScrollIndicator { }
 
     Page{
-        property int space: 20
         id: page
-
         width: root.width
         height: root.height * 1.01
+
+        ListModel{
+            id: listModel
+        }
 
         ColumnLayout{
             id: column
             width: parent.width
-
             Label {
                 width: column.width - space
-                text: "In this section you can create new types for users, reports and devices."
+                text: "In this module you can create new types for users, reports and devices. Remenber the types used can't be delete."
                 wrapMode: Label.Wrap
                 Layout.fillWidth: true
                 Layout.leftMargin: space
+                Layout.rightMargin: space
                 Layout.topMargin: space
             }
 
-            //**********************************************************
             Label {
-                text: "User type"
+                text: "Select one type"
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.topMargin: space
+            }
+
+            ComboBox{
+                id: typeSelect
+                currentIndex: -1
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+
+                onCurrentTextChanged: {
+                    loadList(typeSelect.currentText)
+                    console.log(typeSelect.currentText)
+                }
+
+                model: ListModel{
+                    ListElement {table: "UserType"}
+                    ListElement {table: "DeviceType"}
+                    ListElement {table: "ReportType"}
+                }
+
+            }
+
+
+            Label {
+                text: "Type Settings"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.topMargin: space
             }
+
             RowLayout{
                 spacing: space
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 TextField {
-                    id: userTypeField
+                    id: typeField
                     selectByMouse: true
-                    placeholderText: "User type"
+                    placeholderText: "New type"
                     Layout.fillWidth: true
                 }
                 Button{
@@ -56,27 +86,27 @@ Flickable {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-
                     onClicked: {
-                        try{
-                        db.transaction(
-                                    function(tx) {
-                                        var rs = tx.executeSql('INSERT INTO TypeUser VALUES(?)',[userTypeField.text])
-                                        dialogDb.setTitleDialog("Saved")
-                                        dialogDb.setTextDialog("New user type " + userTypeField.text + " saved correctly")
-                                        dialogDb.open()
-                                        userTypeField.text = ""
-
-                                    }
-                                    )
-                        }catch(err){
-                            console.log("Error adding type:  " + err);
+                        if(typeField.text.length < 1){
                             dialogDb.setTitleDialog("Error")
-                            dialogDb.setTextDialog(err)
+                            dialogDb.setTextDialog("The TextField is blank")
                             dialogDb.open()
+                        }else{
+                            saveType(typeSelect.currentText, typeField.text)
                         }
                     }
                 }
+            }
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                ComboBox{
+                    //currentIndex:
+                    id: typeUserComboBox
+                    Layout.fillWidth: true
+                    model: listModel
+                }                
 
                 Button{
                     Label{
@@ -85,85 +115,74 @@ Flickable {
                         color: "Black"
                     }
                     Layout.rightMargin: space
+                    onClicked:{
+                        deleteType(typeSelect.currentText, typeUserComboBox.currentText, typeUserComboBox.currentIndex)
 
-                    onClicked: {
-                        try{
-                        db.transaction(
-                                    function(tx) {
-                                        var rs = tx.executeSql('DELETE FROM TypeUser WHERE description = ?',[userTypeField.text])
-                                        dialogDb.setTitleDialog("Delete")
-                                        dialogDb.setTextDialog("You delete the type " + userTypeField.text + " correctly")
-                                        dialogDb.open()
-                                        userTypeField.text = ""
-
-                                    }
-                                    )
-                        }catch(err){
-                            console.log("Error adding type:  " + err);
-                            dialogDb.setTitleDialog("Error")
-                            dialogDb.setTextDialog(err)
-                            dialogDb.open()
-                        }
                     }
                 }
             }
-
-            //**********************************************************
-            Label {
-                text: "Device type"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.topMargin: space
-            }
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                TextField {
-                    id: deviceTypeField
-                    selectByMouse: true
-                    placeholderText: "Device type"
-                    Layout.fillWidth: true
-                }
-                Button{
-                    Label{
-                        anchors.centerIn: parent
-                        text: "Save"
-                        color: "Black"
-                    }
-                    Layout.rightMargin: space
-                }
-            }
-
-            //**********************************************************
-            Label {
-                text: "Report type"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.topMargin: space
-            }
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                TextField {
-                    id: reportTypeField
-                    selectByMouse: true
-                    placeholderText: "Report type"
-                    Layout.fillWidth: true
-                }
-                Button{
-                    Label{
-                        anchors.centerIn: parent
-                        text: "Save"
-                        color: "Black"
-                    }
-                    Layout.rightMargin: space
-                }
-            }
-
         }
     }
+
+    function loadList(varType){
+        listModel.clear()
+        try{
+            db.transaction(
+                        function(tx) {
+                            var qry = "SELECT * FROM " + varType
+                            var results = tx.executeSql(qry)
+                            for(var i = 0; i < results.rows.length; i++){
+                                listModel.append({"description":results.rows.item(i).description})
+
+                            }
+                        })
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    function saveType(varType, varDescription){
+        try{
+            db.transaction(
+                        function(tx) {
+                            var qry = "INSERT INTO " + varType +" VALUES (?);"
+                            tx.executeSql(qry, [varDescription])
+                            dialogDb.setTitleDialog("Saved")
+                            dialogDb.setTextDialog("New " + varType + " "+ varDescription + " saved correctly")
+                            listModel.append({"description":varDescription})
+                            dialogDb.open()
+                            typeField.text = ""
+                        }
+                        )
+        }catch(err){
+            console.log("Error adding type:  " + err);
+            dialogDb.setTitleDialog("Error")
+            dialogDb.setTextDialog(err)
+            dialogDb.open()
+        }
+    }
+
+    function deleteType(varType, varDescription, varIndex){
+        try{
+            db.transaction(
+                        function(tx) {
+                            var qry = "DELETE FROM " + varType + " WHERE description = ?;"
+                            tx.executeSql(qry,[varDescription])
+                            dialogDb.setTitleDialog("Delete")
+                            dialogDb.setTextDialog("You delete the "+ varType + " " + varDescription + " correctly")
+                            typeField.text = ""
+                            listModel.remove(varIndex)
+                            dialogDb.open()
+                        })
+
+        }catch(err){
+            console.log("Error adding type:  " + err);
+            dialogDb.setTitleDialog("Error")
+            dialogDb.setTextDialog(err)
+            dialogDb.open()
+        }
+    }
+
 
     Dialog {
         signal setTitleDialog(string titleDialogInput)
