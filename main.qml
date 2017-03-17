@@ -22,6 +22,12 @@ ApplicationWindow {
         pageIndex = Pageindex
     }
 
+    ListModel {
+        id: userListModel
+        //ListElement { password: 500001974; name: "Orlando Flores Teomitzi"; userType: "Laboratory" }
+        //ListElement { password: 500001974; name: "Orlando Flores Teomitzi"; userType: "Laboratory" }
+    }
+
     id: window
     visible: true
     width: 800
@@ -45,9 +51,15 @@ ApplicationWindow {
 
                 onClicked: function iconReturn(){
                     if (stackView.depth > 1) {
-                        stackView.pop()
+                        stackView.pop()                        
                         pageLabel = pageListModel.get(pageIndex).title
-                        if(stackView.depth == 1){pageLabel = appName}
+                        if(pageLabel == "User"){
+                            userListModel.clear()
+                            loadUserList("User")
+                        }
+                        if(stackView.depth == 1){
+                            pageLabel = appName
+                        }
 
                     } else {                        
                         drawer.open()
@@ -116,8 +128,13 @@ ApplicationWindow {
                 highlighted: ListView.isCurrentItem
                 onClicked: {
                     window.setPageIndex(index)
-                    //console.log(pageIndex)
                     pageLabel = pageListModel.get(pageIndex).title
+
+                    if(pageLabel == "User"){
+                        userListModel.clear()
+                        loadUserList("User")
+                    }
+
                     stackView.push(model.source)                    
                     drawer.close()
                 }
@@ -213,6 +230,24 @@ ApplicationWindow {
             }
         }
 
+    }
+
+    function loadUserList(varType){
+        try{
+            db.transaction(
+                        function(tx) {
+                            var qry = "SELECT * FROM " + varType
+                            var results = tx.executeSql(qry)
+                            for(var i = 0; i < results.rows.length; i++){
+                                userListModel.append({"password":results.rows.item(i).password,
+                                                      "name":results.rows.item(i).name,
+                                                      "userType":results.rows.item(i).userTypeDescription})
+
+                            }
+                        })
+        }catch(err){
+            console.log(err)
+        }
     }
 
     Component.onCompleted: {

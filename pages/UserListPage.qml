@@ -8,8 +8,15 @@ Page{
     property var userName
     property var userType
 
+    property string titleDialog
+    property string textDialog
+
     id: root
     contentHeight: page.height
+
+    ListModel{
+        id: userTypeListModel
+    }
 
     Page{
         id: page
@@ -24,13 +31,12 @@ Page{
                 id: userDelegate
 
                 SwipeDelegate{
-                    //id: swipeDelegate
+                    id: swipeDelegate
                     width: parent.width
                     height: userDescription.height + 20
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     swipe.left: Component {
-
                         Rectangle {
                             id: userDelete
                             color: "#848484" //SwipeDelegate.pressed ?  "#585858" : "#848484"
@@ -44,7 +50,10 @@ Page{
                                 anchors.centerIn: parent
                             }
 
-                            SwipeDelegate.onClicked: userPageOption(swipe.position,index)
+                            SwipeDelegate.onClicked: {
+                                console.log(swipe.position)
+                                userPageOption(swipe.position,index)
+                            }
                         }
                     }
 
@@ -77,7 +86,7 @@ Page{
 
                             }
                             Label{
-                                text: name + ", " + typeUser
+                                text: name + ", " + userType
                                 wrapMode: Label.Wrap
                                 font.pixelSize: 12
                                 Layout.fillWidth: true
@@ -91,18 +100,11 @@ Page{
                             }
                         }
                     }
-
-                    onClicked: userPageOption(swipe.position,index)
+                    onClicked: {
+                        console.log(swipe.position)
+                        userPageOption(swipe.position,index)
+                    }
                 }
-
-
-            }
-
-            ListModel {
-                id: userListModel
-                ListElement { password: "500001974"; name: "Orlando Flores Teomitzi"; typeUser: "Laboratory" }
-                ListElement { password: "7149"; name: "Vicente Martínez Villegas"; typeUser: "Laboratory" }
-                ListElement { password: "500000000"; name: "Usuario"; typeUser: "Plant" }
             }
 
             ListView {
@@ -133,20 +135,7 @@ Page{
 
     }
 
-    function userPageOption(position,index){
-        if(position===0){
-            console.log("Edit user" )
-            userPassword = userListModel.get(index).password
-            userName = userListModel.get(index).name
-            //userType = userListModel.get(index).typeUser
-            flickableUserPage.editUser()
-            stackView.push(flickableUserPage)
 
-        }else{
-            console.log("Delete user")
-            userListModel.remove(index)
-        }
-    }
 
     Flickable {
         id: flickableUserPage
@@ -160,7 +149,6 @@ Page{
         onEditUser: {
             pageLabel = "Edit user"
             window.setPageLabel(pageLabel)
-
             passwordField.text = userPassword
             nameField.text = userName
             //typeUserField.text = userType
@@ -168,7 +156,6 @@ Page{
         onNewUser: {
             pageLabel = "New user"
             window.setPageLabel(pageLabel)
-
             passwordField.text = ""
             nameField.text = ""
             //typeUserField.text = userType
@@ -225,10 +212,13 @@ Page{
                             Layout.fillWidth: true
                         }
                         ComboBox{
-                            id: typeUserField
+                            id: userTypeComboBox
                             currentIndex: -1
-                            model:["Laboratory", "Plant"]
+                            model:userTypeListModel
                             Layout.fillWidth: true
+                        }
+                        Component.onCompleted: {
+                            loadUserTypeList("UserType")
                         }
                     }
 
@@ -263,7 +253,7 @@ Page{
                     Layout.rightMargin: space
 
                     onClicked: {
-                        console.log("\nPassword: " +passwordField.text + "\nUser: " + typeUserField.currentText+ "\nName: " + nameField.text)
+                        saveUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
                     }
 
                 }
@@ -272,5 +262,116 @@ Page{
         }
     }
 
+    function saveUser(varPassword, varName, varTypeUser){
+        try{
+            db.transaction(
+                        function(tx) {
+                            //var qry = "INSERT INTO User VALUES (?, ?, ?);"
+                            tx.executeSql("INSERT INTO User VALUES (?, ?, ?);", [varPassword, varName, varTypeUser])
+                            dialogDb.setTitleDialog("Saved")
+                            dialogDb.setTextDialog("New user with password "+ varDescription + " saved correctly")
+                            listModel.append({"description":varDescription})
+                            dialogDb.open()
+                            typeField.text = ""
+                        }
+                        )
+        }catch(err){
+            console.log("Error :  " + err);
+            dialogDb.setTitleDialog("Error")
+            dialogDb.setTextDialog(err)
+            dialogDb.open()
+        }
+    }
+
+
+
+    function userPageOption(position,index){
+
+        if(position === 0){
+            console.log("Edit user" )
+            userPassword = userListModel.get(index).password
+            userName = userListModel.get(index).name
+            //userTypeComboBox = userListModel.get(index).userType
+            flickableUserPage.editUser()
+            stackView.push(flickableUserPage)
+
+        }else{
+            //console.log("Delete user")
+            deleteUser(userListModel.get(index).password)
+            userListModel.remove(index)
+        }
+    }
+
+    function loadUserTypeList(varType){
+        try{
+            db.transaction(
+                        function(tx) {
+                            var qry = "SELECT * FROM " + varType
+                            var results = tx.executeSql(qry)
+                            for(var i = 0; i < results.rows.length; i++){
+                                userTypeListModel.append({"description":results.rows.item(i).description})
+
+                            }
+                        })
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    function deleteUser(varPassword){
+        try{
+            db.transaction(
+                        function(tx) {
+                            tx.executeSql("DELETE FROM User WHERE password = ?;",[varPassword])
+                            dialogDb.setTitleDialog("Delete")
+                            dialogDb.setTextDialog("You delete the user with password" + varPassword + " correctly")
+                            //typeField.text = ""
+                            //listModel.remove(varIndex)
+                            dialogDb.open()
+                        })
+
+        }catch(err){
+            console.log("Error:  " + err);
+            dialogDb.setTitleDialog("Error")
+            dialogDb.setTextDialog(err)
+            dialogDb.open()
+        }
+    }
+
+    Dialog {
+
+        signal setTitleDialog(string titleDialogInput)
+        signal setTextDialog(string textDialogInput)
+
+        onSetTitleDialog:  {
+            titleDialog = titleDialogInput
+        }
+
+        onSetTextDialog:{
+            textDialog = textDialogInput
+        }
+
+        id: dialogDb
+        focus: true
+        modal: true
+        width: parent.width/1.5
+        height: parent.height/1.5
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        title: titleDialog
+
+        standardButtons: Dialog.Close
+
+        Column{
+            spacing: 20
+            Text {
+                width: dialogDb.availableWidth
+                text: textDialog
+                wrapMode: Label.Wrap
+                font.pixelSize: 12
+            }
+        }
+
+    }
 }
 
