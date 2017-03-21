@@ -12,9 +12,16 @@
         <file>emblem-synchronizing.ico</file>
         <file>pages/AddButton.qml</file>
         <file>pages/TypePage.qml</file>
-        <file>pages/UserListPage.qml</file>
         <file>icons/back_dark.png</file>
         <file>icons/drawer_dark.png</file>
         <file>icons/menu_dark.png</file>
+        <file>functions/TypeFunction.js</file>
+        <file>functions/UserFunction.js</file>
+        <file>pages/UserPage.qml</file>
+        <file>DataBase.qml</file>
+        <file>dialogs/SettingsDialog.qml</file>
+        <file>dialogs/AboutDialog.qml</file>
+        <file>dialogs/DialogPage.qml</file>
+        <file>pages/NewUser.qml</file>
     </qresource>
 </RCC>

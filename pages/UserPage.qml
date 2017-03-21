@@ -2,11 +2,14 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
+
 Page{
-    property int space: 20
+    //property int space: 20
     property var userPassword
     property var userName
     property var userType
+
+    property bool editUser: false
 
     property string titleDialog
     property string textDialog
@@ -217,9 +220,6 @@ Page{
                             model:userTypeListModel
                             Layout.fillWidth: true
                         }
-                        Component.onCompleted: {
-                            loadUserTypeList("UserType")
-                        }
                     }
 
 
@@ -254,6 +254,7 @@ Page{
 
                     onClicked: {
                         saveUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
+                        //stackView.pop()
                     }
 
                 }
@@ -263,37 +264,44 @@ Page{
     }
 
     function saveUser(varPassword, varName, varTypeUser){
-        try{
-            db.transaction(
-                        function(tx) {
-                            //var qry = "INSERT INTO User VALUES (?, ?, ?);"
-                            tx.executeSql("INSERT INTO User VALUES (?, ?, ?);", [varPassword, varName, varTypeUser])
-                            dialogDb.setTitleDialog("Saved")
-                            dialogDb.setTextDialog("New user with password "+ varDescription + " saved correctly")
-                            listModel.append({"description":varDescription})
-                            dialogDb.open()
-                            typeField.text = ""
-                        }
-                        )
-        }catch(err){
-            console.log("Error :  " + err);
-            dialogDb.setTitleDialog("Error")
-            dialogDb.setTextDialog(err)
-            dialogDb.open()
+
+        if(editUser === false){
+            try{
+                db.transaction(
+                            function(tx) {
+                                //var qry = "INSERT INTO User VALUES (?, ?, ?);"
+                                tx.executeSql("INSERT INTO User VALUES (?, ?, ?);", [varPassword, varName, varTypeUser])
+                                dialogUser.setTitleDialog("Saved")
+                                dialogUser.setTextDialog("New user with password "+ varPassword + " saved correctly")
+                                //userListModel.append({"description":varDescription})
+                                nameField.text = ""
+                                passwordField.text=""
+                                dialogUser.open()
+
+                            }
+                            )
+            }catch(err){
+                console.log("Error :  " + err);
+                dialogUser.setTitleDialog("Error")
+                dialogUser.setTextDialog(err)
+                dialogUser.open()
+            }
+        }else{
+            editUser = false
+            console.log("Edit user")
         }
     }
-
-
 
     function userPageOption(position,index){
 
         if(position === 0){
-            console.log("Edit user" )
+            //console.log("Edit user" )
             userPassword = userListModel.get(index).password
             userName = userListModel.get(index).name
             //userTypeComboBox = userListModel.get(index).userType
             flickableUserPage.editUser()
             stackView.push(flickableUserPage)
+            editUser = true
 
         }else{
             //console.log("Delete user")
@@ -302,39 +310,25 @@ Page{
         }
     }
 
-    function loadUserTypeList(varType){
-        try{
-            db.transaction(
-                        function(tx) {
-                            var qry = "SELECT * FROM " + varType
-                            var results = tx.executeSql(qry)
-                            for(var i = 0; i < results.rows.length; i++){
-                                userTypeListModel.append({"description":results.rows.item(i).description})
 
-                            }
-                        })
-        }catch(err){
-            console.log(err)
-        }
-    }
 
     function deleteUser(varPassword){
         try{
             db.transaction(
                         function(tx) {
                             tx.executeSql("DELETE FROM User WHERE password = ?;",[varPassword])
-                            dialogDb.setTitleDialog("Delete")
-                            dialogDb.setTextDialog("You delete the user with password" + varPassword + " correctly")
+                            dialogUser.setTitleDialog("Delete")
+                            dialogUser.setTextDialog("You delete the user with password " + varPassword + " correctly")
                             //typeField.text = ""
                             //listModel.remove(varIndex)
-                            dialogDb.open()
+                            dialogUser.open()
                         })
 
         }catch(err){
             console.log("Error:  " + err);
-            dialogDb.setTitleDialog("Error")
-            dialogDb.setTextDialog(err)
-            dialogDb.open()
+            dialogUser.setTitleDialog("Error")
+            dialogUser.setTextDialog(err)
+            dialogUser.open()
         }
     }
 
@@ -351,9 +345,10 @@ Page{
             textDialog = textDialogInput
         }
 
-        id: dialogDb
+        id: dialogUser
         focus: true
         modal: true
+
         width: parent.width/1.5
         height: parent.height/1.5
         x: (parent.width - width) / 2
@@ -365,7 +360,7 @@ Page{
         Column{
             spacing: 20
             Text {
-                width: dialogDb.availableWidth
+                width: dialogUser.availableWidth
                 text: textDialog
                 wrapMode: Label.Wrap
                 font.pixelSize: 12
