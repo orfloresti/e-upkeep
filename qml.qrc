@@ -21,7 +21,8 @@
         <file>DataBase.qml</file>
         <file>dialogs/SettingsDialog.qml</file>
         <file>dialogs/AboutDialog.qml</file>
-        <file>dialogs/DialogPage.qml</file>
-        <file>pages/NewUser.qml</file>
+        <file>dialogs/DialogMessage.qml</file>
+        <file>pages/NewUserPage.qml</file>
+        <file>pages/UpdateUserPage.qml</file>
     </qresource>
 </RCC>

@@ -56,3 +56,13 @@ function deleteType(varType, varDescription, varIndex){
         dialogType.open()
     }
 }
+
+function blankSpace(){
+    if(typeField.text.length < 1){
+        dialogType.setTitleDialog("Error")
+        dialogType.setTextDialog("The TextField is blank")
+        dialogType.open()
+    }else{
+        TypeFunction.saveType(typeSelect.currentText, typeField.text)
+    }
+}

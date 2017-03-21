@@ -11,15 +11,11 @@ Flickable {
     ScrollIndicator.vertical: ScrollIndicator { }
 
     //Show a message of the process
-    DialogPage{
+    DialogMessage{
         id: dialogType
     }
 
-    //ListModel used
-    ListModel{
-        id: listTypeModel
-    }
-
+    //ListModel used only in this page
     ListModel{
         id: definedTypes
         ListElement {table: "UserType"}
@@ -59,14 +55,10 @@ Flickable {
                 currentIndex: -1
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                onCurrentTextChanged: {
-                    TypeFunction.loadList(typeSelect.currentText)
-                }
+                Layout.rightMargin: space                
                 model: definedTypes
+                onCurrentTextChanged: TypeFunction.loadList(typeSelect.currentText)
             }
-
 
             Label {
                 text: "Type Settings"
@@ -92,15 +84,7 @@ Flickable {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: {
-                        if(typeField.text.length < 1){
-                            dialogType.setTitleDialog("Error")
-                            dialogType.setTextDialog("The TextField is blank")
-                            dialogType.open()
-                        }else{
-                            TypeFunction.saveType(typeSelect.currentText, typeField.text)
-                        }
-                    }
+                    onClicked: TypeFunction.blankSpace()
                 }
             }
             RowLayout{
@@ -120,10 +104,9 @@ Flickable {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked:{
-                        TypeFunction.deleteType(typeSelect.currentText, typeUserComboBox.currentText, typeUserComboBox.currentIndex)
-
-                    }
+                    onClicked: TypeFunction.deleteType(typeSelect.currentText,
+                                                       typeUserComboBox.currentText,
+                                                       typeUserComboBox.currentIndex)
                 }
             }
         }

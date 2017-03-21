@@ -2,29 +2,31 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
+import "qrc:/pages/"
+import "qrc:/functions/TypeFunction.js" as TypeFunction
+
 
 Page{
-    //property int space: 20
-    property var userPassword
-    property var userName
-    property var userType
-
-    property bool editUser: false
 
     property string titleDialog
     property string textDialog
 
-    id: root
+    id: userPageRoot
     contentHeight: page.height
 
-    ListModel{
-        id: userTypeListModel
+
+    NewUserPage{
+        id: newUser
+    }
+
+    UpdateUserPage{
+        id: updateUser
     }
 
     Page{
         id: page
-        width: root.width
-        height: root.height * 1.01
+        width: userPageRoot.width
+        height: userPageRoot.height * 1.01
 
         ColumnLayout{
             id: column
@@ -54,7 +56,7 @@ Page{
                             }
 
                             SwipeDelegate.onClicked: {
-                                console.log(swipe.position)
+                                //console.log(swipe.position)
                                 userPageOption(swipe.position,index)
                             }
                         }
@@ -104,8 +106,9 @@ Page{
                         }
                     }
                     onClicked: {
-                        console.log(swipe.position)
+                        //console.log(swipe.position)
                         userPageOption(swipe.position,index)
+                        //console.log(index)
                     }
                 }
             }
@@ -126,191 +129,32 @@ Page{
 
     AddButton{
         id: addUserButton
-        x: root.width - (width + width/2)
-        y: root.height - (height + height/2)
-        NumberAnimation on y { from: root.height; to: root.height - (75); duration: 500 }
+        x: userPageRoot.width - (width + width/2)
+        y: userPageRoot.height - (height + height/2)
+        NumberAnimation on y { from: userPageRoot.height; to: userPageRoot.height - (75); duration: 500 }
 
         onClicked: {
-            flickableUserPage.newUser()
-            stackView.push(flickableUserPage)
-            //console.log(stackView.depth)
-        }
-
-    }
-
-
-
-    Flickable {
-        id: flickableUserPage
-        visible: false
-        contentHeight: userPage.height
-        ScrollIndicator.vertical: ScrollIndicator { }
-
-        signal editUser
-        signal newUser
-
-        onEditUser: {
-            pageLabel = "Edit user"
-            window.setPageLabel(pageLabel)
-            passwordField.text = userPassword
-            nameField.text = userName
-            //typeUserField.text = userType
-        }
-        onNewUser: {
-            pageLabel = "New user"
-            window.setPageLabel(pageLabel)
-            passwordField.text = ""
-            nameField.text = ""
-            //typeUserField.text = userType
-        }
-
-        Page{
-            id: userPage
-            width: flickableUserPage.width
-            height: flickableUserPage.height * 1.01
-            ColumnLayout{
-                id: columnUser
-                width: parent.width
-
-                Item{
-                    id: userItem
-                    implicitHeight: newUserImage.height
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-
-                    Image {
-                        width: 150
-                        height: 150
-                        id: newUserImage
-                        anchors.centerIn: parent
-                        source: "qrc:/images/avatar-default.png"
-
-                    }
-                }
-
-                RowLayout{
-                    spacing: space
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-
-                    ColumnLayout{
-                        Label {
-                            text: "Password"
-                            Layout.fillWidth: true
-                        }
-                        TextField {
-                            id: passwordField
-                            selectByMouse: true
-                            placeholderText: "Password"
-                            Layout.fillWidth: true
-
-                        }
-                    }
-
-                    ColumnLayout{
-                        Label {
-                            text: "User"
-                            Layout.fillWidth: true
-                        }
-                        ComboBox{
-                            id: userTypeComboBox
-                            currentIndex: -1
-                            model:userTypeListModel
-                            Layout.fillWidth: true
-                        }
-                    }
-
-
-                }
-
-                Label {
-                    text: "Name"
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-                }
-                TextField {
-                    id: nameField
-                    selectByMouse: true
-                    placeholderText: "Name"
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-
-                }
-                Button{
-                    id: save
-                    Label{
-                        anchors.centerIn: parent
-                        text: "Save"
-                        color: "Black"
-
-                    }
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-
-                    onClicked: {
-                        saveUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
-                        //stackView.pop()
-                    }
-
-                }
-
-            }
+            //updateUser.newUser()
+            TypeFunction.loadList("UserType")
+            stackView.push(newUser)
         }
     }
 
-    function saveUser(varPassword, varName, varTypeUser){
-
-        if(editUser === false){
-            try{
-                db.transaction(
-                            function(tx) {
-                                //var qry = "INSERT INTO User VALUES (?, ?, ?);"
-                                tx.executeSql("INSERT INTO User VALUES (?, ?, ?);", [varPassword, varName, varTypeUser])
-                                dialogUser.setTitleDialog("Saved")
-                                dialogUser.setTextDialog("New user with password "+ varPassword + " saved correctly")
-                                //userListModel.append({"description":varDescription})
-                                nameField.text = ""
-                                passwordField.text=""
-                                dialogUser.open()
-
-                            }
-                            )
-            }catch(err){
-                console.log("Error :  " + err);
-                dialogUser.setTitleDialog("Error")
-                dialogUser.setTextDialog(err)
-                dialogUser.open()
-            }
-        }else{
-            editUser = false
-            console.log("Edit user")
-        }
-    }
 
     function userPageOption(position,index){
-
         if(position === 0){
-            //console.log("Edit user" )
-            userPassword = userListModel.get(index).password
-            userName = userListModel.get(index).name
-            //userTypeComboBox = userListModel.get(index).userType
-            flickableUserPage.editUser()
-            stackView.push(flickableUserPage)
-            editUser = true
-
+            updateUser.updateUser(userListModel.get(index).password,
+                                  userListModel.get(index).name,
+                                  userListModel.get(index).userType)
+            //updateUser.setPassword(userListModel.get(index).password)
+            //updateUser.setName(userListModel.get(index).name)
+            //updateUser.getTypeIndex(userListModel.get(index).userType)
+            stackView.push(updateUser)
         }else{
-            //console.log("Delete user")
             deleteUser(userListModel.get(index).password)
             userListModel.remove(index)
         }
     }
-
-
 
     function deleteUser(varPassword){
         try{

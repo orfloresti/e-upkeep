@@ -27,6 +27,11 @@ ApplicationWindow {
         pageIndex = Pageindex
     }
 
+    //ListModel used
+    ListModel{
+        id: listTypeModel
+    }
+
     ListModel {
         id: userListModel
     }
@@ -55,7 +60,7 @@ ApplicationWindow {
 
     id: window
     visible: true
-    width: 800
+    width: 400
     height: 600
 
     title: appName

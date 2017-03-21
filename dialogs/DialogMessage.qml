@@ -24,7 +24,6 @@ Dialog {
     y: (parent.height - height) / 2
     title: titleDialog
 
-    standardButtons: Dialog.Close
 
     Column{
         spacing: 20

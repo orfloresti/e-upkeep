@@ -130,10 +130,12 @@ Item{
                                 FOREIGN KEY(reportPassword) REFERENCES Report(password),
                                 FOREIGN KEY(devicePassword) REFERENCES Device(password)
                               );")
+
+                    //tx.executeSql("PRAGMA foreign_keys = ON;")
                 }
                 )
 
-    console.log("Data base load ...")
+    console.log("Loading data base...")
     }
 
 }
