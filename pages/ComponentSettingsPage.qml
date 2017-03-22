@@ -4,7 +4,7 @@ import QtQuick.Controls 2.1
 
 import "qrc:/dialogs/"
 import "qrc:/settings"
-import "qrc:/functions/UserFunction.js" as User
+import "qrc:/functions/ComponentFunction.js" as Comp
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
@@ -13,16 +13,17 @@ Flickable {
     property bool errorSaving: false
 
     //Flag to determinate if a new user is creating
-    property bool newUserState
+    property bool newComponentState
 
     //Signals to create new user or update new one
-    signal newUser()
-    signal updateUser(int varPassword,string varName, string varType)
-    onNewUser: {
-        User.newUserSettings()
+    signal newComponent()
+    signal updateComponent(string varPassword,string varDescription,double varCost, int varStock, int varMin)
+
+    onNewComponent: {
+        Comp.newComponentSettings()
     }
-    onUpdateUser: {
-        User.updateUserSettings(varPassword,varName,varType)
+    onUpdateComponent: {
+        Comp.updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin)
     }
 
     //Load the ListModel of UserType on the beginning
@@ -32,26 +33,25 @@ Flickable {
 
     //Create the dialog to show problems or complete operations
     DialogMessage{
-        id: userDialog
+        id: componentDialog
         standardButtons: Dialog.Ok
-        onAccepted: User.errorSavingUser()
+        onAccepted: Comp.errorSavingComponent()
     }
 
     //Page settings
     id:userSettings
     visible: false
-    contentHeight: userPage.height
+    contentHeight: componentPage.height
     ScrollIndicator.vertical: ScrollIndicator { }
 
     //Main page
     Page{
-        id: userPage
+        id: componentPage
         width: userSettings.width
         height: userSettings.height * 1.01
         ColumnLayout{
             id: columnUser
             width: parent.width
-            Layout.topMargin: space
             Item{
                 id: userItem
                 implicitHeight: newUserImage.height
@@ -64,7 +64,7 @@ Flickable {
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
-                    source: "qrc:/images/avatar-default.png"
+                    source: "qrc:/images/yast.png"
                 }
             }
 
@@ -89,31 +89,66 @@ Flickable {
 
                 ColumnLayout{
                     Label {
-                        text: "User"
+                        text: "Cost"
                         Layout.fillWidth: true
                     }
-                    ComboBox{
-                        id: userTypeComboBox
-                        model:typeListModel
+                    TextField {
+                        id: costField
+                        selectByMouse: true
+                        placeholderText: "$"
                         Layout.fillWidth: true
                     }
                 }
             }
 
             Label {
-                text: "Name"
+                text: "Description"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
             TextField {
-                id: nameField
+                id: descriptionField
                 selectByMouse: true
-                placeholderText: "Name"
+                placeholderText: "Component description"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
+
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+
+                ColumnLayout{
+                    Label {
+                        text: "Stock"
+                        Layout.fillWidth: true
+                    }
+                    TextField {
+                        id: stockField
+                        selectByMouse: true
+                        placeholderText: "Actual stock"
+                        Layout.fillWidth: true
+                    }
+                }
+
+                ColumnLayout{
+                    Label {
+                        text: "Minimum"
+                        Layout.fillWidth: true
+                    }
+                    TextField {
+                        id: minimumField
+                        selectByMouse: true
+                        placeholderText: "Minimum stock"
+                        Layout.fillWidth: true
+                    }
+                }
+            }
+
             Button{
                 Label{
                     id: saveLabel
@@ -122,8 +157,8 @@ Flickable {
                 }
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space                
-                onClicked: User.savingUser(newUserState)
+                Layout.rightMargin: space
+                onClicked: Comp.savingComponent(newComponentState)
             }
 
         }
