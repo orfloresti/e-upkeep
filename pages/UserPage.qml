@@ -3,26 +3,31 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/pages/"
-import "qrc:/functions/TypeFunction.js" as TypeFunction
-
+import "qrc:/dialogs"
+import "qrc:/settings"
+import "qrc:/functions/UserFunction.js" as User
 
 Page{
-
-    property string titleDialog
-    property string textDialog
-
+    //Page settings
     id: userPageRoot
     contentHeight: page.height
 
-
-    NewUserPage{
-        id: newUser
+    //Create one UserSettingsPage modelto new user or update one
+    UserSettingsPage{
+        id: userSettings
     }
 
-    UpdateUserPage{
-        id: updateUser
+    //Create the dialog
+    DialogMessage{
+        id: deleteUserDialog
+        standardButtons: Dialog.Close
     }
 
+    Component.onCompleted: {
+        User.loadUserList("User")
+    }
+
+    //Main page
     Page{
         id: page
         width: userPageRoot.width
@@ -34,7 +39,6 @@ Page{
 
             Component{
                 id: userDelegate
-
                 SwipeDelegate{
                     id: swipeDelegate
                     width: parent.width
@@ -54,22 +58,15 @@ Page{
                                 color: "white"
                                 anchors.centerIn: parent
                             }
-
                             SwipeDelegate.onClicked: {
-                                //console.log(swipe.position)
-                                userPageOption(swipe.position,index)
+                                User.updateOrDetele(swipe.position,index)
                             }
                         }
                     }
-
-                    contentItem: RowLayout{                        
-                        //anchors.fill: parent
-
+                    contentItem: RowLayout{
                         Item{
                             width: userImage.width
                             height: userImage.height
-                            //Layout.leftMargin: 10
-
                             Image {
                                 width: 50
                                 height: 50
@@ -78,7 +75,6 @@ Page{
                                 source: "qrc:/images/avatar-default.png"
                             }
                         }
-
                         ColumnLayout{
                             id: userDescription
                             Layout.leftMargin: 10
@@ -101,23 +97,17 @@ Page{
                                 height: 1
                                 color: "#E6E6E6"
                                 Layout.fillWidth: true
-
                             }
                         }
                     }
                     onClicked: {
-                        //console.log(swipe.position)
-                        userPageOption(swipe.position,index)
-                        //console.log(index)
+                        User.updateOrDetele(swipe.position,index)
                     }
                 }
             }
-
             ListView {
                 id: userList
                 Layout.fillWidth: true
-                //Layout.fillHeight: true
-                //width: swipeView.width
                 height: page.height
                 focus: true
                 model: userListModel
@@ -126,7 +116,6 @@ Page{
             }
         }
     }
-
     AddButton{
         id: addUserButton
         x: userPageRoot.width - (width + width/2)
@@ -134,83 +123,9 @@ Page{
         NumberAnimation on y { from: userPageRoot.height; to: userPageRoot.height - (75); duration: 500 }
 
         onClicked: {
-            //updateUser.newUser()
-            TypeFunction.loadList("UserType")
-            stackView.push(newUser)
+            userSettings.newUser()
+            stackView.push(userSettings)
         }
-    }
-
-
-    function userPageOption(position,index){
-        if(position === 0){
-            updateUser.updateUser(userListModel.get(index).password,
-                                  userListModel.get(index).name,
-                                  userListModel.get(index).userType)
-            //updateUser.setPassword(userListModel.get(index).password)
-            //updateUser.setName(userListModel.get(index).name)
-            //updateUser.getTypeIndex(userListModel.get(index).userType)
-            stackView.push(updateUser)
-        }else{
-            deleteUser(userListModel.get(index).password)
-            userListModel.remove(index)
-        }
-    }
-
-    function deleteUser(varPassword){
-        try{
-            db.transaction(
-                        function(tx) {
-                            tx.executeSql("DELETE FROM User WHERE password = ?;",[varPassword])
-                            dialogUser.setTitleDialog("Delete")
-                            dialogUser.setTextDialog("You delete the user with password " + varPassword + " correctly")
-                            //typeField.text = ""
-                            //listModel.remove(varIndex)
-                            dialogUser.open()
-                        })
-
-        }catch(err){
-            console.log("Error:  " + err);
-            dialogUser.setTitleDialog("Error")
-            dialogUser.setTextDialog(err)
-            dialogUser.open()
-        }
-    }
-
-    Dialog {
-
-        signal setTitleDialog(string titleDialogInput)
-        signal setTextDialog(string textDialogInput)
-
-        onSetTitleDialog:  {
-            titleDialog = titleDialogInput
-        }
-
-        onSetTextDialog:{
-            textDialog = textDialogInput
-        }
-
-        id: dialogUser
-        focus: true
-        modal: true
-
-        width: parent.width/1.5
-        height: parent.height/1.5
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        title: titleDialog
-
-        standardButtons: Dialog.Close
-
-        Column{
-            spacing: 20
-            Text {
-                width: dialogUser.availableWidth
-                text: textDialog
-                wrapMode: Label.Wrap
-                font.pixelSize: 12
-            }
-        }
-
     }
 }
 

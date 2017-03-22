@@ -3,88 +3,66 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/dialogs/"
+import "qrc:/settings"
 import "qrc:/functions/UserFunction.js" as User
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
 Flickable {
-
-    property int password
-    property string name
-
+    //Flag if a error passed saving or update user
     property bool errorSaving: false
 
+    //Flag to determinate if a new user is creating
     property bool newUserState
 
-
+    //Signals to create new user or update new one
     signal newUser()
     signal updateUser(int varPassword,string varName, string varType)
-
-
     onNewUser: {
-        newUserState = true
-        userTypeComboBox.currentIndex = -1
-        saveLabel.text = "Save"
-        passwordField.enabled = true
-
-
+        User.newUserSettings()
     }
-
     onUpdateUser: {
-        newUserState = false
-        password = varPassword
-        name = varName
-        var i = 0;
-        for(i; i < listTypeModel.count; i++){
-            if(varType === listTypeModel.get(i).description){
-                userTypeComboBox.currentIndex = parseInt(i);
-            }
-        }
-
-        saveLabel.text = "Update"
-        passwordField.enabled = false
-
+        User.updateUserSettings(varPassword,varName,varType)
     }
 
+    //Load the ListModel of UserType on the beginning
     Component.onCompleted: {
         TypeFunction.loadList("UserType")
     }
 
+    //Create the dialog to show problems or complete operations
+    DialogMessage{
+        id: userDialog
+        standardButtons: Dialog.Ok
+        onAccepted: User.errorSavingUser()
+    }
 
-    id:updatePageRoot
+    //Page settings
+    id:userSettings
     visible: false
     contentHeight: userPage.height
     ScrollIndicator.vertical: ScrollIndicator { }
 
-    DialogMessage{
-        id: dialogUpdateUser
-        standardButtons: Dialog.Ok
-        onAccepted: User.errorSavingFunction()
-    }    
-
+    //Main page
     Page{
-
         id: userPage
-        width: updatePageRoot.width
-        height: updatePageRoot.height * 1.01
+        width: userSettings.width
+        height: userSettings.height * 1.01
         ColumnLayout{
             id: columnUser
             width: parent.width
-
             Item{
                 id: userItem
                 implicitHeight: newUserImage.height
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-
                 Image {
                     width: 150
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
                     source: "qrc:/images/avatar-default.png"
-
                 }
             }
 
@@ -104,8 +82,6 @@ Flickable {
                         selectByMouse: true
                         placeholderText: "Password"
                         Layout.fillWidth: true
-                        text: password
-                        //enabled: false
                     }
                 }
 
@@ -116,13 +92,10 @@ Flickable {
                     }
                     ComboBox{
                         id: userTypeComboBox
-                        model:listTypeModel
+                        model:typeListModel
                         Layout.fillWidth: true
-                        //displayText: userPageRoot.userType
                     }
                 }
-
-
             }
 
             Label {
@@ -138,30 +111,17 @@ Flickable {
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-                text: name
-
             }
             Button{
-                id: save
                 Label{
                     id: saveLabel
                     anchors.centerIn: parent
-                    //text: "Update"
                     color: "Black"
                 }
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                onClicked: {
-                    if(newUserState === true){
-                        User.saveUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
-                    }else{
-                        User.updateUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
-                    }
-                }
-
-
+                Layout.rightMargin: space                
+                onClicked: User.savingUser(newUserState)
             }
 
         }

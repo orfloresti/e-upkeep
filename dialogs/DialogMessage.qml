@@ -3,15 +3,12 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 Dialog {
-    signal setTitleDialog(string varTitle)
-    signal setTextDialog(string varText)
 
-    onSetTitleDialog:  {
-        titleDialog = varTitle
-    }
+    signal setSettings(string varTitle, string varText)
 
-    onSetTextDialog:{
-        textDialog = varText
+    onSetSettings: {
+        dialog.title = varTitle
+        dialogText.text = varText
     }
 
     id: dialog
@@ -22,14 +19,14 @@ Dialog {
     height: parent.height/1.5
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
-    title: titleDialog
-
+    //title:
 
     Column{
         spacing: 20
         Text {
+            id: dialogText
             width: dialog.availableWidth
-            text: textDialog
+            //text: textDialog
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }

@@ -12,6 +12,8 @@ Dialog {
     y: (parent.height - height) / 2
     title: "About"
 
+    standardButtons: Dialog.Close
+
     Column{
         id: aboutColumn
         spacing: 20

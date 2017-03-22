@@ -11,6 +11,9 @@ Dialog {
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
     title: "Settings"
+
+    standardButtons: Dialog.Close
+
     ColumnLayout{
         id: column
         width: parent.width

@@ -10,7 +10,7 @@
         <file>images/avatar-default.png</file>
         <file>pages/ReportPage.qml</file>
         <file>emblem-synchronizing.ico</file>
-        <file>pages/AddButton.qml</file>
+        <file>settings/AddButton.qml</file>
         <file>pages/TypePage.qml</file>
         <file>icons/back_dark.png</file>
         <file>icons/drawer_dark.png</file>
@@ -18,11 +18,13 @@
         <file>functions/TypeFunction.js</file>
         <file>functions/UserFunction.js</file>
         <file>pages/UserPage.qml</file>
-        <file>DataBase.qml</file>
+        <file>settings/DataBase.qml</file>
         <file>dialogs/SettingsDialog.qml</file>
         <file>dialogs/AboutDialog.qml</file>
         <file>dialogs/DialogMessage.qml</file>
-        <file>pages/NewUserPage.qml</file>
-        <file>pages/UpdateUserPage.qml</file>
+        <file>pages/UserSettingsPage.qml</file>
+        <file>settings/ToolBarSettings.qml</file>
+        <file>settings/DrawerSettings.qml</file>
+        <file>functions/MainFunction.js</file>
     </qresource>
 </RCC>
