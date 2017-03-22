@@ -8,59 +8,45 @@ import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
 Flickable {
-
+    //Flag if a error passed saving or update user
     property bool errorSaving: false
+
+    //Flag to determinate if a new user is creating
     property bool newUserState
+
+    //Signals to create new user or update new one
     signal newUser()
     signal updateUser(int varPassword,string varName, string varType)
-
-    id:updatePageRoot
-    visible: false
-    contentHeight: userPage.height
-    ScrollIndicator.vertical: ScrollIndicator { }
-
     onNewUser: {
-        newUserState = true
-
-        passwordField.text = ""
-        nameField.text = ""
-        userTypeComboBox.currentIndex = -1
-
-        saveLabel.text = "Save"
-        passwordField.enabled = true
+        User.newUserSettings()
     }
-
     onUpdateUser: {
-        newUserState = false
-
-        passwordField.text  = varPassword
-        nameField.text = varName
-
-        var i = 0;
-        for(i; i < listTypeModel.count; i++){
-            if(varType === listTypeModel.get(i).description){
-                userTypeComboBox.currentIndex = parseInt(i);
-            }
-        }
-
-        saveLabel.text = "Update"
-        passwordField.enabled = false
+        User.updateUserSettings(varPassword,varName,varType)
     }
 
+    //Load the ListModel of UserType on the beginning
     Component.onCompleted: {
         TypeFunction.loadList("UserType")
     }
 
+    //Create the dialog to show problems or complete operations
     DialogMessage{
-        id: dialogUser
+        id: userDialog
         standardButtons: Dialog.Ok
         onAccepted: User.errorSavingUser()
     }
 
+    //Page settings
+    id:userSettings
+    visible: false
+    contentHeight: userPage.height
+    ScrollIndicator.vertical: ScrollIndicator { }
+
+    //Main page
     Page{
         id: userPage
-        width: updatePageRoot.width
-        height: updatePageRoot.height * 1.01
+        width: userSettings.width
+        height: userSettings.height * 1.01
         ColumnLayout{
             id: columnUser
             width: parent.width
@@ -124,11 +110,8 @@ Flickable {
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-
-
             }
             Button{
-                id: save
                 Label{
                     id: saveLabel
                     anchors.centerIn: parent
@@ -136,17 +119,8 @@ Flickable {
                 }
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                onClicked: {
-                    if(newUserState === true){
-                        User.saveUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
-                    }else{
-                        User.updateUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
-                    }
-                }
-
-
+                Layout.rightMargin: space                
+                onClicked: User.savingUser(newUserState)
             }
 
         }

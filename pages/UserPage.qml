@@ -3,20 +3,26 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/pages/"
-
+import "qrc:/dialogs"
+import "qrc:/functions/UserFunction.js" as User
 
 Page{
-
-    property string titleDialog
-    property string textDialog
-
+    //Page settings
     id: userPageRoot
     contentHeight: page.height
 
+    //Create one UserSettingsPage modelto new user or update one
     UserSettingsPage{
         id: userSettings
     }
 
+    //Create the dialog
+    DialogMessage{
+        id: deleteUserDialog
+        standardButtons: Dialog.Close
+    }
+
+    //Main page
     Page{
         id: page
         width: userPageRoot.width
@@ -28,7 +34,6 @@ Page{
 
             Component{
                 id: userDelegate
-
                 SwipeDelegate{
                     id: swipeDelegate
                     width: parent.width
@@ -48,22 +53,15 @@ Page{
                                 color: "white"
                                 anchors.centerIn: parent
                             }
-
                             SwipeDelegate.onClicked: {
-                                //console.log(swipe.position)
-                                userPageOption(swipe.position,index)
+                                User.updateOrDetele(swipe.position,index)
                             }
                         }
                     }
-
-                    contentItem: RowLayout{                        
-                        //anchors.fill: parent
-
+                    contentItem: RowLayout{
                         Item{
                             width: userImage.width
                             height: userImage.height
-                            //Layout.leftMargin: 10
-
                             Image {
                                 width: 50
                                 height: 50
@@ -72,7 +70,6 @@ Page{
                                 source: "qrc:/images/avatar-default.png"
                             }
                         }
-
                         ColumnLayout{
                             id: userDescription
                             Layout.leftMargin: 10
@@ -95,23 +92,17 @@ Page{
                                 height: 1
                                 color: "#E6E6E6"
                                 Layout.fillWidth: true
-
                             }
                         }
                     }
                     onClicked: {
-                        //console.log(swipe.position)
-                        userPageOption(swipe.position,index)
-                        //console.log(index)
+                        User.updateOrDetele(swipe.position,index)
                     }
                 }
             }
-
             ListView {
                 id: userList
                 Layout.fillWidth: true
-                //Layout.fillHeight: true
-                //width: swipeView.width
                 height: page.height
                 focus: true
                 model: userListModel
@@ -120,7 +111,6 @@ Page{
             }
         }
     }
-
     AddButton{
         id: addUserButton
         x: userPageRoot.width - (width + width/2)
@@ -130,38 +120,6 @@ Page{
         onClicked: {
             userSettings.newUser()
             stackView.push(userSettings)
-        }
-    }
-
-    function userPageOption(position,index){
-        if(position === 0){
-            userSettings.updateUser(userListModel.get(index).password,
-                                  userListModel.get(index).name,
-                                  userListModel.get(index).userType)
-            stackView.push(userSettings)
-        }else{
-            deleteUser(userListModel.get(index).password)
-            userListModel.remove(index)
-        }
-    }
-
-    function deleteUser(varPassword){
-        try{
-            db.transaction(
-                        function(tx) {
-                            tx.executeSql("DELETE FROM User WHERE password = ?;",[varPassword])
-                            dialogUser.setTitleDialog("Delete")
-                            dialogUser.setTextDialog("You delete the user with password " + varPassword + " correctly")
-                            //typeField.text = ""
-                            //listModel.remove(varIndex)
-                            dialogUser.open()
-                        })
-
-        }catch(err){
-            console.log("Error:  " + err);
-            dialogUser.setTitleDialog("Error")
-            dialogUser.setTextDialog(err)
-            dialogUser.open()
         }
     }
 }
