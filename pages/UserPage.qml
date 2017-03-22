@@ -4,6 +4,7 @@ import QtQuick.Controls 2.1
 
 import "qrc:/pages/"
 import "qrc:/dialogs"
+import "qrc:/settings"
 import "qrc:/functions/UserFunction.js" as User
 
 Page{
@@ -20,6 +21,10 @@ Page{
     DialogMessage{
         id: deleteUserDialog
         standardButtons: Dialog.Close
+    }
+
+    Component.onCompleted: {
+        User.loadUserList("User")
     }
 
     //Main page

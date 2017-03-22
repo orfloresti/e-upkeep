@@ -1,12 +1,12 @@
 function loadList(varType){
-    listTypeModel.clear()
+    typeListModel.clear()
     try{
         db.transaction(
                     function(tx) {
                         var qry = "SELECT * FROM " + varType
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
-                            listTypeModel.append({"description":results.rows.item(i).description})
+                            typeListModel.append({"description":results.rows.item(i).description})
 
                         }
                     })
@@ -23,7 +23,7 @@ function saveType(varType, varDescription){
                         tx.executeSql(qry, [varDescription])
                         dialogType.setSettings("Saved","New " + varType + " "+ varDescription + " saved correctly")
 
-                        listTypeModel.append({"description":varDescription})
+                        typeListModel.append({"description":varDescription})
                         dialogType.open()
                         typeField.text = ""
                     }
@@ -43,7 +43,7 @@ function deleteType(varType, varDescription, varIndex){
                         dialogType.setSettings("Delete",
                                                "You delete the "+ varType + " " + varDescription + " correctly")
                         typeField.text = ""
-                        listTypeModel.remove(varIndex)
+                        typeListModel.remove(varIndex)
                         dialogType.open()
                     })
 

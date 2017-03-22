@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/dialogs/"
+import "qrc:/settings"
 import "qrc:/functions/UserFunction.js" as User
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
@@ -91,7 +92,7 @@ Flickable {
                     }
                     ComboBox{
                         id: userTypeComboBox
-                        model:listTypeModel
+                        model:typeListModel
                         Layout.fillWidth: true
                     }
                 }

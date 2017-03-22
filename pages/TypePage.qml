@@ -26,7 +26,7 @@ Flickable {
 
     //Clear the type list on the beginning
     Component.onCompleted: {
-        listTypeModel.clear()
+        typeListModel.clear()
     }
 
     //Main page
@@ -100,7 +100,7 @@ Flickable {
                 ComboBox{
                     id: typeUserComboBox
                     Layout.fillWidth: true
-                    model: listTypeModel
+                    model: typeListModel
                 }                
 
                 Button{

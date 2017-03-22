@@ -1,5 +1,26 @@
+//load the UserList
+function loadUserList(varType){
+    userListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM " + varType
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            userListModel.append({"password":results.rows.item(i).password,
+                                                  "name":results.rows.item(i).name,
+                                                  "userType":results.rows.item(i).userTypeDescription})
+
+                        }
+                    })
+    }catch(err){
+        console.log(err)
+    }
+}
+
 //Functions to new user
 function newUserSettings(){
+    moduleName = "New User"
     newUserState = true
 
     passwordField.text = ""
@@ -38,6 +59,8 @@ function saveUser(varPassword, varName, varTypeUser){
 
 //Functions to update user
 function updateUserSettings(varPassword,varName,varType){
+    moduleName = "Update User"
+
     newUserState = false
 
     passwordField.text  = varPassword
@@ -45,8 +68,8 @@ function updateUserSettings(varPassword,varName,varType){
 
     //Determine the index of the listTypeModel with UserTypes using a string, to show in the combobox
     var i = 0;
-    for(i; i < listTypeModel.count; i++){
-        if(varType === listTypeModel.get(i).description){
+    for(i; i < typeListModel.count; i++){
+        if(varType ===typeListModel.get(i).description){
             userTypeComboBox.currentIndex = parseInt(i);
         }
     }
@@ -80,6 +103,7 @@ function errorSavingUser(){
     if(errorSaving == false){
         userListModel.clear()
         loadUserList("User")
+        moduleName = moduleListModel.get(moduleIdex).title
         stackView.pop()
     }
 }
