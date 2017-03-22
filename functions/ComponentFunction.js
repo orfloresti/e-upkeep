@@ -26,22 +26,25 @@ function newComponentSettings(){
     moduleName = "New Component"
     newComponentState = true
 
-    passwordField.text = ""
-    nameField.text = ""
-    userTypeComboBox.currentIndex = -1
+    passwordField = ""
+    costField = ""
+    descriptionField = ""
+    stockField =""
+    minimumField = ""
 
     saveLabel.text = "Save"
     passwordField.enabled = true
 }
 
-function saveComponent(varPassword, varName, varTypeUser){
+function saveComponent(varPassword,varDescription,varCost, varStock, varMin){
 
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("INSERT INTO User VALUES (?, ?, ?);", [varPassword, varName, varTypeUser]);
+                        tx.executeSql("INSERT INTO Component VALUES (?, ?, ?, ?, ?);",
+                                      [varPassword,varDescription,varCost, varStock, varMin]);
                         componentDialog.setSettings("Saved",
-                                                    "New user with password "+ varPassword + " saved correctly");
+                                                    "New component with password "+ varPassword + " saved correctly");
                         componentDialog.open();
                         errorSaving = false;
 
@@ -99,8 +102,8 @@ function updateComponent(varPassword, varName, varTypeUser) {
 // Conditions in an error
 function errorSavingComponent(){
     if(errorSaving == false){
-        userListModel.clear()
-        loadUserList("Component")
+        componentListModel.clear()
+        loadComponentList("Component")
         moduleName = moduleListModel.get(moduleIdex).title
         stackView.pop()
     }
@@ -109,9 +112,9 @@ function errorSavingComponent(){
 //Depending the flag newUserState state, save new user or update one
 function savingComponent(newComponentState){
     if(newComponentState === true){
-        saveComponent(passwordField.text, nameField.text, userTypeComboBox.currentText)
+        saveComponent(passwordField.text, descriptionField.text, costField.text, stockField.text, minimumField.text)
     }else{
-        updateComponent(passwordField.text, nameField.text, userTypeComboBox.currentText)
+        updateComponent(passwordField.text, descriptionField.text, costField.text, stockField.text, minimumField.text)
     }
 }
 

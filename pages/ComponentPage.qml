@@ -89,7 +89,9 @@ Page{
 
                             }
                             Label{
-                                text: "<b>Description: </b>" + description + ", <b>Stock: </b>" + stock + ", <b>Minimum: </b>" + min
+                                text: "<b>" + description + "</b>" +
+                                      ", Stock: " + stock +
+                                      ", Min: " + min
                                 wrapMode: Label.Wrap
                                 font.pixelSize: 12
                                 Layout.fillWidth: true

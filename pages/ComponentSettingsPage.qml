@@ -17,13 +17,13 @@ Flickable {
 
     //Signals to create new user or update new one
     signal newComponent()
-    signal updateComponent(int varPassword,string varName, string varType)
+    signal updateComponent(string varPassword,string varDescription,double varCost, int varStock, int varMin)
 
     onNewComponent: {
         Comp.newComponentSettings()
     }
     onUpdateComponent: {
-        Comp.updateComponentSettings(varPassword,varName,varType)
+        Comp.updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin)
     }
 
     //Load the ListModel of UserType on the beginning
@@ -33,9 +33,9 @@ Flickable {
 
     //Create the dialog to show problems or complete operations
     DialogMessage{
-        id: userDialog
+        id: componentDialog
         standardButtons: Dialog.Ok
-        onAccepted: User.errorSavingComponent()
+        onAccepted: Comp.errorSavingComponent()
     }
 
     //Page settings
@@ -89,31 +89,66 @@ Flickable {
 
                 ColumnLayout{
                     Label {
-                        text: "User"
+                        text: "Cost"
                         Layout.fillWidth: true
                     }
-                    ComboBox{
-                        id: userTypeComboBox
-                        model:typeListModel
+                    TextField {
+                        id: costField
+                        selectByMouse: true
+                        placeholderText: "$"
                         Layout.fillWidth: true
                     }
                 }
             }
 
             Label {
-                text: "Name"
+                text: "Description"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
             TextField {
-                id: nameField
+                id: descriptionField
                 selectByMouse: true
-                placeholderText: "Name"
+                placeholderText: "Component description"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
+
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+
+                ColumnLayout{
+                    Label {
+                        text: "Stock"
+                        Layout.fillWidth: true
+                    }
+                    TextField {
+                        id: stockField
+                        selectByMouse: true
+                        placeholderText: "Actual stock"
+                        Layout.fillWidth: true
+                    }
+                }
+
+                ColumnLayout{
+                    Label {
+                        text: "Minimum"
+                        Layout.fillWidth: true
+                    }
+                    TextField {
+                        id: minimumField
+                        selectByMouse: true
+                        placeholderText: "Minimum stock"
+                        Layout.fillWidth: true
+                    }
+                }
+            }
+
             Button{
                 Label{
                     id: saveLabel
@@ -123,7 +158,7 @@ Flickable {
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-                onClicked: User.savingUser(newComponetState)
+                onClicked: Comp.savingComponent(newComponentState)
             }
 
         }
