@@ -13,6 +13,7 @@ Flickable {
     //Show a message of the process
     DialogMessage{
         id: dialogType
+        standardButtons: Dialog.Close
     }
 
     //ListModel used only in this page
@@ -21,6 +22,11 @@ Flickable {
         ListElement {table: "UserType"}
         ListElement {table: "DeviceType"}
         ListElement {table: "ReportType"}
+    }
+
+    //Clear the type list on the beginning
+    Component.onCompleted: {
+        listTypeModel.clear()
     }
 
     //Main page

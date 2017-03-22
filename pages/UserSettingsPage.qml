@@ -9,31 +9,33 @@ import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 Flickable {
 
-    property int password
-    property string name
-
     property bool errorSaving: false
-
     property bool newUserState
-
-
     signal newUser()
     signal updateUser(int varPassword,string varName, string varType)
 
+    id:updatePageRoot
+    visible: false
+    contentHeight: userPage.height
+    ScrollIndicator.vertical: ScrollIndicator { }
 
     onNewUser: {
         newUserState = true
+
+        passwordField.text = ""
+        nameField.text = ""
         userTypeComboBox.currentIndex = -1
+
         saveLabel.text = "Save"
         passwordField.enabled = true
-
-
     }
 
     onUpdateUser: {
         newUserState = false
-        password = varPassword
-        name = varName
+
+        passwordField.text  = varPassword
+        nameField.text = varName
+
         var i = 0;
         for(i; i < listTypeModel.count; i++){
             if(varType === listTypeModel.get(i).description){
@@ -43,48 +45,37 @@ Flickable {
 
         saveLabel.text = "Update"
         passwordField.enabled = false
-
     }
 
     Component.onCompleted: {
         TypeFunction.loadList("UserType")
     }
 
-
-    id:updatePageRoot
-    visible: false
-    contentHeight: userPage.height
-    ScrollIndicator.vertical: ScrollIndicator { }
-
     DialogMessage{
-        id: dialogUpdateUser
+        id: dialogUser
         standardButtons: Dialog.Ok
-        onAccepted: User.errorSavingFunction()
-    }    
+        onAccepted: User.errorSavingUser()
+    }
 
     Page{
-
         id: userPage
         width: updatePageRoot.width
         height: updatePageRoot.height * 1.01
         ColumnLayout{
             id: columnUser
             width: parent.width
-
             Item{
                 id: userItem
                 implicitHeight: newUserImage.height
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-
                 Image {
                     width: 150
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
                     source: "qrc:/images/avatar-default.png"
-
                 }
             }
 
@@ -104,8 +95,6 @@ Flickable {
                         selectByMouse: true
                         placeholderText: "Password"
                         Layout.fillWidth: true
-                        text: password
-                        //enabled: false
                     }
                 }
 
@@ -118,11 +107,8 @@ Flickable {
                         id: userTypeComboBox
                         model:listTypeModel
                         Layout.fillWidth: true
-                        //displayText: userPageRoot.userType
                     }
                 }
-
-
             }
 
             Label {
@@ -138,7 +124,7 @@ Flickable {
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-                text: name
+
 
             }
             Button{
@@ -146,7 +132,6 @@ Flickable {
                 Label{
                     id: saveLabel
                     anchors.centerIn: parent
-                    //text: "Update"
                     color: "Black"
                 }
                 Layout.fillWidth: true

@@ -21,17 +21,15 @@ function saveType(varType, varDescription){
                     function(tx) {
                         var qry = "INSERT INTO " + varType +" VALUES (?);"
                         tx.executeSql(qry, [varDescription])
-                        dialogType.setTitleDialog("Saved")
-                        dialogType.setTextDialog("New " + varType + " "+ varDescription + " saved correctly")
+                        dialogType.setSettings("Saved","New " + varType + " "+ varDescription + " saved correctly")
+
                         listTypeModel.append({"description":varDescription})
                         dialogType.open()
                         typeField.text = ""
                     }
                     )
     }catch(err){
-        console.log("Error adding type:  " + err);
-        dialogType.setTitleDialog("Error")
-        dialogType.setTextDialog(err)
+        dialogType.setSettings("Error", err)
         dialogType.open()
     }
 }
@@ -42,25 +40,22 @@ function deleteType(varType, varDescription, varIndex){
                     function(tx) {
                         var qry = "DELETE FROM " + varType + " WHERE description = ?;"
                         tx.executeSql(qry,[varDescription])
-                        dialogType.setTitleDialog("Delete")
-                        dialogType.setTextDialog("You delete the "+ varType + " " + varDescription + " correctly")
+                        dialogType.setSettings("Delete",
+                                               "You delete the "+ varType + " " + varDescription + " correctly")
                         typeField.text = ""
                         listTypeModel.remove(varIndex)
                         dialogType.open()
                     })
 
     }catch(err){
-        console.log("Error adding type:  " + err);
-        dialogType.setTitleDialog("Error")
-        dialogType.setTextDialog(err)
+        dialogType.setSettings("Error", err)
         dialogType.open()
     }
 }
 
 function blankSpace(){
     if(typeField.text.length < 1){
-        dialogType.setTitleDialog("Error")
-        dialogType.setTextDialog("The TextField is blank")
+        dialogType.setSettings("Error","The TextField is blank")
         dialogType.open()
     }else{
         TypeFunction.saveType(typeSelect.currentText, typeField.text)

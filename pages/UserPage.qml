@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/pages/"
-import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
 Page{
@@ -14,13 +13,8 @@ Page{
     id: userPageRoot
     contentHeight: page.height
 
-
-    NewUserPage{
-        id: newUser
-    }
-
-    UpdateUserPage{
-        id: updateUser
+    UserSettingsPage{
+        id: userSettings
     }
 
     Page{
@@ -134,22 +128,17 @@ Page{
         NumberAnimation on y { from: userPageRoot.height; to: userPageRoot.height - (75); duration: 500 }
 
         onClicked: {
-            //updateUser.newUser()
-            TypeFunction.loadList("UserType")
-            stackView.push(newUser)
+            userSettings.newUser()
+            stackView.push(userSettings)
         }
     }
 
-
     function userPageOption(position,index){
         if(position === 0){
-            updateUser.updateUser(userListModel.get(index).password,
+            userSettings.updateUser(userListModel.get(index).password,
                                   userListModel.get(index).name,
                                   userListModel.get(index).userType)
-            //updateUser.setPassword(userListModel.get(index).password)
-            //updateUser.setName(userListModel.get(index).name)
-            //updateUser.getTypeIndex(userListModel.get(index).userType)
-            stackView.push(updateUser)
+            stackView.push(userSettings)
         }else{
             deleteUser(userListModel.get(index).password)
             userListModel.remove(index)
@@ -174,43 +163,6 @@ Page{
             dialogUser.setTextDialog(err)
             dialogUser.open()
         }
-    }
-
-    Dialog {
-
-        signal setTitleDialog(string titleDialogInput)
-        signal setTextDialog(string textDialogInput)
-
-        onSetTitleDialog:  {
-            titleDialog = titleDialogInput
-        }
-
-        onSetTextDialog:{
-            textDialog = textDialogInput
-        }
-
-        id: dialogUser
-        focus: true
-        modal: true
-
-        width: parent.width/1.5
-        height: parent.height/1.5
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        title: titleDialog
-
-        standardButtons: Dialog.Close
-
-        Column{
-            spacing: 20
-            Text {
-                width: dialogUser.availableWidth
-                text: textDialog
-                wrapMode: Label.Wrap
-                font.pixelSize: 12
-            }
-        }
-
     }
 }
 
