@@ -10,18 +10,13 @@ ApplicationWindow {
     //Space used in the pages
     property int space: 20
 
+    //Module name and module index
     property string appName: "Feedback"
     property string moduleName: appName
     property int moduleIdex
 
     //The variable for the data base
     property var db
-
-    //Define the module name
-    signal setModuleName(string module)
-
-    onSetModuleName: {
-    }
 
     //ApplicationWindow settings
     id: window
@@ -33,12 +28,13 @@ ApplicationWindow {
     //ListModels used
     ListModel{id:typeListModel}
     ListModel{id:userListModel}
+    ListModel{id:componentListModel}
 
     ListModel {
         id: moduleListModel
         ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
         ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
-        ListElement { title: "Component"; source:"" }
+        ListElement { title: "Component"; source:"qrc:/pages/ComponentPage.qml" }
         ListElement { title: "Device"; source:"" }
         ListElement { title: "Map"; source:"" }
         ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}

@@ -26,5 +26,9 @@
         <file>settings/ToolBarSettings.qml</file>
         <file>settings/DrawerSettings.qml</file>
         <file>functions/MainFunction.js</file>
+        <file>pages/ComponentPage.qml</file>
+        <file>pages/ComponentSettingsPage.qml</file>
+        <file>functions/ComponentFunction.js</file>
+        <file>images/yast.png</file>
     </qresource>
 </RCC>

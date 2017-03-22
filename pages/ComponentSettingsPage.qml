@@ -4,7 +4,7 @@ import QtQuick.Controls 2.1
 
 import "qrc:/dialogs/"
 import "qrc:/settings"
-import "qrc:/functions/UserFunction.js" as User
+import "qrc:/functions/ComponentFunction.js" as Comp
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
@@ -13,16 +13,17 @@ Flickable {
     property bool errorSaving: false
 
     //Flag to determinate if a new user is creating
-    property bool newUserState
+    property bool newComponentState
 
     //Signals to create new user or update new one
-    signal newUser()
-    signal updateUser(int varPassword,string varName, string varType)
-    onNewUser: {
-        User.newUserSettings()
+    signal newComponent()
+    signal updateComponent(int varPassword,string varName, string varType)
+
+    onNewComponent: {
+        Comp.newComponentSettings()
     }
-    onUpdateUser: {
-        User.updateUserSettings(varPassword,varName,varType)
+    onUpdateComponent: {
+        Comp.updateComponentSettings(varPassword,varName,varType)
     }
 
     //Load the ListModel of UserType on the beginning
@@ -34,24 +35,23 @@ Flickable {
     DialogMessage{
         id: userDialog
         standardButtons: Dialog.Ok
-        onAccepted: User.errorSavingUser()
+        onAccepted: User.errorSavingComponent()
     }
 
     //Page settings
     id:userSettings
     visible: false
-    contentHeight: userPage.height
+    contentHeight: componentPage.height
     ScrollIndicator.vertical: ScrollIndicator { }
 
     //Main page
     Page{
-        id: userPage
+        id: componentPage
         width: userSettings.width
         height: userSettings.height * 1.01
         ColumnLayout{
             id: columnUser
             width: parent.width
-            Layout.topMargin: space
             Item{
                 id: userItem
                 implicitHeight: newUserImage.height
@@ -64,7 +64,7 @@ Flickable {
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
-                    source: "qrc:/images/avatar-default.png"
+                    source: "qrc:/images/yast.png"
                 }
             }
 
@@ -122,8 +122,8 @@ Flickable {
                 }
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space                
-                onClicked: User.savingUser(newUserState)
+                Layout.rightMargin: space
+                onClicked: User.savingUser(newComponetState)
             }
 
         }
