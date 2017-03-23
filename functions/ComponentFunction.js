@@ -1,10 +1,10 @@
 //load the UserList
-function loadComponentList(varType){
+function loadComponentList(){
     componentListModel.clear()
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM " + varType
+                        var qry = "SELECT * FROM Component ORDER BY description ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
                             componentListModel.append({"password":results.rows.item(i).password,
@@ -121,13 +121,13 @@ function savingComponent(newComponentState){
 //Option to update or delete
 function updateOrDetele(position,index){
     if(position === 0){
-        userSettings.updateUser(userListModel.get(index).password,
+        /*userSettings.updateUser(userListModel.get(index).password,
                               userListModel.get(index).name,
                               userListModel.get(index).userType)
-        stackView.push(userSettings)
+        stackView.push(userSettings)*/
     }else{
-        deleteComponent(userListModel.get(index).password)
-        userListModel.remove(index)
+        deleteComponent(componentListModel.get(index).password)
+        componentListModel.remove(index)
     }
 }
 
@@ -136,9 +136,9 @@ function deleteComponent(varPassword){
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("DELETE FROM User WHERE password = ?;",[varPassword])
+                        tx.executeSql("DELETE FROM Component WHERE password = ?;",[varPassword])
                         componentDialog.setSettings("Delete",
-                                               "You delete the user with password " + varPassword + " correctly")
+                                               "You delete the component with password " + varPassword + " correctly")
                         componentDialog.open()
                     })
 

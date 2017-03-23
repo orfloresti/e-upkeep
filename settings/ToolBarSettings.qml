@@ -4,7 +4,12 @@ import QtQuick.Layouts 1.3
 
 import "qrc:/functions/MainFunction.js" as Main
 
-ToolBar{    
+ToolBar{
+    background: Rectangle{
+        color: "Orange"
+    }
+
+
     RowLayout{
         spacing: 20
         anchors.fill: parent

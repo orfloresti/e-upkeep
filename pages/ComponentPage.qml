@@ -25,7 +25,7 @@ Page{
     }
 
     Component.onCompleted: {
-        Comp.loadComponentList("Component")
+        Comp.loadComponentList()
     }
 
     //Main page

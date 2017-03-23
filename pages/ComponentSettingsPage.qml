@@ -59,6 +59,8 @@ Flickable {
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.topMargin: space
+                Layout.bottomMargin: space
+
                 Image {
                     width: 150
                     height: 150

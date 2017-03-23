@@ -47,7 +47,7 @@ Flickable {
     Page{
         id: userPage
         width: userSettings.width
-        height: userSettings.height * 1.01
+        height: userSettings.height * 1.5
         ColumnLayout{
             id: columnUser
             width: parent.width
@@ -59,12 +59,14 @@ Flickable {
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.topMargin: space
+                Layout.bottomMargin: space
+
                 Image {
                     width: 150
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
-                    source: "qrc:/images/avatar-default.png"
+                    source: "qrc:/images/x-office-address-book.png"
                 }
             }
 
