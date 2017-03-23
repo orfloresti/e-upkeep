@@ -26,11 +26,11 @@ function newComponentSettings(){
     moduleName = "New Component"
     newComponentState = true
 
-    passwordField = ""
-    costField = ""
-    descriptionField = ""
-    stockField =""
-    minimumField = ""
+    passwordField.text = ""
+    costField.text = ""
+    descriptionField.text = ""
+    stockField.text =""
+    minimumField.text = ""
 
     saveLabel.text = "Save"
     passwordField.enabled = true
