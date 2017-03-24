@@ -10,9 +10,6 @@
         <file>emblem-synchronizing.ico</file>
         <file>settings/AddButton.qml</file>
         <file>pages/TypePage.qml</file>
-        <file>icons/back_dark.png</file>
-        <file>icons/drawer_dark.png</file>
-        <file>icons/menu_dark.png</file>
         <file>functions/TypeFunction.js</file>
         <file>functions/UserFunction.js</file>
         <file>pages/UserPage.qml</file>
@@ -28,7 +25,7 @@
         <file>pages/ComponentSettingsPage.qml</file>
         <file>functions/ComponentFunction.js</file>
         <file>images/yast.png</file>
-        <file>images/x-office-address-book.png</file>
         <file>images/media-flash.png</file>
+        <file>images/avatar-default.png</file>
     </qresource>
 </RCC>

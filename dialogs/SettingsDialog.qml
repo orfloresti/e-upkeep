@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
+import QtQuick.Window 2.0
 
 Dialog {
 
@@ -29,6 +30,21 @@ Dialog {
                 }
                 else{
                     showNormal()
+                }
+            }
+        }
+        SwitchDelegate{
+            id: minOption
+            //checked: false
+            text: qsTr("Minimized")
+            Layout.fillWidth: true
+            onClicked: fullScreen(minOption.checked)
+            function fullScreen(screenState){
+                if(screenState === true) {
+                    showMinimized()
+                }
+                else{
+                    //showNormal()
                 }
             }
         }

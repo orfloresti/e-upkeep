@@ -72,7 +72,7 @@ Page{
                                 height: 50
                                 id: userImage
                                 anchors.centerIn: parent
-                                source: "qrc:/images/x-office-address-book.png"
+                                source: "qrc:/images/avatar-default.png"
                             }
                         }
                         ColumnLayout{

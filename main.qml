@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
-import QtQuick.Window 2.0
 
 import "qrc:/dialogs"
 import "qrc:/settings"
@@ -29,7 +28,6 @@ ApplicationWindow {
     ListModel{id:typeListModel}
     ListModel{id:userListModel}
     ListModel{id:componentListModel}
-
     ListModel {
         id: moduleListModel
         ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }

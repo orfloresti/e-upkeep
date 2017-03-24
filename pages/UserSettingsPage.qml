@@ -8,7 +8,7 @@ import "qrc:/functions/UserFunction.js" as User
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
-Flickable {
+Page {
     //Flag if a error passed saving or update user
     property bool errorSaving: false
 
@@ -39,15 +39,14 @@ Flickable {
 
     //Page settings
     id:userSettings
-    visible: false
-    contentHeight: userPage.height
-    ScrollIndicator.vertical: ScrollIndicator { }
 
     //Main page
-    Page{
-        id: userPage
-        width: userSettings.width
-        height: userSettings.height * 1.5
+    Flickable{
+        anchors.fill: parent
+        contentHeight: columnUser .height
+        //boundsBehavior: Flickable.StopAtBounds
+        ScrollIndicator.vertical: ScrollIndicator { }
+
         ColumnLayout{
             id: columnUser
             width: parent.width
@@ -66,7 +65,7 @@ Flickable {
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
-                    source: "qrc:/images/x-office-address-book.png"
+                    source: "qrc:/images/avatar-default.png"
                 }
             }
 
@@ -124,7 +123,8 @@ Flickable {
                 }
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space                
+                Layout.rightMargin: space
+                Layout.bottomMargin: space
                 onClicked: User.savingUser(newUserState)
             }
 

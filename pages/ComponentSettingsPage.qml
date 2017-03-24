@@ -8,7 +8,7 @@ import "qrc:/functions/ComponentFunction.js" as Comp
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
 
-Flickable {
+Page{
     //Flag if a error passed saving or update user
     property bool errorSaving: false
 
@@ -39,16 +39,16 @@ Flickable {
     }
 
     //Page settings
-    id:userSettings
-    visible: false
-    contentHeight: componentPage.height
-    ScrollIndicator.vertical: ScrollIndicator { }
+    id:page
+
+
 
     //Main page
-    Page{
-        id: componentPage
-        width: userSettings.width
-        height: userSettings.height * 1.01
+    Flickable{
+        anchors.fill: parent
+        contentHeight: columnUser.height
+        ScrollIndicator.vertical: ScrollIndicator { }
+
         ColumnLayout{
             id: columnUser
             width: parent.width
@@ -160,6 +160,7 @@ Flickable {
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
+                Layout.bottomMargin: space
                 onClicked: Comp.savingComponent(newComponentState)
             }
 

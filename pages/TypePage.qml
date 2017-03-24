@@ -5,10 +5,8 @@ import QtQuick.Controls 2.1
 import "qrc:/dialogs"
 import "qrc:/functions/TypeFunction.js" as TypeFunction
 
-Flickable {
-    id: root
-    contentHeight: page.height
-    ScrollIndicator.vertical: ScrollIndicator { }
+Page {
+    id: page
 
     //Show a message of the process
     DialogMessage{
@@ -30,10 +28,11 @@ Flickable {
     }
 
     //Main page
-    Page{
-        id: page
-        width: root.width
-        height: root.height * 1.01        
+    Flickable{
+        anchors.fill: parent
+        contentHeight: column.height
+        //boundsBehavior: Flickable.StopAtBounds
+        ScrollIndicator.vertical: ScrollIndicator { }
 
         ColumnLayout{
             id: column
