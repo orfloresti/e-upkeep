@@ -1,18 +1,13 @@
 //load the component list
-function loadComponentList(){
-    componentListModel.clear()
+function loadList(){
+    listModel.clear()
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM Component ORDER BY description ASC"
+                        var qry = "SELECT * FROM Brand ORDER BY description ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
-                            componentListModel.append({"password":results.rows.item(i).password,
-                                                     "description":results.rows.item(i).description,
-                                                     "cost":results.rows.item(i).cost,
-                                                     "stock":results.rows.item(i).stock,
-                                                     "min":results.rows.item(i).min
-                                                 })
+                            listModel.append({"description":results.rows.item(i).description})
 
                         }
                     })
@@ -21,10 +16,11 @@ function loadComponentList(){
     }
 }
 
+
 //Functions to new user
 function newComponentSettings(){
     moduleName = "New Component"
-    newComponentState = true
+    newState = true
 
     passwordField.text = ""
     costField.text = ""
@@ -61,7 +57,7 @@ function saveComponent(varPassword,varDescription,varCost, varStock, varMin){
 //Functions to update user
 function updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin){
     moduleName = "Update Component"
-    newComponentState = false
+    newState = false
 
     passwordField.text = varPassword
     costField.text = varCost
@@ -104,8 +100,8 @@ function errorSavingComponent(){
 }
 
 //Depending the flag newUserState state, save new user or update one
-function savingComponent(newComponentState){
-    if(newComponentState === true){
+function savingComponent(newState){
+    if(newState === true){
         saveComponent(passwordField.text, descriptionField.text, costField.text, stockField.text, minimumField.text)
     }else{
         updateComponent(passwordField.text, descriptionField.text, costField.text, stockField.text, minimumField.text)

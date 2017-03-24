@@ -4,14 +4,15 @@ import QtQuick.Controls 2.1
 
 import "qrc:/dialogs/"
 import "qrc:/settings"
-import "qrc:/modules/component/ComponentFunction.js" as Comp
+
+import "qrc:/modules/brand/BrandFunction.js" as Brand
 
 Page{
     //Flag if a error passed saving or update user
     property bool errorSaving: false
 
     //Flag to determinate if a new user is creating
-    property bool newComponentState
+    property bool newState
 
     //Signals to create new user or update new one
     signal newComponent()
@@ -152,7 +153,7 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.bottomMargin: space
-                onClicked: Comp.savingComponent(newComponentState)
+                onClicked: Comp.savingComponent(newState)
             }
 
         }

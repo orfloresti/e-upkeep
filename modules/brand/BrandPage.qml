@@ -5,38 +5,39 @@ import QtQuick.Controls 2.1
 import "qrc:/dialogs"
 import "qrc:/settings"
 
-import "qrc:/modules/component"
-import "qrc:/modules/component/ComponentFunction.js" as Comp
+import "qrc:/modules/brand"
+import "qrc:/modules/brand/BrandFunction.js" as Brand
 
+/*
 Page{
     //Page settings
-    id: componentPage
+    id: rootPage
     contentHeight: page.height
 
-    //Create one componentSettingsPage modelto new user or update one
-    ComponentSettingsPage{
+    //Create one SettingsPage model to create new or update
+    BrandSettingsPage{
         visible: false
-        id: componentSettings
+        id: settings
     }
 
     //Create the dialog
     DialogMessage{
-        id: componentDialog
+        id: dialog
         standardButtons: Dialog.Close
     }
 
     //List comp
-    ListModel{id:componentListModel}
+    ListModel{id:listModel}
 
     Component.onCompleted: {
-        Comp.loadComponentList()
+        Brand.loadList()
     }
-
+*/
     //Main page
     Page{
         id: page
-        width: componentPage.width
-        height: componentPage.height * 1.01
+        width: rootPage.width
+        height: rootPage.height * 1.01
 
         ColumnLayout{
             id: column
@@ -122,7 +123,7 @@ Page{
                 Layout.fillWidth: true
                 height: page.height
                 focus: true
-                model: componentListModel
+                model: brandListModel
                 delegate: componentDelegate
                 ScrollIndicator.vertical: ScrollIndicator { }
             }
@@ -130,13 +131,13 @@ Page{
     }
     AddButton{
         id: addUserButton
-        x: componentPage.width - (width + width/2)
-        y: componentPage.height - (height + height/2)
-        NumberAnimation on y { from: componentPage.height; to: componentPage.height - (75); duration: 500 }
+        x: rootPage.width - (width + width/2)
+        y: rootPage.height - (height + height/2)
+        NumberAnimation on y { from: rootPage.height; to: rootPage.height - (75); duration: 500 }
 
         onClicked: {
             componentSettings.newComponent()
             stackView.push(componentSettings)
         }
     }
-}
+//}

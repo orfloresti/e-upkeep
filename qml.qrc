@@ -28,5 +28,8 @@
         <file>modules/user/UserSettingsPage.qml</file>
         <file>main.cpp</file>
         <file>MainFunction.js</file>
+        <file>modules/brand/BrandFunction.js</file>
+        <file>modules/brand/BrandPage.qml</file>
+        <file>modules/brand/BrandSettingsPage.qml</file>
     </qresource>
 </RCC>
