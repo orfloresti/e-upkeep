@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 Drawer {    
     width: Math.min(window.width, window.height) / 3 * 2
     height: window.height
-    dragMargin: stackView.depth > 1 ? 0 : undefined
+    dragMargin: stackView.depth > 1 ? 0 : undefined    
 
     ListView {
         id: listView

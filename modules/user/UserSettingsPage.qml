@@ -4,54 +4,51 @@ import QtQuick.Controls 2.1
 
 import "qrc:/dialogs/"
 import "qrc:/settings"
-import "qrc:/functions/ComponentFunction.js" as Comp
-import "qrc:/functions/TypeFunction.js" as TypeFunction
+import "qrc:/modules/user/UserFunction.js" as User
 
-
-Page{
+Page {
     //Flag if a error passed saving or update user
     property bool errorSaving: false
 
     //Flag to determinate if a new user is creating
-    property bool newComponentState
+    property bool newUserState
 
     //Signals to create new user or update new one
-    signal newComponent()
-    signal updateComponent(string varPassword,string varDescription,double varCost, int varStock, int varMin)
-
-    onNewComponent: {
-        Comp.newComponentSettings()
+    signal newUser()
+    signal updateUser(int varPassword,string varName, string varType)
+    onNewUser: {
+        User.newUserSettings()
     }
-    onUpdateComponent: {
-        Comp.updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin)
+    onUpdateUser: {
+        User.updateUserSettings(varPassword,varName,varType)
     }
 
     //Load the ListModel of UserType on the beginning
     Component.onCompleted: {
-        TypeFunction.loadList("UserType")
+        User.loadTypeList("UserType")
     }
 
     //Create the dialog to show problems or complete operations
     DialogMessage{
-        id: componentDialog
+        id: userDialog
         standardButtons: Dialog.Ok
-        onAccepted: Comp.errorSavingComponent()
+        onAccepted: User.errorSavingUser()
     }
 
     //Page settings
-    id:page
-
-
+    id:userSettings
 
     //Main page
     Flickable{
         anchors.fill: parent
-        contentHeight: columnUser.height
+        contentHeight: columnUser .height
+        //boundsBehavior: Flickable.StopAtBounds
         ScrollIndicator.vertical: ScrollIndicator { }
 
         ColumnLayout{
             id: columnUser
             width: parent.width
+            Layout.topMargin: space
             Item{
                 id: userItem
                 implicitHeight: newUserImage.height
@@ -66,7 +63,7 @@ Page{
                     height: 150
                     id: newUserImage
                     anchors.centerIn: parent
-                    source: "qrc:/images/yast.png"
+                    source: "qrc:/images/avatar-default.png"
                 }
             }
 
@@ -91,66 +88,31 @@ Page{
 
                 ColumnLayout{
                     Label {
-                        text: "Cost"
+                        text: "User"
                         Layout.fillWidth: true
                     }
-                    TextField {
-                        id: costField
-                        selectByMouse: true
-                        placeholderText: "$"
+                    ComboBox{
+                        id: userTypeComboBox
+                        model:typeListModel
                         Layout.fillWidth: true
                     }
                 }
             }
 
             Label {
-                text: "Description"
+                text: "Name"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
             TextField {
-                id: descriptionField
+                id: nameField
                 selectByMouse: true
-                placeholderText: "Component description"
+                placeholderText: "Name"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
-
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                ColumnLayout{
-                    Label {
-                        text: "Stock"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: stockField
-                        selectByMouse: true
-                        placeholderText: "Actual stock"
-                        Layout.fillWidth: true
-                    }
-                }
-
-                ColumnLayout{
-                    Label {
-                        text: "Minimum"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: minimumField
-                        selectByMouse: true
-                        placeholderText: "Minimum stock"
-                        Layout.fillWidth: true
-                    }
-                }
-            }
-
             Button{
                 Label{
                     id: saveLabel
@@ -161,7 +123,7 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.bottomMargin: space
-                onClicked: Comp.savingComponent(newComponentState)
+                onClicked: User.savingUser(newUserState)
             }
 
         }

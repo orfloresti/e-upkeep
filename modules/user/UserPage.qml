@@ -2,18 +2,25 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
-import "qrc:/pages/"
+
 import "qrc:/dialogs"
 import "qrc:/settings"
-import "qrc:/functions/UserFunction.js" as User
+
+import "qrc:/modules/user"
+import "qrc:/modules/user/UserFunction.js" as User
 
 Page{
     //Page settings
     id: userPageRoot
     contentHeight: page.height
 
-    //Create one UserSettingsPage modelto new user or update one
+    //List model
+    ListModel{id:userListModel}
+    ListModel{id:typeListModel}
+
+    //Create one UserSettingsPage model to new user or update one
     UserSettingsPage{
+        visible: false
         id: userSettings
     }
 

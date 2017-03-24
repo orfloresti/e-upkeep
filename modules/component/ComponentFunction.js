@@ -1,4 +1,4 @@
-//load the UserList
+//load the component list
 function loadComponentList(){
     componentListModel.clear()
     try{
@@ -59,33 +59,27 @@ function saveComponent(varPassword,varDescription,varCost, varStock, varMin){
 }
 
 //Functions to update user
-function updateComponentSettings(varPassword,varName,varType){
+function updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin){
     moduleName = "Update Component"
+    newComponentState = false
 
-    newUserState = false
-
-    passwordField.text  = varPassword
-    nameField.text = varName
-
-    //Determine the index of the listTypeModel with UserTypes using a string, to show in the combobox
-    var i = 0;
-    for(i; i < typeListModel.count; i++){
-        if(varType ===typeListModel.get(i).description){
-            userTypeComboBox.currentIndex = parseInt(i);
-        }
-    }
+    passwordField.text = varPassword
+    costField.text = varCost
+    descriptionField.text = varDescription
+    stockField.text = varStock
+    minimumField.text = varMin
 
     saveLabel.text = "Update"
     passwordField.enabled = false
 }
 
-function updateComponent(varPassword, varName, varTypeUser) {
+function updateComponent(varPassword,varDescription,varCost, varStock, varMin) {
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("UPDATE User SET password=?, name=?, userTypeDescription=? WHERE password=?",
-                                      [varPassword, varName, varTypeUser,varPassword]);
-                        componentDialog.setSettings("Updated","User with password "+ varPassword + " saved correctly");
+                        tx.executeSql("UPDATE Component SET password=?, description=?, cost=?, stock=?, min=? WHERE password=?",
+                                      [varPassword, varDescription,varCost, varStock, varMin, varPassword]);
+                        componentDialog.setSettings("Updated","Component with password "+ varPassword + " saved correctly");
                         componentDialog.open();
                         errorSaving = false;
 
@@ -121,10 +115,12 @@ function savingComponent(newComponentState){
 //Option to update or delete
 function updateOrDetele(position,index){
     if(position === 0){
-        /*userSettings.updateUser(userListModel.get(index).password,
-                              userListModel.get(index).name,
-                              userListModel.get(index).userType)
-        stackView.push(userSettings)*/
+        componentSettings.updateComponent(componentListModel.get(index).password,
+                                                  componentListModel.get(index).description,
+                                                  componentListModel.get(index).cost,
+                                                  componentListModel.get(index).stock,
+                                                  componentListModel.get(index).min)
+        stackView.push(componentSettings)
     }else{
         deleteComponent(componentListModel.get(index).password)
         componentListModel.remove(index)

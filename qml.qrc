@@ -6,26 +6,27 @@
         <file>icons/drawer.png</file>
         <file>icons/menu.png</file>
         <file>icons/emblem-synchronizing.png</file>
-        <file>pages/ReportPage.qml</file>
         <file>emblem-synchronizing.ico</file>
         <file>settings/AddButton.qml</file>
-        <file>pages/TypePage.qml</file>
-        <file>functions/TypeFunction.js</file>
-        <file>functions/UserFunction.js</file>
-        <file>pages/UserPage.qml</file>
         <file>settings/DataBase.qml</file>
         <file>dialogs/SettingsDialog.qml</file>
         <file>dialogs/AboutDialog.qml</file>
         <file>dialogs/DialogMessage.qml</file>
-        <file>pages/UserSettingsPage.qml</file>
         <file>settings/ToolBarSettings.qml</file>
         <file>settings/DrawerSettings.qml</file>
-        <file>functions/MainFunction.js</file>
-        <file>pages/ComponentPage.qml</file>
-        <file>pages/ComponentSettingsPage.qml</file>
-        <file>functions/ComponentFunction.js</file>
         <file>images/yast.png</file>
         <file>images/media-flash.png</file>
         <file>images/avatar-default.png</file>
+        <file>modules/component/ComponentFunction.js</file>
+        <file>modules/component/ComponentPage.qml</file>
+        <file>modules/component/ComponentSettingsPage.qml</file>
+        <file>modules/report/ReportPage.qml</file>
+        <file>modules/type/TypeFunction.js</file>
+        <file>modules/type/TypePage.qml</file>
+        <file>modules/user/UserFunction.js</file>
+        <file>modules/user/UserPage.qml</file>
+        <file>modules/user/UserSettingsPage.qml</file>
+        <file>main.cpp</file>
+        <file>MainFunction.js</file>
     </qresource>
 </RCC>

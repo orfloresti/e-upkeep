@@ -58,6 +58,6 @@ function blankSpace(){
         dialogType.setSettings("Error","The TextField is blank")
         dialogType.open()
     }else{
-        TypeFunction.saveType(typeSelect.currentText, typeField.text)
+        saveType(typeSelect.currentText, typeField.text)
     }
 }

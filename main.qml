@@ -2,8 +2,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
 
-import "qrc:/dialogs"
 import "qrc:/settings"
+import "qrc:/dialogs"
 
 ApplicationWindow {
     //Space used in the pages
@@ -25,21 +25,15 @@ ApplicationWindow {
     title: appName + "  [" + moduleName + "]"
 
     //ListModels used
-    ListModel{id:typeListModel}
-    ListModel{id:userListModel}
-    ListModel{id:componentListModel}
     ListModel {
         id: moduleListModel
-        ListElement { title: "Report"; source: "qrc:/pages/ReportPage.qml" }
-        ListElement { title: "User"; source: "qrc:/pages/UserPage.qml" }
-        ListElement { title: "Component"; source:"qrc:/pages/ComponentPage.qml" }
-        ListElement { title: "Device"; source:"" }
-        ListElement { title: "Map"; source:"" }
-        ListElement { title: "Type"; source: "qrc:/pages/TypePage.qml"}
+        ListElement { title: "-Report"; source: "qrc:/modules/report/ReportPage.qml" }
+        ListElement { title: "Component"; source:"qrc:/modules/component/ComponentPage.qml" }
+        ListElement { title: "-Device"; source:"" }
+        ListElement { title: "User"; source: "qrc:/modules/user/UserPage.qml" }
+        ListElement { title: "-Map"; source:"" }
+        ListElement { title: "Type"; source: "qrc:/modules/type/TypePage.qml"}
     }
-
-    //Load the data base
-    DataBase{}
 
     //Pages StackView
     StackView {
@@ -49,15 +43,18 @@ ApplicationWindow {
         }
     }
 
-    //Dialogs in the menu
-    SettingsDialog{id: settingsDialog}
-    AboutDialog{id: aboutDialog}
+    //Load the data base
+    DataBase{}        
 
     //Create the ToolBar
     header: ToolBarSettings{}
 
     //Create the Drawer for the ToolBar
     DrawerSettings{id: drawer}
+
+    //Dialogs in the menu
+    SettingsDialog{id: settingsDialog}
+    AboutDialog{id: aboutDialog}
 
 }
 

@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/dialogs"
-import "qrc:/functions/TypeFunction.js" as TypeFunction
+import "qrc:/modules/type/TypeFunction.js" as Type
 
 Page {
     id: page
@@ -21,6 +21,8 @@ Page {
         ListElement {table: "DeviceType"}
         ListElement {table: "ReportType"}
     }
+
+    ListModel{id:typeListModel}
 
     //Clear the type list on the beginning
     Component.onCompleted: {
@@ -62,7 +64,7 @@ Page {
                 Layout.leftMargin: space
                 Layout.rightMargin: space                
                 model: definedTypes
-                onCurrentTextChanged: TypeFunction.loadList(typeSelect.currentText)
+                onCurrentTextChanged: Type.loadList(typeSelect.currentText)
             }
 
             Label {
@@ -89,7 +91,7 @@ Page {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: TypeFunction.blankSpace()
+                    onClicked: Type.blankSpace()
                 }
             }
             RowLayout{
@@ -109,7 +111,7 @@ Page {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: TypeFunction.deleteType(typeSelect.currentText,
+                    onClicked: Type.deleteType(typeSelect.currentText,
                                                        typeUserComboBox.currentText,
                                                        typeUserComboBox.currentIndex)
                 }

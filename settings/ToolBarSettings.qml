@@ -2,13 +2,10 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
 
-import "qrc:/functions/MainFunction.js" as Main
+import "qrc:/MainFunction.js" as Main
 
 ToolBar{
-    background: Rectangle{
-        color: "Orange"
-    }
-
+    background: Rectangle{ color: "Orange" }
 
     RowLayout{
         spacing: 20

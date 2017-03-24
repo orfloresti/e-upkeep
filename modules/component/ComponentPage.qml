@@ -2,11 +2,11 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
-import "qrc:/pages/"
 import "qrc:/dialogs"
 import "qrc:/settings"
 
-import "qrc:/functions/ComponentFunction.js" as Comp
+import "qrc:/modules/component"
+import "qrc:/modules/component/ComponentFunction.js" as Comp
 
 Page{
     //Page settings
@@ -15,6 +15,7 @@ Page{
 
     //Create one componentSettingsPage modelto new user or update one
     ComponentSettingsPage{
+        visible: false
         id: componentSettings
     }
 
@@ -23,6 +24,9 @@ Page{
         id: componentDialog
         standardButtons: Dialog.Close
     }
+
+    //List comp
+    ListModel{id:componentListModel}
 
     Component.onCompleted: {
         Comp.loadComponentList()
@@ -60,10 +64,7 @@ Page{
                                 color: "white"
                                 anchors.centerIn: parent
                             }
-                            SwipeDelegate.onClicked: {
-                                Comp.updateOrDetele(swipe.position,index)
-                            }
-                        }
+                            SwipeDelegate.onClicked: Comp.updateOrDetele(swipe.position,index)                        }
                     }
                     contentItem: RowLayout{
                         Item{
