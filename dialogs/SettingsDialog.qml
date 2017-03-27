@@ -33,7 +33,7 @@ Dialog {
                 }
             }
         }
-        SwitchDelegate{
+        /*SwitchDelegate{
             id: minOption
             //checked: false
             text: qsTr("Minimized")
@@ -47,7 +47,7 @@ Dialog {
                     //showNormal()
                 }
             }
-        }
+        }*/
     }
 
 }

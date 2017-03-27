@@ -31,7 +31,7 @@ ApplicationWindow {
         ListElement { title: "Component"; source:"qrc:/modules/component/ComponentPage.qml" }
         ListElement { title: "-Device"; source:"" }
         ListElement { title: "User"; source: "qrc:/modules/user/UserPage.qml" }
-        ListElement { title: "-Map"; source:"" }
+        ListElement { title: "Map"; source:"qrc:/modules/map/Main.qml" }
         ListElement { title: "Brand"; source:"qrc:/modules/brand/Main.qml" }
         ListElement { title: "Type"; source: "qrc:/modules/type/TypePage.qml"}
     }

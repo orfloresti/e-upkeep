@@ -32,5 +32,8 @@
         <file>modules/brand/Main.qml</file>
         <file>modules/brand/Editor.qml</file>
         <file>images/easytag.png</file>
+        <file>modules/map/Editor.qml</file>
+        <file>modules/map/Function.js</file>
+        <file>modules/map/Main.qml</file>
     </qresource>
 </RCC>
