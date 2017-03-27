@@ -18,11 +18,9 @@ Page{
         standardButtons: Dialog.Close
     }
 
-    //List comp
+    //Load list and order showed
     ListModel{id:listModel}
-    Component.onCompleted: {
-        Def.loadList()
-    }
+    Component.onCompleted: { Def.loadList()}
 
     //Create editor to new or update one
     Editor{
@@ -55,7 +53,7 @@ Page{
                             color: "white"
                             anchors.centerIn: parent
                         }
-                        SwipeDelegate.onClicked: Def.updateOrDetele(swipe.position,index)
+                        SwipeDelegate.onClicked: Def.modeEditor(swipe.position,index)
                     }
                 }
                 contentItem: RowLayout{
@@ -88,7 +86,7 @@ Page{
                         }
                     }
                 }
-                onClicked: Def.updateOrDetele(swipe.position,index)
+                onClicked: Def.modeEditor(swipe.position,index)
             }
         }
         ListView {

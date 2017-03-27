@@ -3,11 +3,11 @@ import QtQuick.LocalStorage 2.0
 
 Item{
     Component.onCompleted: {
-    db = LocalStorage.openDatabaseSync("Feedback", "1.0", "Feedback database", 10000);
+        db = LocalStorage.openDatabaseSync("Feedback", "1.0", "Feedback database", 10000);
 
-    db.transaction(
-                function(tx) {
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Component(
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Component(
                                 password TEXT NOT NULL PRIMARY KEY ,
                                 description TEXT NOT NULL,
                                 cost NUMERIC NOT NULL,
@@ -15,52 +15,60 @@ Item{
                                 min INTEGER NOT NULL
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Brand(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Brand(
                                 name TEXT NOT NULL PRIMARY KEY
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Building(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Map(
                                 name TEXT NOT NULL PRIMARY KEY
-                              );")
+                             );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Zone(
-                                name TEXT NOT NULL PRIMARY KEY
-                              );")
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Building(
+                                      name TEXT NOT NULL PRIMARY KEY,
+                                      mapName TEXT NOT NULL PRIMARY KEY,
+                                      FOREIGN KEY(mapName) REFERENCES Map(name)
+                                    );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS UserType(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Zone(
+                                      name TEXT NOT NULL PRIMARY KEY,
+                                      buildingName TEXT NOT NULL PRIMARY KEY,
+                                      FOREIGN KEY(buildingName) REFERENCES Building(name)
+                                    );")
+
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS UserType(
                                 description TEXT NOT NULL PRIMARY KEY
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS ReportType(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS ReportType(
                                 description TEXT NOT NULL PRIMARY KEY
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS DeviceType(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS DeviceType(
                                 description TEXT NOT NULL PRIMARY KEY
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Device(
-                                password TEXT NOT NULL PRIMARY KEY,
-                                description TEXT NOT NULL,
-                                stock INTEGER NOT NULL,
-                                brandName TEXT,
-                                deviceTypeDescription TEXT,
-                                buildingZoneBuildingName TEXT,
-                                buildingZoneZoneName TEXT,
-                                FOREIGN KEY(brandName) REFERENCES Brand(name),
-                                FOREIGN KEY(deviceTypeDescription) REFERENCES DeviceType(description)
-                                FOREIGN KEY(buildingZoneBuildingName) REFERENCES BuildingZone(buildingName)
-                                FOREIGN KEY(buildingZoneZoneName) REFERENCES BuildingZone(zoneName)
-                              );")
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Device(
+                                      password TEXT NOT NULL PRIMARY KEY,
+                                      description TEXT NOT NULL,
+                                      stock INTEGER NOT NULL,
+                                      brandName TEXT,
+                                      deviceTypeDescription TEXT,
+                                      zoneName TEXT,
+                                      buildingName TEXT,
+                                      FOREIGN KEY(brandName) REFERENCES Brand(name),
+                                      FOREIGN KEY(deviceTypeDescription) REFERENCES DeviceType(description)
+                                      FOREIGN KEY(zoneName) REFERENCES Zone(name)
+                                      FOREIGN KEY(buildingName) REFERENCES Building(name)
+                                    );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS User(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS User(
                                 password INTEGER NOT NULL PRIMARY KEY,
                                 name TEXT NOT NULL,
                                 userTypeDescription TEXT,
                                 FOREIGN KEY(userTypeDescription) REFERENCES UserType(description)
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS BuildingZone(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS BuildingZone(
                                 buildingName TEXT,
                                 zoneName TEXT,
                                 PRIMARY KEY(buildingName, zoneName)
@@ -69,7 +77,7 @@ Item{
 
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Arrive(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Arrive(
                                 year INTEGER NOT NULL,
                                 month INTEGER NOT NULL,
                                 day INTEGER NOT NULL,
@@ -80,7 +88,7 @@ Item{
                                 FOREIGN KEY(labUser, plantUser) REFERENCES User(password, password)
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Out(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Out(
                                 year INTEGER NOT NULL,
                                 month INTEGER NOT NULL,
                                 day INTEGER NOT NULL,
@@ -91,7 +99,7 @@ Item{
                                 FOREIGN KEY(labUser, plantUser) REFERENCES User(password, password)
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS Report(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Report(
                                 password TEXT PRIMARY KEY NOT NULL,
                                 observation TEXT NOT NULL,
                                 process TEXT NOT NULL,
@@ -105,7 +113,7 @@ Item{
                                 FOREIGN KEY(devicePassword) REFERENCES Device(password)
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS DoBy(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS DoBy(
                                 reportPassword TEXT,
                                 userPassword TEXT,
                                 PRIMARY KEY(reportPassword, userPassword),
@@ -113,7 +121,7 @@ Item{
                                 FOREIGN KEY(userPassword) REFERENCES User(password)
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS UsedComponent(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS UsedComponent(
                                 reportPassword TEXT,
                                 componentPassword TEXT,
                                 quantity INTEGER NOT NULL,
@@ -122,7 +130,7 @@ Item{
                                 FOREIGN KEY(componentPassword) REFERENCES Component(password)
                               );")
 
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS UsedDevice(
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS UsedDevice(
                                 reportPassword TEXT,
                                 devicePassword TEXT,
                                 quantity INTEGER NOT NULL,
@@ -131,11 +139,11 @@ Item{
                                 FOREIGN KEY(devicePassword) REFERENCES Device(password)
                               );")
 
-                    //tx.executeSql("PRAGMA foreign_keys = ON;")
-                }
-                )
+                        //tx.executeSql("PRAGMA foreign_keys = ON;")
+                    }
+                    )
 
-    console.log("Loading data base...")
+        console.log("Loading data base...")
     }
 
 }

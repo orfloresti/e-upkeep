@@ -2,7 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
 
-import "qrc:/MainFunction.js" as Main
+import "qrc:/settings/ToolbarFunction.js" as Def
 
 ToolBar{
     background: Rectangle{ color: "Orange" }
@@ -17,7 +17,7 @@ ToolBar{
                 verticalAlignment: Image.AlignVCenter
                 source: stackView.depth == 1 ?  "qrc:/icons/drawer.png" : "qrc:/icons/back.png"
             }            
-            onClicked: Main.iconReturn(moduleIdex)
+            onClicked: Def.iconReturn(moduleIdex)
         }
         Label {
             id: titleLabel

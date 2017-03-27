@@ -4,7 +4,7 @@ function loadList(){
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM Brand ORDER BY name ASC"
+                        var qry = "SELECT * FROM brand ORDER BY name ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
                             listModel.append({"name":results.rows.item(i).name})
@@ -57,14 +57,14 @@ function updateItem(varName) {
 function errorSavingItem(){
     if(errorSaving == false){
         listModel.clear()
-        loadList("Brand")
+        loadList()
         moduleName = moduleListModel.get(moduleIdex).title
         stackView.pop()
     }
 }
 
 //Depending the flag newUserState state, save new user or update one
-function savingComponent(newState){
+function saving(newState){
     if(newState === true){
         saveItem(nameField.text)
     }else{
@@ -73,7 +73,7 @@ function savingComponent(newState){
 }
 
 //Option to update or delete
-function updateOrDetele(position,index){
+function modeEditor(position,index){
     if(position === 0){
         editor.updateItem(listModel.get(index).name)
         stackView.push(editor)

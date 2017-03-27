@@ -8,6 +8,7 @@ import "qrc:/settings"
 import "qrc:/modules/brand/Function.js" as Def
 
 Page{
+
     //Flag if a error passed saving or update user
     property bool errorSaving: false
 
@@ -24,7 +25,7 @@ Page{
     onNewItem: {
         moduleName = "New Brand"
         newState = true
-        nameField.text = nameField.clear()
+        nameField.clear()
         button.text = "Save"
         //passwordField.enabled = true
     }
@@ -102,7 +103,7 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.bottomMargin: space
-                onClicked: Def.savingComponent(newState)
+                onClicked: Def.saving(newState)
             }
 
         }
