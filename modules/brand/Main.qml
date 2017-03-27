@@ -6,7 +6,7 @@ import "qrc:/dialogs"
 import "qrc:/settings"
 
 import "qrc:/modules/brand"
-import "qrc:/modules/brand/BrandFunction.js" as Brand
+import "qrc:/modules/brand/Function.js" as Def
 
 /*
 Page{
@@ -36,8 +36,17 @@ Page{
     //Main page
     Page{
         id: page
-        width: rootPage.width
-        height: rootPage.height * 1.01
+        //width: rootPage.width
+        //height: rootPage.height * 1.01
+
+        //Create the dialog
+        DialogMessage{
+            id: dialog
+            standardButtons: Dialog.Close
+        }
+
+        //List comp
+        ListModel{id:listModel}
 
         ColumnLayout{
             id: column
@@ -115,7 +124,7 @@ Page{
                             }
                         }
                     }
-                    onClicked: Comp.updateOrDetele(swipe.position,index)
+                    //onClicked: Comp.updateOrDetele(swipe.position,index)
                 }
             }
             ListView {
@@ -123,21 +132,23 @@ Page{
                 Layout.fillWidth: true
                 height: page.height
                 focus: true
-                model: brandListModel
+                model: listModel
                 delegate: componentDelegate
                 ScrollIndicator.vertical: ScrollIndicator { }
             }
         }
-    }
-    AddButton{
-        id: addUserButton
-        x: rootPage.width - (width + width/2)
-        y: rootPage.height - (height + height/2)
-        NumberAnimation on y { from: rootPage.height; to: rootPage.height - (75); duration: 500 }
 
-        onClicked: {
-            componentSettings.newComponent()
-            stackView.push(componentSettings)
+        AddButton{
+            id: addUserButton
+            x: page.width - (width + width/2)
+            y: page.height - (height + height/2)
+            NumberAnimation on y { from: page.height; to: page.height - (75); duration: 500 }
+
+            onClicked: {
+                componentSettings.newComponent()
+                stackView.push(componentSettings)
+            }
         }
     }
+
 //}
