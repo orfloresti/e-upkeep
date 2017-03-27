@@ -4,96 +4,60 @@ function loadList(){
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM Brand ORDER BY description ASC"
+                        var qry = "SELECT * FROM Brand ORDER BY name ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
-                            listModel.append({"description":results.rows.item(i).description})
+                            listModel.append({"name":results.rows.item(i).name})
 
                         }
                     })
     }catch(err){
-        console.log(err)
+        errorMessage(err)
     }
 }
 
-
-//Functions to new user
-function newComponentSettings(){
-    moduleName = "New Component"
-    newState = true
-
-    passwordField.text = ""
-    costField.text = ""
-    descriptionField.text = ""
-    stockField.text =""
-    minimumField.text = ""
-
-    saveLabel.text = "Save"
-    passwordField.enabled = true
-}
-
-function saveComponent(varPassword,varDescription,varCost, varStock, varMin){
+//Save new item in data base
+function saveItem(varName){
 
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("INSERT INTO Component VALUES (?, ?, ?, ?, ?);",
-                                      [varPassword,varDescription,varCost, varStock, varMin]);
-                        componentDialog.setSettings("Saved",
-                                                    "New component with password "+ varPassword + " saved correctly");
-                        componentDialog.open();
+                        tx.executeSql("INSERT INTO Brand VALUES (?);",[varName]);
+                        dialog.setSettings("Saved","New brand named "+ varName + " saved correctly");
+                        dialog.open();
                         errorSaving = false;
 
                     }
                     )
     }catch(err){
-        componentDialog.setSettings("Error", err);
-        componentDialog.open();
-        errorSaving = true;
+        errorMessage(err)
     }
-
 }
 
-//Functions to update user
-function updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin){
-    moduleName = "Update Component"
-    newState = false
-
-    passwordField.text = varPassword
-    costField.text = varCost
-    descriptionField.text = varDescription
-    stockField.text = varStock
-    minimumField.text = varMin
-
-    saveLabel.text = "Update"
-    passwordField.enabled = false
-}
-
-function updateComponent(varPassword,varDescription,varCost, varStock, varMin) {
+//Update item in data base
+function updateItem(varName) {
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("UPDATE Component SET password=?, description=?, cost=?, stock=?, min=? WHERE password=?",
-                                      [varPassword, varDescription,varCost, varStock, varMin, varPassword]);
-                        componentDialog.setSettings("Updated","Component with password "+ varPassword + " saved correctly");
-                        componentDialog.open();
+                        tx.executeSql("UPDATE Brand SET name=? WHERE name=?",
+                                      [varName, actualName]);
+                        dialog.setSettings("Updated","Component with password "+ varName + " saved correctly");
+                        dialog.open();
                         errorSaving = false;
 
                     }
                     )
     }catch(err){
-        componentDialog.setSettings("Error", err);
-        componentDialog.open();
-        errorSaving = true;
+        errorMessage(err)
     }
 
 }
 
 // Conditions in an error
-function errorSavingComponent(){
+function errorSavingItem(){
     if(errorSaving == false){
-        componentListModel.clear()
-        loadComponentList("Component")
+        listModel.clear()
+        loadList("Brand")
         moduleName = moduleListModel.get(moduleIdex).title
         stackView.pop()
     }
@@ -102,41 +66,43 @@ function errorSavingComponent(){
 //Depending the flag newUserState state, save new user or update one
 function savingComponent(newState){
     if(newState === true){
-        saveComponent(passwordField.text, descriptionField.text, costField.text, stockField.text, minimumField.text)
+        saveItem(nameField.text)
     }else{
-        updateComponent(passwordField.text, descriptionField.text, costField.text, stockField.text, minimumField.text)
+        updateItem(nameField.text)
     }
 }
 
 //Option to update or delete
 function updateOrDetele(position,index){
     if(position === 0){
-        componentSettings.updateComponent(componentListModel.get(index).password,
-                                                  componentListModel.get(index).description,
-                                                  componentListModel.get(index).cost,
-                                                  componentListModel.get(index).stock,
-                                                  componentListModel.get(index).min)
-        stackView.push(componentSettings)
+        editor.updateItem(listModel.get(index).name)
+        stackView.push(editor)
     }else{
-        deleteComponent(componentListModel.get(index).password)
-        componentListModel.remove(index)
+        deleteItem(listModel.get(index).name)
+        listModel.remove(index)
     }
 }
 
 //Delete user function
-function deleteComponent(varPassword){
+function deleteItem(varName){
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("DELETE FROM Component WHERE password = ?;",[varPassword])
-                        componentDialog.setSettings("Delete",
-                                               "You delete the component with password " + varPassword + " correctly")
-                        componentDialog.open()
+                        tx.executeSql("DELETE FROM Brand WHERE name = ?;",[varName])
+                        dialog.setSettings("Delete",
+                                               "You delete the brand named " + varName + " correctly")
+                        dialog.open()
                     })
 
     }catch(err){
-        componentDialog.setSettings("Error", err);
-        componentDialog.open();
-        componentDialog.open()
+        errorMessage(err)
     }
+}
+
+//Show error in a dialog and in console
+function errorMessage(err){
+    dialog.setSettings("Error", err);
+    console.log(err)
+    dialog.open();
+    errorSaving = true;
 }

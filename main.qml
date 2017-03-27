@@ -32,7 +32,7 @@ ApplicationWindow {
         ListElement { title: "-Device"; source:"" }
         ListElement { title: "User"; source: "qrc:/modules/user/UserPage.qml" }
         ListElement { title: "-Map"; source:"" }
-        ListElement { title: "Brand"; source:"qrc:/modules/brand/BrandPage.qml" }
+        ListElement { title: "Brand"; source:"qrc:/modules/brand/Main.qml" }
         ListElement { title: "Type"; source: "qrc:/modules/type/TypePage.qml"}
     }
 

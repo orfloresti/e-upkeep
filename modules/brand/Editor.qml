@@ -5,7 +5,7 @@ import QtQuick.Controls 2.1
 import "qrc:/dialogs/"
 import "qrc:/settings"
 
-import "qrc:/modules/brand/BrandFunction.js" as Brand
+import "qrc:/modules/brand/Function.js" as Def
 
 Page{
     //Flag if a error passed saving or update user
@@ -14,22 +14,37 @@ Page{
     //Flag to determinate if a new user is creating
     property bool newState
 
-    //Signals to create new user or update new one
-    signal newComponent()
-    signal updateComponent(string varPassword,string varDescription,double varCost, int varStock, int varMin)
+    //property to actual name
+    property string actualName
 
-    onNewComponent: {
-        Comp.newComponentSettings()
+    //Signals to create new user or update new one
+    signal newItem()
+    signal updateItem(string varName)
+
+    onNewItem: {
+        moduleName = "New Brand"
+        newState = true
+        nameField.text = nameField.clear()
+        button.text = "Save"
+        //passwordField.enabled = true
     }
-    onUpdateComponent: {
-        Comp.updateComponentSettings(varPassword,varDescription,varCost, varStock, varMin)
+
+    onUpdateItem:{
+        moduleName = "Update Brand"
+        newState = false
+
+        actualName = varName
+        nameField.text = varName
+
+        button.text = "Update"
+        //passwordField.enabled = false
     }
 
     //Create the dialog to show problems or complete operations
     DialogMessage{
-        id: componentDialog
+        id: dialog
         standardButtons: Dialog.Ok
-        onAccepted: Comp.errorSavingComponent()
+        onAccepted: Def.errorSavingItem()
     }
 
     //Page settings
@@ -38,15 +53,15 @@ Page{
     //Main page
     Flickable{
         anchors.fill: parent
-        contentHeight: columnUser.height
+        contentHeight: columnLayout.height
         ScrollIndicator.vertical: ScrollIndicator { }
 
         ColumnLayout{
-            id: columnUser
+            id: columnLayout
             width: parent.width
             Item{
-                id: userItem
-                implicitHeight: newUserImage.height
+                id: item
+                implicitHeight: image.height
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
@@ -56,96 +71,30 @@ Page{
                 Image {
                     width: 150
                     height: 150
-                    id: newUserImage
+                    id: image
                     anchors.centerIn: parent
-                    source: "qrc:/images/yast.png"
-                }
-            }
-
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                ColumnLayout{
-                    Label {
-                        text: "Password"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: passwordField
-                        selectByMouse: true
-                        placeholderText: "Password"
-                        Layout.fillWidth: true
-                    }
-                }
-
-                ColumnLayout{
-                    Label {
-                        text: "Cost"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: costField
-                        selectByMouse: true
-                        placeholderText: "$"
-                        Layout.fillWidth: true
-                    }
+                    source: "qrc:/images/easytag.png"
                 }
             }
 
             Label {
-                text: "Description"
+                text: "Name"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
             TextField {
-                id: descriptionField
+                id: nameField
                 selectByMouse: true
-                placeholderText: "Component description"
+                placeholderText: "Brand name"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-            }
-
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                ColumnLayout{
-                    Label {
-                        text: "Stock"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: stockField
-                        selectByMouse: true
-                        placeholderText: "Actual stock"
-                        Layout.fillWidth: true
-                    }
-                }
-
-                ColumnLayout{
-                    Label {
-                        text: "Minimum"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: minimumField
-                        selectByMouse: true
-                        placeholderText: "Minimum stock"
-                        Layout.fillWidth: true
-                    }
-                }
             }
 
             Button{
                 Label{
-                    id: saveLabel
+                    id: button
                     anchors.centerIn: parent
                     color: "Black"
                 }
@@ -153,7 +102,7 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.bottomMargin: space
-                onClicked: Comp.savingComponent(newState)
+                onClicked: Def.savingComponent(newState)
             }
 
         }
