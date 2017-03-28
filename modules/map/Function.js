@@ -1,13 +1,13 @@
 //load the component list
-function loadList(){
-    listModel.clear()
+function loadMapList(){
+    mapListModel.clear()
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM brand ORDER BY name ASC"
+                        var qry = "SELECT * FROM Map ORDER BY name ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
-                            listModel.append({"name":results.rows.item(i).name})
+                            mapListModel.append({"name":results.rows.item(i).name})
 
                         }
                     })
@@ -15,6 +15,42 @@ function loadList(){
         errorMessage(err)
     }
 }
+
+function loadBuildingList(){
+    buildingListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM Building ORDER BY name ASC"
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            buildingListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+function loadZoneList(){
+    zoneListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM Zone ORDER BY name ASC"
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            zoneListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+
 
 //Save new item in data base
 function saveItem(varName){

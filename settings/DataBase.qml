@@ -24,15 +24,18 @@ Item{
                              );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Building(
-                                      name TEXT NOT NULL PRIMARY KEY,
-                                      mapName TEXT NOT NULL PRIMARY KEY,
+                                      name TEXT NOT NULL,
+                                      mapName TEXT NOT NULL,
                                       FOREIGN KEY(mapName) REFERENCES Map(name)
+                                      PRIMARY KEY(name, mapName)
                                     );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Zone(
-                                      name TEXT NOT NULL PRIMARY KEY,
-                                      buildingName TEXT NOT NULL PRIMARY KEY,
-                                      FOREIGN KEY(buildingName) REFERENCES Building(name)
+                                      name TEXT NOT NULL,
+                                      buildingName TEXT NOT NULL,
+                                      mapName TEXT NOT NULL,
+                                      FOREIGN KEY(buildingName, mapName) REFERENCES Building(name, mapName)
+                                      PRIMARY KEY(name, buildingName, mapName)
                                     );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS UserType(

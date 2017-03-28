@@ -3,9 +3,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/dialogs"
-import "qrc:/settings"
-
-import "qrc:/modules/map"
 import "qrc:/modules/map/Function.js" as Def
 
 //Main page
@@ -19,97 +16,206 @@ Page{
     }
 
     //Load list and order showed
-    ListModel{id:listModel}
-    Component.onCompleted: { Def.loadList()}
+    ListModel{id:mapListModel}
+    ListModel{id:buildingListModel}
+    ListModel{id:zoneListModel}
 
-    //Create editor to new or update one
-    Editor{
-        id: editor
-        visible: false
+    Component.onCompleted: {
+        Def.loadMapList()
+        Def.loadBuildingList()
+        Def.loadZoneList()
     }
 
-    //Principal content
-    ColumnLayout{
-        id: column
-        width: parent.width
+    //Main page
+    Flickable{
+        anchors.fill: parent
+        contentHeight: column.height
+        ScrollIndicator.vertical: ScrollIndicator { }
 
-        Component{
-            id: delegate
+        //Principal content
+        ColumnLayout{
+            id: column
+            width: parent.width
 
-            SwipeDelegate{
-                id: swipeDelegate
-                width: parent.width
-                height: columnDescription.height + space
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                swipe.left: Component {
-                    Rectangle {
-                        color: "#848484" //SwipeDelegate.pressed ?  "#585858" : "#848484"
-                        width: parent.width - (image.height + 30)
-                        height: parent.height
-                        clip: true
-                        Label {
-                            text: "Click to remove"
-                            color: "white"
-                            anchors.centerIn: parent
-                        }
-                        SwipeDelegate.onClicked: Def.modeEditor(swipe.position,index)
-                    }
-                }
-                contentItem: RowLayout{
-                    Item{
-                        width: image.width
-                        height: image.height
-                        Image {
-                            width: columnDescription.height
-                            height: columnDescription.height
-                            id: image
-                            anchors.centerIn: parent
-                            source: "qrc:/images/easytag.png"
-                        }
-                    }
-                    ColumnLayout{
-                        id: columnDescription
-                        Layout.leftMargin: 10
-                        Label{
-                            text: name
-                            wrapMode: Label.Wrap
-                            font.pixelSize: 16
-                            font.bold: true
-                            Layout.fillWidth: true
-
-                        }
-                        Rectangle {
-                            height: 1
-                            color: "#E6E6E6"
-                            Layout.fillWidth: true
-                        }
-                    }
-                }
-                onClicked: Def.modeEditor(swipe.position,index)
+            Label {
+                width: column.width - space
+                text: "In this module you can create general characteristics of your map."
+                wrapMode: Label.Wrap
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.topMargin: space
             }
-        }
-        ListView {
-            id: userList
-            Layout.fillWidth: true
-            height: page.height
-            focus: true
-            model: listModel
-            delegate: delegate
-            ScrollIndicator.vertical: ScrollIndicator { }
+
+
+
+
+            Label {
+                width: column.width - space
+                text: "Map name"
+                wrapMode: Label.Wrap
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.topMargin: space
+            }
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                TextField {
+                    id: mapField
+                    selectByMouse: true
+                    placeholderText: "New map"
+                    Layout.fillWidth: true
+                }
+                Button{
+                    Label{
+                        anchors.centerIn: parent
+                        text: "Save"
+                        color: "Black"
+                    }
+                    Layout.rightMargin: space
+                    //onClicked: Type.blankSpace()
+                }
+            }
+
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                ComboBox{
+                    id: mapComboBox
+                    Layout.fillWidth: true
+                    model: mapListModel
+                }
+
+                Button{
+                    Label{
+                        anchors.centerIn: parent
+                        text: "Delete"
+                        color: "Black"
+                    }
+                    Layout.rightMargin: space
+                    //onClicked:
+                }
+            }
+
+
+
+
+
+
+            Label {
+                width: column.width - space
+                text: "Building name"
+                wrapMode: Label.Wrap
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.topMargin: space
+            }
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                TextField {
+                    id: buildingField
+                    selectByMouse: true
+                    placeholderText: "New Building"
+                    Layout.fillWidth: true
+                }
+                Button{
+                    Label{
+                        anchors.centerIn: parent
+                        text: "Save"
+                        color: "Black"
+                    }
+                    Layout.rightMargin: space
+                    //onClicked: Type.blankSpace()
+                }
+            }
+
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                ComboBox{
+                    id: buildingComboBox
+                    Layout.fillWidth: true
+                    model: buildingListModel
+                }
+
+                Button{
+                    Label{
+                        anchors.centerIn: parent
+                        text: "Delete"
+                        color: "Black"
+                    }
+                    Layout.rightMargin: space
+                    //onClicked:
+                }
+            }
+
+
+
+            Label {
+                width: column.width - space
+                text: "Zone name"
+                wrapMode: Label.Wrap
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.topMargin: space
+            }
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                TextField {
+                    id: zoneField
+                    selectByMouse: true
+                    placeholderText: "New zone"
+                    Layout.fillWidth: true
+                }
+                Button{
+                    Label{
+                        anchors.centerIn: parent
+                        text: "Save"
+                        color: "Black"
+                    }
+                    Layout.rightMargin: space
+                    //onClicked: Type.blankSpace()
+                }
+            }
+
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                ComboBox{
+                    id: zoneComboBox
+                    Layout.fillWidth: true
+                    model: zoneListModel
+                }
+
+                Button{
+                    Label{
+                        anchors.centerIn: parent
+                        text: "Delete"
+                        color: "Black"
+                    }
+                    Layout.rightMargin: space
+                    //onClicked:
+                }
+            }
+
+
+
+
+
         }
     }
 
-    AddButton{
-        id: addUserButton
-        x: page.width - (width + width/2)
-        y: page.height - (height + height/2)
-        NumberAnimation on y { from: page.height; to: page.height - (75); duration: 500 }
-
-        onClicked: {
-            editor.newItem()
-            stackView.push(editor)
-        }
-    }
 }
 

@@ -20,19 +20,25 @@ Dialog {
 
         Label {
             width: aboutDialog.availableWidth
-            text: "Feedback is a tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
+            text: "Feedback is an application tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }
         Label {
             width: aboutDialog.availableWidth
-            text: "Based on Qt 5.8"
+            text: "Language: Qt 5.8"
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }
         Label{
             width: aboutDialog.availableWidth
-            text: "Paper Icons: by Sam Hewitt" // is licensed under CC-SA-4.0
+            text: "Icons: Paper by Sam Hewitt" // is licensed under CC-SA-4.0
+            wrapMode: Label.Wrap
+            font.pixelSize: 12
+        }
+        Label{
+            width: aboutDialog.availableWidth
+            text: "Developer: Orlando Flores Teomitzi"
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }
