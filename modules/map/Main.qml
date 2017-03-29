@@ -104,8 +104,6 @@ Page{
 
 
 
-
-
             Label {
                 width: column.width - space
                 text: "Building name"

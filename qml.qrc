@@ -34,5 +34,6 @@
         <file>images/easytag.png</file>
         <file>modules/map/Function.js</file>
         <file>modules/map/Main.qml</file>
+        <file>modules/wiki/Main.qml</file>
     </qresource>
 </RCC>

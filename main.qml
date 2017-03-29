@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
+import QtWebView 1.1
 
 import "qrc:/settings"
 import "qrc:/dialogs"
@@ -34,15 +35,18 @@ ApplicationWindow {
         ListElement { title: "Map"; source:"qrc:/modules/map/Main.qml" }
         ListElement { title: "Brand"; source:"qrc:/modules/brand/Main.qml" }
         ListElement { title: "Type"; source: "qrc:/modules/type/TypePage.qml"}
+        ListElement { title: "Wiki"; source: "qrc:/modules/wiki/Main.qml"}
     }
 
     //Pages StackView
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: Page{
+        initialItem:Page{
 
         }
+
+        
     }
 
     //Load the data base
