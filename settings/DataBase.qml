@@ -38,10 +38,6 @@ Item{
                                       PRIMARY KEY(name, buildingName, mapName)
                                     );")
 
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS UserType(
-                                description TEXT NOT NULL PRIMARY KEY
-                              );")
-
                         tx.executeSql("CREATE TABLE IF NOT EXISTS ReportType(
                                 description TEXT NOT NULL PRIMARY KEY
                               );")
@@ -67,8 +63,10 @@ Item{
                         tx.executeSql("CREATE TABLE IF NOT EXISTS User(
                                 password INTEGER NOT NULL PRIMARY KEY,
                                 name TEXT NOT NULL,
-                                userTypeDescription TEXT,
-                                FOREIGN KEY(userTypeDescription) REFERENCES UserType(description)
+                                zoneName TEXT NOT NULL,
+                                buildingName TEXT NOT NULL,
+                                mapName TEXT NOT NULL,
+                                FOREIGN KEY(zoneName, buildingName, mapName) REFERENCES Zone
                               );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS BuildingZone(

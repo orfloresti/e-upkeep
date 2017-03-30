@@ -1,19 +1,57 @@
-function loadTypeList(varType){
-    typeListModel.clear()
+//load the lists
+function loadMapList(){
+    mapListModel.clear()
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM " + varType
+                        var qry = "SELECT * FROM Map ORDER BY name ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
-                            typeListModel.append({"description":results.rows.item(i).description})
+                            mapListModel.append({"name":results.rows.item(i).name})
 
                         }
                     })
     }catch(err){
-        console.log(err)
+        errorMessage(err)
     }
 }
+
+function loadBuildingList(varMap){
+    buildingListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT name FROM Building WHERE mapName = ? ORDER BY name ASC"
+                        var results = tx.executeSql(qry, [varMap])
+                        for(var i = 0; i < results.rows.length; i++){
+                            buildingListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+function loadZoneList(varBuilding, varMap){
+    zoneListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT name FROM Zone WHERE mapName = ? AND buildingName = ? ORDER BY name ASC"
+                        var results = tx.executeSql(qry, [varMap, varBuilding])
+                        for(var i = 0; i < results.rows.length; i++){
+                            zoneListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+
+
 
 //load the UserList
 function loadUserList(varType){
@@ -26,26 +64,15 @@ function loadUserList(varType){
                         for(var i = 0; i < results.rows.length; i++){
                             userListModel.append({"password":results.rows.item(i).password,
                                                   "name":results.rows.item(i).name,
-                                                  "userType":results.rows.item(i).userTypeDescription})
+                                                  "zoneName":results.rows.item(i).zoneName,
+                                                  "buildingName":results.rows.item(i).buildingName,
+                                                  "mapName":results.rows.item(i).mapName})
 
                         }
                     })
     }catch(err){
         console.log(err)
     }
-}
-
-//Functions to new user
-function newUserSettings(){
-    moduleName = "New User"
-    newUserState = true
-
-    passwordField.text = ""
-    nameField.text = ""
-    userTypeComboBox.currentIndex = -1
-
-    saveLabel.text = "Save"
-    passwordField.enabled = true
 }
 
 function saveUser(varPassword, varName, varTypeUser){
@@ -74,26 +101,7 @@ function saveUser(varPassword, varName, varTypeUser){
     }
 }
 
-//Functions to update user
-function updateUserSettings(varPassword,varName,varType){
-    moduleName = "Update User"
 
-    newUserState = false
-
-    passwordField.text  = varPassword
-    nameField.text = varName
-
-    //Determine the index of the listTypeModel with UserTypes using a string, to show in the combobox
-    var i = 0;
-    for(i; i < typeListModel.count; i++){
-        if(varType ===typeListModel.get(i).description){
-            userTypeComboBox.currentIndex = parseInt(i);
-        }
-    }
-
-    saveLabel.text = "Update"
-    passwordField.enabled = false
-}
 
 function updateUser(varPassword, varName, varTypeUser) {
     try{
@@ -139,7 +147,9 @@ function updateOrDetele(position,index){
     if(position === 0){
         userSettings.updateUser(userListModel.get(index).password,
                               userListModel.get(index).name,
-                              userListModel.get(index).userType)
+                              userListModel.get(index).zoneName,
+                              userListModel.get(index).buildingName,
+                              userListModel.get(index).mapName)
         stackView.push(userSettings)
     }else{
         deleteUser(userListModel.get(index).password)
@@ -163,6 +173,14 @@ function deleteUser(varPassword){
         deleteUserDialog.open();
         deleteUserDialog.open()
     }
+}
+
+
+//Show error in a dialog and in console
+function errorMessage(err){
+    userDialog.setSettings("Error", err);
+    console.log(err)
+    userDialog.open();
 }
 
 

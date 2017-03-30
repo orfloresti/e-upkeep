@@ -1,4 +1,4 @@
-//load the component list
+//load the lists
 function loadMapList(){
     mapListModel.clear()
     try{

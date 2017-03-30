@@ -36,6 +36,7 @@ Page{
 
     Component.onCompleted: {
         User.loadUserList("User")
+        User.loadMapList()
     }
 
     //Main page
@@ -98,7 +99,7 @@ Page{
 
                             }
                             Label{
-                                text: "<b>" + name + "</b>, " + userType
+                                text: "<b>" + name + "</b>, " + zoneName
                                 wrapMode: Label.Wrap
                                 font.pixelSize: 12
                                 Layout.fillWidth: true

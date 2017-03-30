@@ -15,18 +15,62 @@ Page {
 
     //Signals to create new user or update new one
     signal newUser()
-    signal updateUser(int varPassword,string varName, string varType)
+    signal updateUser(int varPassword,string varName, string varZone, string varBuilding, string varMap)
     onNewUser: {
-        User.newUserSettings()
-    }
-    onUpdateUser: {
-        User.updateUserSettings(varPassword,varName,varType)
+        moduleName = "New User"
+        newUserState = true
+
+        passwordField.text = ""
+        nameField.text = ""
+
+        mapComboBox.currentIndex = -1
+        buildingComboBox.currentIndex = -1
+        zoneComboBox.currentIndex = -1
+
+        saveLabel.text = "Save"
+        passwordField.enabled = true
     }
 
-    //Load the ListModel of UserType on the beginning
+    onUpdateUser: {
+            moduleName = "Update User"
+
+            newUserState = false
+
+            passwordField.text  = varPassword
+            nameField.text = varName
+
+            //Determine the index of the listModel
+            var i = 0;
+
+            for(i = 0; i < mapListModel.count; i++){
+                if(varMap ===mapListModel.get(i).name){
+                    mapComboBox.currentIndex = parseInt(i);
+                }
+            }
+
+            //Determine the index of the listModel
+            for(i = 0; i < buildingListModel.count; i++){
+                if(varBuilding === buildingListModel.get(i).name){
+                    buildingComboBox.currentIndex = parseInt(i);
+                }
+            }
+
+            //Determine the index of the listModel
+            for(i = 0; i < zoneListModel.count; i++){
+                if(varZone === zoneListModel.get(i).name){
+                    zoneComboBox.currentIndex = parseInt(i);
+                }
+            }
+
+            saveLabel.text = "Update"
+            passwordField.enabled = false
+
+    }
+
+    /*Load the ListModel of UserType on the beginning
     Component.onCompleted: {
         User.loadTypeList("UserType")
-    }
+    }*/
 
     //Create the dialog to show problems or complete operations
     DialogMessage{
@@ -76,78 +120,89 @@ Page {
                 ColumnLayout{
                     Label {
                         text: "Password"
-                        Layout.fillWidth: true
+                        //Layout.fillWidth: true
                     }
                     TextField {
                         id: passwordField
                         selectByMouse: true
                         placeholderText: "Password"
+                        //Layout.fillWidth: true
+                    }
+                }
+
+                ColumnLayout{
+                    Label {
+                        text: "Name"
                         Layout.fillWidth: true
+                        Layout.leftMargin: space
+                        Layout.rightMargin: space
+                    }
+                    TextField {
+                        id: nameField
+                        selectByMouse: true
+                        placeholderText: "Name"
+                        Layout.fillWidth: true
+                        Layout.leftMargin: space
+                        Layout.rightMargin: space
                     }
                 }
 
 
             }
 
-            ColumnLayout{
-                Label {
-                    text: "Name"
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-                }
-                TextField {
-                    id: nameField
-                    selectByMouse: true
-                    placeholderText: "Name"
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-                }
-            }
 
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
+
+
 
                 ColumnLayout{
+                    Layout.fillWidth: true
+                    Layout.leftMargin: space
+                    Layout.rightMargin: space
                     Label {
                         text: "Map"
                         Layout.fillWidth: true
                     }
                     ComboBox{
-                        id: userTypeComboBox
-                        model:typeListModel
+                        id: mapComboBox
+                        model:mapListModel
                         Layout.fillWidth: true
+                        onCurrentTextChanged: User.loadBuildingList(mapComboBox.currentText)
                     }
                 }
 
                 ColumnLayout{
+                    Layout.fillWidth: true
+                    Layout.leftMargin: space
+                    Layout.rightMargin: space
                     Label {
                         text: "Building"
                         Layout.fillWidth: true
                     }
                     ComboBox{
                         id: buildingComboBox
-                        model:typeListModel
+                        model:buildingListModel
                         Layout.fillWidth: true
+                        onCurrentTextChanged: User.loadZoneList(buildingComboBox.currentText,
+                                                                mapComboBox.currentText)
+
                     }
                 }
 
                 ColumnLayout{
+                    Layout.fillWidth: true
+                    Layout.leftMargin: space
+                    Layout.rightMargin: space
                     Label {
                         text: "Zone"
                         Layout.fillWidth: true
                     }
                     ComboBox{
                         id: zoneComboBox
-                        model:typeListModel
+                        model:zoneListModel
                         Layout.fillWidth: true
                     }
                 }
-            }
+
 
 
             Button{
