@@ -100,29 +100,6 @@ function saveUser(varPassword, varName, varTypeUser){
         }
     }
 }
-
-
-
-function updateUser(varPassword, varName, varTypeUser) {
-    try{
-        db.transaction(
-                    function(tx) {
-                        tx.executeSql("UPDATE User SET password=?, name=?, userTypeDescription=? WHERE password=?",
-                                      [varPassword, varName, varTypeUser,varPassword]);
-                        userDialog.setSettings("Updated","User with password "+ varPassword + " saved correctly");
-                        userDialog.open();
-                        errorSaving = false;
-
-                    }
-                    )
-    }catch(err){
-        userDialog.setSettings("Error", err);
-        userDialog.open();
-        errorSaving = true;
-    }
-
-}
-
 // Conditions in an error
 function errorSavingUser(){
     if(errorSaving == false){
@@ -136,9 +113,17 @@ function errorSavingUser(){
 //Depending the flag newUserState state, save new user or update one
 function savingUser(newUserState){
     if(newUserState === true){
-        saveUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
+        saveUser(passwordField.text,
+                 nameField.text,
+                 zoneComboBox.currentText,
+                 buildingComboBox.currentText,
+                 mapComboBox.currentText)
     }else{
-        updateUser(passwordField.text, nameField.text, userTypeComboBox.currentText)
+        updateUser(passwordField.text,
+                   nameField.text,
+                   zoneComboBox.currentText,
+                   buildingComboBox.currentText,
+                   mapComboBox.currentText)
     }
 }
 
@@ -155,6 +140,27 @@ function updateOrDetele(position,index){
         deleteUser(userListModel.get(index).password)
         userListModel.remove(index)
     }
+}
+
+//updateUser function
+function updateUser(varPassword, varName, varZone, varBuilding, varMap) {
+    try{
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("UPDATE User SET password=?, name=?, zoneName=?, buildingName = ?, mapName=? WHERE password=?",
+                                      [varPassword, varName, varZone, varBuilding, varMap,varPassword]);
+                        userDialog.setSettings("Updated","User with password "+ varPassword + " saved correctly");
+                        userDialog.open();
+                        errorSaving = false;
+
+                    }
+                    )
+    }catch(err){
+        userDialog.setSettings("Error", err);
+        userDialog.open();
+        errorSaving = true;
+    }
+
 }
 
 //Delete user function
