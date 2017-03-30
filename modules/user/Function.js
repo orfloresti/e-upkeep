@@ -75,7 +75,7 @@ function loadUserList(varType){
     }
 }
 
-function saveUser(varPassword, varName, varTypeUser){
+function saveUser(varPassword, varName, varZone, varBuilding, varMap){
 
     if(varPassword.length < 1 || varPassword.length > 9){
         userDialog.setSettings("Error","The password must be between one and nine characters.")
@@ -85,7 +85,7 @@ function saveUser(varPassword, varName, varTypeUser){
         try{
             db.transaction(
                         function(tx) {
-                            tx.executeSql("INSERT INTO User VALUES (?, ?, ?);", [varPassword, varName, varTypeUser]);
+                            tx.executeSql("INSERT INTO User VALUES (?, ?, ?, ?, ?);", [varPassword, varName, varZone, varBuilding, varMap]);
                             userDialog.setSettings("Saved",
                                                    "New user with password "+ varPassword + " saved correctly");
                             userDialog.open();
@@ -148,7 +148,7 @@ function updateUser(varPassword, varName, varZone, varBuilding, varMap) {
         db.transaction(
                     function(tx) {
                         tx.executeSql("UPDATE User SET password=?, name=?, zoneName=?, buildingName = ?, mapName=? WHERE password=?",
-                                      [varPassword, varName, varZone, varBuilding, varMap,varPassword]);
+                                      [varPassword, varName, varZone, varBuilding, varMap, varPassword]);
                         userDialog.setSettings("Updated","User with password "+ varPassword + " saved correctly");
                         userDialog.open();
                         errorSaving = false;
