@@ -12,7 +12,6 @@ Page{
     WebView{
         id: wiki
         anchors.fill: parent
-        url: "http://192.168.56.102/mediawiki/Main_Page"
-        //url:"http://www.google.com"
+        url: "http://"+ serverIp +"/mediawiki/Main_Page"
     }
 }

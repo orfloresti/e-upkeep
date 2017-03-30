@@ -86,9 +86,35 @@ Page {
                     }
                 }
 
+
+            }
+
+            ColumnLayout{
+                Label {
+                    text: "Name"
+                    Layout.fillWidth: true
+                    Layout.leftMargin: space
+                    Layout.rightMargin: space
+                }
+                TextField {
+                    id: nameField
+                    selectByMouse: true
+                    placeholderText: "Name"
+                    Layout.fillWidth: true
+                    Layout.leftMargin: space
+                    Layout.rightMargin: space
+                }
+            }
+
+            RowLayout{
+                spacing: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+
                 ColumnLayout{
                     Label {
-                        text: "User"
+                        text: "Map"
                         Layout.fillWidth: true
                     }
                     ComboBox{
@@ -97,22 +123,33 @@ Page {
                         Layout.fillWidth: true
                     }
                 }
+
+                ColumnLayout{
+                    Label {
+                        text: "Building"
+                        Layout.fillWidth: true
+                    }
+                    ComboBox{
+                        id: buildingComboBox
+                        model:typeListModel
+                        Layout.fillWidth: true
+                    }
+                }
+
+                ColumnLayout{
+                    Label {
+                        text: "Zone"
+                        Layout.fillWidth: true
+                    }
+                    ComboBox{
+                        id: zoneComboBox
+                        model:typeListModel
+                        Layout.fillWidth: true
+                    }
+                }
             }
 
-            Label {
-                text: "Name"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-            TextField {
-                id: nameField
-                selectByMouse: true
-                placeholderText: "Name"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
+
             Button{
                 Label{
                     id: saveLabel

@@ -10,6 +10,9 @@ ApplicationWindow {
     //Space used in the pages
     property int space: 20
 
+    //property to design the url of the server
+    property string serverIp: "192.168.56.102"
+
     //Module name and module index
     property string appName: "Feedback"
     property string moduleName: appName

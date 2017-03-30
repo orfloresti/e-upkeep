@@ -16,7 +16,11 @@ Page{
 
     //List model
     ListModel{id:userListModel}
-    ListModel{id:typeListModel}
+    //ListModel{id:typeListModel}
+
+    ListModel{id:mapListModel}
+    ListModel{id:buildingListModel}
+    ListModel{id:zoneListModel}
 
     //Create one UserSettingsPage model to new user or update one
     Editor{

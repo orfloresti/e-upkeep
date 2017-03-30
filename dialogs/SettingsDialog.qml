@@ -53,6 +53,7 @@ Dialog {
                 selectByMouse: true
                 placeholderText: "0.0.0.0"
                 Layout.fillWidth: true
+                onAccepted: serverIp = ipField.text
             }
         }
     }
