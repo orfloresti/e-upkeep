@@ -22,8 +22,8 @@ Page{
 
     Component.onCompleted: {
         Def.loadMapList()
-        Def.loadBuildingList()
-        Def.loadZoneList()
+        //Def.loadBuildingList()
+        //Def.loadZoneList()
     }
 
     //Main page
@@ -76,7 +76,7 @@ Page{
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    //onClicked: Type.blankSpace()
+                    onClicked: Def.saveMapName(mapField.text)
                 }
             }
 
@@ -97,7 +97,7 @@ Page{
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    //onClicked:
+                    onClicked:Def.deleteMapName(mapComboBox.currentText)
                 }
             }
 

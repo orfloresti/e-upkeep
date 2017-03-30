@@ -33,21 +33,28 @@ Dialog {
                 }
             }
         }
-        /*SwitchDelegate{
-            id: minOption
-            //checked: false
-            text: qsTr("Minimized")
+
+        //Don´t work yet
+        RowLayout{
+            spacing: space
             Layout.fillWidth: true
-            onClicked: fullScreen(minOption.checked)
-            function fullScreen(screenState){
-                if(screenState === true) {
-                    showMinimized()
-                }
-                else{
-                    //showNormal()
-                }
+            Layout.leftMargin: space
+            Label {
+                //width: column.width - space
+                text: "Server IP"
+                wrapMode: Label.Wrap
+                //Layout.fillWidth: true
+                //Layout.leftMargin: space
+                Layout.rightMargin: space
+                //Layout.topMargin: space
             }
-        }*/
+            TextField {
+                id: ipField
+                selectByMouse: true
+                placeholderText: "0.0.0.0"
+                Layout.fillWidth: true
+            }
+        }
     }
 
 }
