@@ -119,6 +119,37 @@ function deleteMapName(varName){
     }
 }
 
+function deleteBuildingName(varName, varMap){
+    try{
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("DELETE FROM Building WHERE name = ?;",[varName])
+                        dialog.setSettings("Delete","You delete the building named " + varName + " correctly")
+                        dialog.open()
+                        loadBuildingList(varMap)
+                    })
+
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+function deleteZoneName(varName, varBuilding, varMap){
+    try{
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("DELETE FROM Zone WHERE name = ?;",[varName])
+                        dialog.setSettings("Delete","You delete the zone named " + varName + " correctly")
+                        dialog.open()
+                        loadZoneList(varBuilding, varMap)
+                    })
+
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+
 
 //Show error in a dialog and in console
 function errorMessage(err){

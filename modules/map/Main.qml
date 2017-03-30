@@ -89,10 +89,11 @@ Page{
                 }
 
                 Button{
+                    enabled: false
                     Label{
                         anchors.centerIn: parent
                         text: "Delete"
-                        color: "Black"
+                        //color: "Black"
                     }
                     Layout.rightMargin: space
                     onClicked:Def.deleteMapName(mapComboBox.currentText)
@@ -145,13 +146,14 @@ Page{
                 }
 
                 Button{
+                    enabled: false
                     Label{
                         anchors.centerIn: parent
                         text: "Delete"
-                        color: "Black"
+                        //color: "Black"
                     }
                     Layout.rightMargin: space
-                    //onClicked:
+                    onClicked: Def.deleteBuildingName(buildingField.text, mapComboBox.currentText)
                 }
             }
 
@@ -200,19 +202,18 @@ Page{
                 }
 
                 Button{
+                    enabled: false
                     Label{
                         anchors.centerIn: parent
                         text: "Delete"
-                        color: "Black"
+                        //color: "Black"
                     }
                     Layout.rightMargin: space
-                    //onClicked:
+                    onClicked: Def.deleteZoneName(zoneField.text,
+                                                  buildingComboBox.currentText,
+                                                  mapComboBox.currentText)
                 }
             }
-
-
-
-
 
         }
     }
