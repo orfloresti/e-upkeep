@@ -99,7 +99,7 @@ Page{
 
                             }
                             Label{
-                                text: "<b>" + name + "</b>, " + zoneName
+                                text: "<b>" + name + "</b>, " + buildingName + ", "+zoneName
                                 wrapMode: Label.Wrap
                                 font.pixelSize: 12
                                 Layout.fillWidth: true

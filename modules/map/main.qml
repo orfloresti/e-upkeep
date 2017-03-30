@@ -89,7 +89,7 @@ Page{
                 }
 
                 Button{
-                    enabled: false
+                    //enabled: false
                     Label{
                         anchors.centerIn: parent
                         text: "Delete"
@@ -129,7 +129,8 @@ Page{
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: Def.saveBuildingName(buildingField.text, mapComboBox.currentText)
+                    onClicked: Def.saveBuildingName(buildingField.text,
+                                                    mapComboBox.currentText)
                 }
             }
 
@@ -146,14 +147,15 @@ Page{
                 }
 
                 Button{
-                    enabled: false
+                    //enabled: false
                     Label{
                         anchors.centerIn: parent
                         text: "Delete"
                         //color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: Def.deleteBuildingName(buildingField.text, mapComboBox.currentText)
+                    onClicked: Def.deleteBuildingName(buildingComboBox.currentText,
+                                                      mapComboBox.currentText)
                 }
             }
 
@@ -202,14 +204,14 @@ Page{
                 }
 
                 Button{
-                    enabled: false
+                    //enabled: false
                     Label{
                         anchors.centerIn: parent
                         text: "Delete"
                         //color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: Def.deleteZoneName(zoneField.text,
+                    onClicked: Def.deleteZoneName(zoneComboBox.currentText,
                                                   buildingComboBox.currentText,
                                                   mapComboBox.currentText)
                 }
