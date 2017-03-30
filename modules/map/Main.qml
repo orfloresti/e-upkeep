@@ -47,9 +47,6 @@ Page{
                 Layout.topMargin: space
             }
 
-
-
-
             Label {
                 width: column.width - space
                 text: "Map name"
@@ -88,6 +85,7 @@ Page{
                     id: mapComboBox
                     Layout.fillWidth: true
                     model: mapListModel
+                    onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
                 }
 
                 Button{
@@ -130,7 +128,7 @@ Page{
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    //onClicked: Type.blankSpace()
+                    onClicked: Def.saveBuildingName(buildingField.text, mapComboBox.currentText)
                 }
             }
 
@@ -142,6 +140,8 @@ Page{
                     id: buildingComboBox
                     Layout.fillWidth: true
                     model: buildingListModel
+                    onCurrentTextChanged: Def.loadZoneList(buildingComboBox.currentText,
+                                                           mapComboBox.currentText)
                 }
 
                 Button{
@@ -183,7 +183,9 @@ Page{
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    //onClicked: Type.blankSpace()
+                    onClicked: Def.saveZoneName(zoneField.text,
+                                                buildingComboBox.currentText,
+                                                mapComboBox.currentText)
                 }
             }
 
