@@ -2,58 +2,59 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
+
 import "qrc:/dialogs"
 import "qrc:/settings"
 
-import "qrc:/modules/component"
-import "qrc:/modules/component/ComponentFunction.js" as Comp
+import "qrc:/modules/user"
+import "qrc:/modules/user/Function.js" as User
 
 Page{
     //Page settings
-    id: componentPage
+    id: userPageRoot
     contentHeight: page.height
 
-    //Create one componentSettingsPage modelto new user or update one
-    ComponentSettingsPage{
+    //List model
+    ListModel{id:userListModel}
+    ListModel{id:typeListModel}
+
+    //Create one UserSettingsPage model to new user or update one
+    Editor{
         visible: false
-        id: componentSettings
+        id: userSettings
     }
 
     //Create the dialog
     DialogMessage{
-        id: componentDialog
+        id: deleteUserDialog
         standardButtons: Dialog.Close
     }
 
-    //List comp
-    ListModel{id:componentListModel}
-
     Component.onCompleted: {
-        Comp.loadComponentList()
+        User.loadUserList("User")
     }
 
     //Main page
     Page{
         id: page
-        width: componentPage.width
-        height: componentPage.height * 1.01
+        width: userPageRoot.width
+        height: userPageRoot.height * 1.01
 
         ColumnLayout{
             id: column
             width: parent.width
 
             Component{
-                id: componentDelegate
-
+                id: userDelegate
                 SwipeDelegate{
                     id: swipeDelegate
                     width: parent.width
-                    height: componentDescription.height + 20
+                    height: userDescription.height + 20
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     swipe.left: Component {
                         Rectangle {
-                            id: componentDelete
+                            id: userDelete
                             color: "#848484" //SwipeDelegate.pressed ?  "#585858" : "#848484"
                             width: parent.width -80
                             height: parent.height
@@ -64,22 +65,25 @@ Page{
                                 color: "white"
                                 anchors.centerIn: parent
                             }
-                            SwipeDelegate.onClicked: Comp.updateOrDetele(swipe.position,index)                        }
+                            SwipeDelegate.onClicked: {
+                                User.updateOrDetele(swipe.position,index)
+                            }
+                        }
                     }
                     contentItem: RowLayout{
                         Item{
-                            width: componentImage.width
-                            height: componentImage.height
+                            width: userImage.width
+                            height: userImage.height
                             Image {
                                 width: 50
                                 height: 50
-                                id: componentImage
+                                id: userImage
                                 anchors.centerIn: parent
-                                source: "qrc:/images/yast.png"
+                                source: "qrc:/images/avatar-default.png"
                             }
                         }
                         ColumnLayout{
-                            id: componentDescription
+                            id: userDescription
                             Layout.leftMargin: 10
                             Label{
                                 text: password
@@ -90,19 +94,9 @@ Page{
 
                             }
                             Label{
-                                text: "<b>" + description + "</b>" +
-                                      ", Stock: " + stock +
-                                      ", Min: " + min
+                                text: "<b>" + name + "</b>, " + userType
                                 wrapMode: Label.Wrap
                                 font.pixelSize: 12
-                                Layout.fillWidth: true
-                                color: "grey"
-
-                            }
-                            Label{
-                                text: "<b> $" + cost + "</b>"
-                                wrapMode: Label.Wrap
-                                font.pixelSize: 14
                                 Layout.fillWidth: true
                                 color: "grey"
 
@@ -114,7 +108,9 @@ Page{
                             }
                         }
                     }
-                    onClicked: Comp.updateOrDetele(swipe.position,index)
+                    onClicked: {
+                        User.updateOrDetele(swipe.position,index)
+                    }
                 }
             }
             ListView {
@@ -122,21 +118,22 @@ Page{
                 Layout.fillWidth: true
                 height: page.height
                 focus: true
-                model: componentListModel
-                delegate: componentDelegate
+                model: userListModel
+                delegate: userDelegate
                 ScrollIndicator.vertical: ScrollIndicator { }
             }
         }
     }
     AddButton{
         id: addUserButton
-        x: componentPage.width - (width + width/2)
-        y: componentPage.height - (height + height/2)
-        NumberAnimation on y { from: componentPage.height; to: componentPage.height - (75); duration: 500 }
+        x: userPageRoot.width - (width + width/2)
+        y: userPageRoot.height - (height + height/2)
+        NumberAnimation on y { from: userPageRoot.height; to: userPageRoot.height - (75); duration: 500 }
 
         onClicked: {
-            componentSettings.newComponent()
-            stackView.push(componentSettings)
+            userSettings.newUser()
+            stackView.push(userSettings)
         }
     }
 }
+

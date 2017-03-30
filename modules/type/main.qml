@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
 import "qrc:/dialogs"
-import "qrc:/modules/type/TypeFunction.js" as Type
+import "qrc:/modules/type/Function.js" as Type
 
 Page {
     id: page

@@ -17,23 +17,23 @@
         <file>images/yast.png</file>
         <file>images/media-flash.png</file>
         <file>images/avatar-default.png</file>
-        <file>modules/component/ComponentFunction.js</file>
-        <file>modules/component/ComponentPage.qml</file>
-        <file>modules/component/ComponentSettingsPage.qml</file>
-        <file>modules/report/ReportPage.qml</file>
-        <file>modules/type/TypeFunction.js</file>
-        <file>modules/type/TypePage.qml</file>
-        <file>modules/user/UserFunction.js</file>
-        <file>modules/user/UserPage.qml</file>
-        <file>modules/user/UserSettingsPage.qml</file>
+        <file>modules/component/Function.js</file>
+        <file>modules/component/main.qml</file>
+        <file>modules/component/Editor.qml</file>
+        <file>modules/report/main.qml</file>
+        <file>modules/type/Function.js</file>
+        <file>modules/type/main.qml</file>
+        <file>modules/user/Function.js</file>
+        <file>modules/user/main.qml</file>
+        <file>modules/user/Editor.qml</file>
         <file>main.cpp</file>
         <file>settings/ToolbarFunction.js</file>
         <file>modules/brand/Function.js</file>
-        <file>modules/brand/Main.qml</file>
+        <file>modules/brand/main.qml</file>
         <file>modules/brand/Editor.qml</file>
         <file>images/easytag.png</file>
         <file>modules/map/Function.js</file>
-        <file>modules/map/Main.qml</file>
-        <file>modules/wiki/Main.qml</file>
+        <file>modules/map/main.qml</file>
+        <file>modules/wiki/main.qml</file>
     </qresource>
 </RCC>

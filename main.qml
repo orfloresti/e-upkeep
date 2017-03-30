@@ -28,14 +28,14 @@ ApplicationWindow {
     //ListModels used
     ListModel {
         id: moduleListModel
-        ListElement { title: "-Report"; source: "qrc:/modules/report/ReportPage.qml" }
-        ListElement { title: "Component"; source:"qrc:/modules/component/ComponentPage.qml" }
+        ListElement { title: "-Report"; source: "qrc:/modules/report/main.qml" }
+        ListElement { title: "Component"; source:"qrc:/modules/component/main.qml" }
         ListElement { title: "-Device"; source:"" }
-        ListElement { title: "User"; source: "qrc:/modules/user/UserPage.qml" }
-        ListElement { title: "Map"; source:"qrc:/modules/map/Main.qml" }
-        ListElement { title: "Brand"; source:"qrc:/modules/brand/Main.qml" }
-        ListElement { title: "Type"; source: "qrc:/modules/type/TypePage.qml"}
-        ListElement { title: "Wiki"; source: "qrc:/modules/wiki/Main.qml"}
+        ListElement { title: "User"; source: "qrc:/modules/user/main.qml" }
+        ListElement { title: "Map"; source:"qrc:/modules/map/main.qml" }
+        ListElement { title: "Brand"; source:"qrc:/modules/brand/main.qml" }
+        ListElement { title: "Type"; source: "qrc:/modules/type/main.qml"}
+        ListElement { title: "Wiki"; source: "qrc:/modules/wiki/main.qml"}
     }
 
     //Pages StackView
