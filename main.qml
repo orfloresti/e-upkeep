@@ -33,7 +33,7 @@ ApplicationWindow {
         id: moduleListModel
         ListElement { title: "-Report"; source: "qrc:/modules/report/main.qml" }
         ListElement { title: "Component"; source:"qrc:/modules/component/main.qml" }
-        ListElement { title: "-Device"; source:"" }
+        ListElement { title: "Device"; source:"qrc:/modules/device/main.qml" }
         ListElement { title: "User"; source: "qrc:/modules/user/main.qml" }
         ListElement { title: "Map"; source:"qrc:/modules/map/main.qml" }
         ListElement { title: "Brand"; source:"qrc:/modules/brand/main.qml" }

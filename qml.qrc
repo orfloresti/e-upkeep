@@ -35,5 +35,8 @@
         <file>modules/map/Function.js</file>
         <file>modules/map/main.qml</file>
         <file>modules/wiki/main.qml</file>
+        <file>modules/device/Editor.qml</file>
+        <file>modules/device/Function.js</file>
+        <file>modules/device/main.qml</file>
     </qresource>
 </RCC>

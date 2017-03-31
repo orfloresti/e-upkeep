@@ -17,9 +17,8 @@ Page {
     //ListModel used only in this page
     ListModel{
         id: definedTypes
-        ListElement {table: "UserType"}
-        ListElement {table: "DeviceType"}
-        ListElement {table: "ReportType"}
+        ListElement {table: "DeviceType"; title: "Device"}
+        ListElement {table: "ReportType"; title: "Report"}
     }
 
     ListModel{id:typeListModel}
@@ -41,7 +40,7 @@ Page {
             width: parent.width
             Label {
                 width: column.width - space
-                text: "In this module you can create new types for users, reports and devices. Remenber the types used can't be delete."
+                text: "In this module you can create new types for reports and devices. Remenber the types used can't be delete."
                 wrapMode: Label.Wrap
                 Layout.fillWidth: true
                 Layout.leftMargin: space
@@ -50,7 +49,7 @@ Page {
             }
 
             Label {
-                text: "Select one type"
+                text: "Select the category"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
@@ -64,7 +63,11 @@ Page {
                 Layout.leftMargin: space
                 Layout.rightMargin: space                
                 model: definedTypes
-                onCurrentTextChanged: Type.loadList(typeSelect.currentText)
+                textRole: "title"
+                onCurrentTextChanged: {
+                    //console.log(definedTypes.get(typeSelect.currentIndex).table)
+                    Type.loadList(definedTypes.get(typeSelect.currentIndex).table)
+                }
             }
 
             Label {
@@ -111,7 +114,7 @@ Page {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: Type.deleteType(typeSelect.currentText,
+                    onClicked: Type.deleteType(definedTypes.get(typeSelect.currentIndex).table,
                                                        typeUserComboBox.currentText,
                                                        typeUserComboBox.currentIndex)
                 }
