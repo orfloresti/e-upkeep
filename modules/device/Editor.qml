@@ -20,25 +20,26 @@ Page{
 
     //Signals to create new user or update new one
     signal newItem()
-    signal updateItem(string varName)
+    signal updateItem()
 
     onNewItem: {
-        moduleName = "New Brand"
+        moduleName = "New Device"
         newState = true
-        nameField.clear()
+
+        //nameField.clear()
         button.text = "Save"
-        //passwordField.enabled = true
+        passwordField.enabled = true
     }
 
     onUpdateItem:{
-        moduleName = "Update Brand"
+        moduleName = "Update Device"
         newState = false
 
-        actualName = varName
-        nameField.text = varName
+        //actualName = varName
+        //nameField.text = varName
 
         button.text = "Update"
-        //passwordField.enabled = false
+        passwordField.enabled = false
     }
 
     //Create the dialog to show problems or complete operations
@@ -47,6 +48,12 @@ Page{
         standardButtons: Dialog.Ok
         onAccepted: Def.errorSavingItem()
     }
+
+    //Listmodels
+    ListModel{
+        id:descriptionListModel
+    }
+
 
     //Page settings
     id:page
@@ -60,38 +67,10 @@ Page{
         ColumnLayout{
             id: columnLayout
             width: parent.width
-            Item{
-                id: item
-                implicitHeight: image.height
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-                Layout.topMargin: space
-                Layout.bottomMargin: space
 
-                Image {
-                    width: 150
-                    height: 150
-                    id: image
-                    anchors.centerIn: parent
-                    source: "qrc:/images/easytag.png"
-                }
-            }
 
-            Label {
-                text: "Name"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-            TextField {
-                id: nameField
-                selectByMouse: true
-                placeholderText: "Brand name"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
+
+
 
             Button{
                 Label{

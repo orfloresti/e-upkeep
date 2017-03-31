@@ -38,5 +38,9 @@
         <file>modules/device/Editor.qml</file>
         <file>modules/device/Function.js</file>
         <file>modules/device/main.qml</file>
+        <file>modules/category/Editor.qml</file>
+        <file>modules/category/Function.js</file>
+        <file>modules/category/main.qml</file>
+        <file>images/edit-paste.png</file>
     </qresource>
 </RCC>

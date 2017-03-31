@@ -4,11 +4,11 @@ function loadList(){
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "SELECT * FROM brand ORDER BY name ASC"
+                        var qry = "SELECT * FROM Category ORDER BY password ASC"
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
                             listModel.append({"password":results.rows.item(i).password,
-                                              "name":results.rows.item(i).name})
+                                              "description":results.rows.item(i).description})
 
                         }
                     })
@@ -18,13 +18,13 @@ function loadList(){
 }
 
 //Save new item in data base
-function saveItem(varPassword, varName){
+function saveItem(varPassword, varDescription){
 
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("INSERT INTO Brand VALUES (?, ?);",[varPassword, varName]);
-                        dialog.setSettings("Saved","New brand  " + varName + " saved correctly");
+                        tx.executeSql("INSERT INTO Category VALUES (?, ?);",[varPassword, varDescription]);
+                        dialog.setSettings("Saved","New category  " + varDescription + " saved correctly");
                         dialog.open();
                         errorSaving = false;
 
@@ -36,13 +36,13 @@ function saveItem(varPassword, varName){
 }
 
 //Update item in data base
-function updateItem(varPassword, varName) {
+function updateItem(varPassword, varDescription) {
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("UPDATE Brand SET password=?, name=? WHERE password=?",
-                                      [varPassword, varName, varPassword]);
-                        dialog.setSettings("Updated","Brand with password "+ varName + " saved correctly");
+                        tx.executeSql("UPDATE Category SET password=?, description=? WHERE password=?",
+                                      [varPassword, varDescription, varPassword]);
+                        dialog.setSettings("Updated","The category "+ varDescription + " saved correctly");
                         dialog.open();
                         errorSaving = false;
 
@@ -67,16 +67,16 @@ function errorSavingItem(){
 //Depending the flag newUserState state, save new user or update one
 function saving(newState){
     if(newState === true){
-        saveItem(passwordField.text,nameField.text)
+        saveItem(passwordField.text, descriptionField.text)
     }else{
-        updateItem(passwordField.text,nameField.text)
+        updateItem(passwordField.text, descriptionField.text)
     }
 }
 
 //Option to update or delete
 function modeEditor(position,index){
     if(position === 0){
-        editor.updateItem(listModel.get(index).password, listModel.get(index).name)
+        editor.updateItem(listModel.get(index).password, listModel.get(index).description)
         stackView.push(editor)
     }else{
         deleteItem(listModel.get(index).password)
@@ -89,9 +89,9 @@ function deleteItem(varPassword){
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("DELETE FROM Brand WHERE password = ?;",[varPassword])
+                        tx.executeSql("DELETE FROM Category WHERE password = ?;",[varPassword])
                         dialog.setSettings("Delete",
-                                               "You delete the brand named " + varPassword + " correctly")
+                                               "You delete the Category named " + varPassword + " correctly")
                         dialog.open()
                     })
 

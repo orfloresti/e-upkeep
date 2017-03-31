@@ -5,8 +5,8 @@ import QtQuick.Controls 2.1
 import "qrc:/dialogs"
 import "qrc:/settings"
 
-import "qrc:/modules/brand"
-import "qrc:/modules/brand/Function.js" as Def
+import "qrc:/modules/device"
+import "qrc:/modules/device/Function.js" as Def
 
 //Main page
 Page{
@@ -65,7 +65,7 @@ Page{
                             height: columnDescription.height
                             id: image
                             anchors.centerIn: parent
-                            source: "qrc:/images/easytag.png"
+                            source: "qrc:/images/media-flash.png"
                         }
                     }
                     ColumnLayout{

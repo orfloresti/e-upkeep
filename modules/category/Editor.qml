@@ -5,7 +5,7 @@ import QtQuick.Controls 2.1
 import "qrc:/dialogs/"
 import "qrc:/settings"
 
-import "qrc:/modules/brand/Function.js" as Def
+import "qrc:/modules/category/Function.js" as Def
 
 Page{
 
@@ -20,19 +20,19 @@ Page{
     signal updateItem(string varPassword, string varName)
 
     onNewItem: {
-        moduleName = "New Brand"
+        moduleName = "New Category"
         newState = true
         passwordField.clear()
-        nameField.clear()
+        descriptionField.clear()
         button.text = "Save"
         passwordField.enabled = true
     }
 
     onUpdateItem:{
-        moduleName = "Update Brand"
+        moduleName = "Update Category"
         newState = false
         passwordField.text = varPassword
-        nameField.text = varName
+        descriptionField.text = varName
         button.text = "Update"
         passwordField.enabled = false
     }
@@ -70,7 +70,7 @@ Page{
                     height: 150
                     id: image
                     anchors.centerIn: parent
-                    source: "qrc:/images/easytag.png"
+                    source: "qrc:/images/edit-paste.png"
                 }
             }
 
@@ -83,22 +83,22 @@ Page{
             TextField {
                 id: passwordField
                 selectByMouse: true
-                placeholderText: "Brand Password"
+                placeholderText: "Category Password"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
 
             Label {
-                text: "Name"
+                text: "Description"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
             TextField {
-                id: nameField
+                id: descriptionField
                 selectByMouse: true
-                placeholderText: "Brand name"
+                placeholderText: "Category description"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space

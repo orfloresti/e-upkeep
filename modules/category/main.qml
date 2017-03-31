@@ -5,8 +5,8 @@ import QtQuick.Controls 2.1
 import "qrc:/dialogs"
 import "qrc:/settings"
 
-import "qrc:/modules/brand"
-import "qrc:/modules/brand/Function.js" as Def
+import "qrc:/modules/category"
+import "qrc:/modules/category/Function.js" as Def
 
 //Main page
 Page{
@@ -65,14 +65,14 @@ Page{
                             height: columnDescription.height
                             id: image
                             anchors.centerIn: parent
-                            source: "qrc:/images/easytag.png"
+                            source: "qrc:/images/edit-paste.png"
                         }
                     }
                     ColumnLayout{
                         id: columnDescription
                         Layout.leftMargin: 10
                         Label{
-                            text: name
+                            text: description
                             wrapMode: Label.Wrap
                             font.pixelSize: 16
                             font.bold: true

@@ -16,7 +16,13 @@ Item{
                               );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Brand(
-                                name TEXT NOT NULL PRIMARY KEY
+                                password TEXT NOT NULL PRIMARY KEY,
+                                name TEXT NOT NULL
+                              );")
+
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Category(
+                                password TEXT NOT NULL PRIMARY KEY,
+                                description TEXT NOT NULL
                               );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Map(
