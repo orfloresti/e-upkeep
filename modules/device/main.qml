@@ -19,8 +19,15 @@ Page{
     }
 
     //Load list and order showed
-    ListModel{id:listModel}
-    Component.onCompleted: { Def.loadList()}
+    //ListModel{id:listModel}
+    Component.onCompleted: {
+        //Def.loadList()
+        Def.loadMapList()
+    }
+
+    ListModel{id:mapListModel}
+    ListModel{id:buildingListModel}
+    ListModel{id:zoneListModel}
 
     //Create editor to new or update one
     Editor{
@@ -94,7 +101,7 @@ Page{
             Layout.fillWidth: true
             height: page.height
             focus: true
-            model: listModel
+            //model: listModel
             delegate: delegate
             ScrollIndicator.vertical: ScrollIndicator { }
         }

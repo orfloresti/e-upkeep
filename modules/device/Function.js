@@ -1,3 +1,55 @@
+//load the lists
+function loadMapList(){
+    mapListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM Map ORDER BY name ASC"
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            mapListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+function loadBuildingList(varMap){
+    buildingListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT name FROM Building WHERE mapName = ? ORDER BY name ASC"
+                        var results = tx.executeSql(qry, [varMap])
+                        for(var i = 0; i < results.rows.length; i++){
+                            buildingListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+function loadZoneList(varBuilding, varMap){
+    zoneListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT name FROM Zone WHERE mapName = ? AND buildingName = ? ORDER BY name ASC"
+                        var results = tx.executeSql(qry, [varMap, varBuilding])
+                        for(var i = 0; i < results.rows.length; i++){
+                            zoneListModel.append({"name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
 //load the component list
 function loadList(){
     listModel.clear()
