@@ -23,8 +23,12 @@ Page{
     Component.onCompleted: {
         //Def.loadList()
         Def.loadMapList()
+        Def.loadDescriptionList()
+        Def.loadBrandList()
     }
 
+    ListModel{id:categoryListModel}
+    ListModel{id:brandListModel}
     ListModel{id:mapListModel}
     ListModel{id:buildingListModel}
     ListModel{id:zoneListModel}

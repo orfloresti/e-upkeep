@@ -49,12 +49,6 @@ Page{
         onAccepted: Def.errorSavingItem()
     }
 
-    //Listmodels
-    ListModel{
-        id:descriptionListModel
-    }
-
-
     //Page settings
     id:page
 
@@ -129,6 +123,36 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 columns: 2
+
+                Label {
+                    text: "Description"
+                    Layout.rightMargin: space
+
+                }
+
+                ComboBox{
+                    id: descriptionComboBox
+                    model:categoryListModel
+                    textRole: "description"
+                    Layout.fillWidth: true
+                    //onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
+
+                }
+
+                Label {
+                    text: "Brand"
+                    Layout.rightMargin: space
+
+                }
+
+                ComboBox{
+                    id: brandComboBox
+                    model:brandListModel
+                    textRole: "name"
+                    Layout.fillWidth: true
+                    //onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
+
+                }
 
                 Label {
                     text: "Map"

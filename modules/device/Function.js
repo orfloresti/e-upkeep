@@ -1,4 +1,41 @@
 //load the lists
+
+function loadDescriptionList(){
+    categoryListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM Category ORDER BY description ASC"
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            categoryListModel.append({"password":results.rows.item(i).password,
+                                                "description":results.rows.item(i).description})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
+function loadBrandList(){
+    brandListModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM Brand ORDER BY name ASC"
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            brandListModel.append({"password":results.rows.item(i).password,
+                                                "name":results.rows.item(i).name})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
 function loadMapList(){
     mapListModel.clear()
     try{
@@ -50,23 +87,6 @@ function loadZoneList(varBuilding, varMap){
     }
 }
 
-//load the component list
-function loadList(){
-    listModel.clear()
-    try{
-        db.transaction(
-                    function(tx) {
-                        var qry = "SELECT * FROM brand ORDER BY name ASC"
-                        var results = tx.executeSql(qry)
-                        for(var i = 0; i < results.rows.length; i++){
-                            listModel.append({"name":results.rows.item(i).name})
-
-                        }
-                    })
-    }catch(err){
-        errorMessage(err)
-    }
-}
 
 //Save new item in data base
 function saveItem(varName){
