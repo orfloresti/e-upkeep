@@ -15,8 +15,16 @@ Page{
     //Flag to determinate if a new user is creating
     property bool newState
 
-    //property to actual name
-    property string actualName
+    //property to password
+    property string categoryPassword
+    property string brandPassword
+
+    signal updatePasswordDevice()
+
+    onUpdatePasswordDevice: {
+        passwordField.text = categoryPassword + brandPassword
+
+    }
 
     //Signals to create new user or update new one
     signal newItem()
@@ -26,9 +34,16 @@ Page{
         moduleName = "New Device"
         newState = true
 
-        //nameField.clear()
+        passwordField.clear()
+        spinBox.value = 1
+        categoryComboBox.currentIndex = -1
+        brandComboBox.currentIndex =-1
+        mapComboBox.currentIndex = -1
+        buildingComboBox.currentIndex = -1
+        zoneComboBox.currentIndex = -1
+
         button.text = "Save"
-        //passwordField.enabled = true
+        passwordField.enabled = true
     }
 
     onUpdateItem:{
@@ -39,7 +54,7 @@ Page{
         //nameField.text = varName
 
         button.text = "Update"
-        //passwordField.enabled = false
+        passwordField.enabled = false
     }
 
     //Create the dialog to show problems or complete operations
@@ -81,38 +96,38 @@ Page{
             }
 
             RowLayout{
-            ColumnLayout{
-            Label {
-                text: "Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                //Layout.rightMargin: space
-            }
-            TextField {
-                id: passwordField
-                selectByMouse: true
-                placeholderText: "Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                //Layout.rightMargin: space
-                enabled: false
-            }
-            }
-
-            ColumnLayout{
-                Label {
-                    text: "Stock"
-                    //Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
+                ColumnLayout{
+                    Label {
+                        text: "Password"
+                        Layout.fillWidth: true
+                        Layout.leftMargin: space
+                        //Layout.rightMargin: space
+                    }
+                    TextField {
+                        id: passwordField
+                        selectByMouse: true
+                        placeholderText: "Password"
+                        Layout.fillWidth: true
+                        Layout.leftMargin: space
+                        //Layout.rightMargin: space
+                        //enabled: false
+                    }
                 }
 
-                SpinBox{
-                    //Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
+                ColumnLayout{
+                    Label {
+                        text: "Stock"
+                        //Layout.fillWidth: true
+                        Layout.leftMargin: space
+                        Layout.rightMargin: space
+                    }
+
+                    SpinBox{
+                        id: spinBox
+                        Layout.leftMargin: space
+                        Layout.rightMargin: space
+                    }
                 }
-            }
 
             }
 
@@ -125,17 +140,20 @@ Page{
                 columns: 2
 
                 Label {
-                    text: "Description"
+                    text: "Category"
                     Layout.rightMargin: space
 
                 }
 
                 ComboBox{
-                    id: descriptionComboBox
+                    id: categoryComboBox
                     model:categoryListModel
                     textRole: "description"
                     Layout.fillWidth: true
-                    //onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
+                    onCurrentTextChanged: {
+                        categoryPassword = categoryListModel.get(categoryComboBox.currentIndex).password;
+                        updatePasswordDevice()
+                    }
 
                 }
 
@@ -150,7 +168,10 @@ Page{
                     model:brandListModel
                     textRole: "name"
                     Layout.fillWidth: true
-                    //onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
+                    onCurrentTextChanged: {
+                        brandPassword = brandListModel.get(brandComboBox.currentIndex).password;
+                        updatePasswordDevice()
+                    }
 
                 }
 
@@ -179,7 +200,7 @@ Page{
                     model:buildingListModel
                     Layout.fillWidth: true
                     onCurrentTextChanged: Def.loadZoneList(buildingComboBox.currentText,
-                                                            mapComboBox.currentText)
+                                                           mapComboBox.currentText)
 
                 }
 

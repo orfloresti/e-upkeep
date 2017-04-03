@@ -89,13 +89,14 @@ function loadZoneList(varBuilding, varMap){
 
 
 //Save new item in data base
-function saveItem(varName){
+function saveItem(varPassword, varStock, varCategory, varBrand, varZone, varBuilding, varMap){
 
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("INSERT INTO Brand VALUES (?);",[varName]);
-                        dialog.setSettings("Saved","New brand named "+ varName + " saved correctly");
+                        tx.executeSql("INSERT INTO Device VALUES (?, ?, ?, ?, ?, ?, ?);",
+                                      [varPassword, varStock, varCategory, varBrand, varZone, varBuilding, varMap]);
+                        dialog.setSettings("Saved","New "+ varPassword + " saved correctly");
                         dialog.open();
                         errorSaving = false;
 
@@ -111,7 +112,7 @@ function updateItem(varName) {
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("UPDATE Brand SET name=? WHERE name=?",
+                        tx.executeSql("UPDATE Device SET password=? stock=? categoryPassword=? brandPassword=? zoneName=? buildingName=? mapName=? WHERE name=?",
                                       [varName, actualName]);
                         dialog.setSettings("Updated","Component with password "+ varName + " saved correctly");
                         dialog.open();
@@ -138,7 +139,7 @@ function errorSavingItem(){
 //Depending the flag newUserState state, save new user or update one
 function saving(newState){
     if(newState === true){
-        saveItem(nameField.text)
+        saveItem(passwordField.text)
     }else{
         updateItem(nameField.text)
     }

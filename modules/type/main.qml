@@ -17,7 +17,7 @@ Page {
     //ListModel used only in this page
     ListModel{
         id: definedTypes
-        ListElement {table: "DeviceType"; title: "Device"}
+        //ListElement {table: "DeviceType"; title: "Device"}
         ListElement {table: "ReportType"; title: "Report"}
     }
 

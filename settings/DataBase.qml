@@ -48,22 +48,17 @@ Item{
                                 description TEXT NOT NULL PRIMARY KEY
                               );")
 
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS DeviceType(
-                                description TEXT NOT NULL PRIMARY KEY
-                              );")
-
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Device(
                                       password TEXT NOT NULL PRIMARY KEY,
-                                      description TEXT NOT NULL,
                                       stock INTEGER NOT NULL,
-                                      brandName TEXT,
-                                      deviceTypeDescription TEXT,
+                                      categoryPassword TEXT NOT NULL,
+                                      brandPassword TEXT,
                                       zoneName TEXT,
                                       buildingName TEXT,
-                                      FOREIGN KEY(brandName) REFERENCES Brand(name),
-                                      FOREIGN KEY(deviceTypeDescription) REFERENCES DeviceType(description)
-                                      FOREIGN KEY(zoneName) REFERENCES Zone(name)
-                                      FOREIGN KEY(buildingName) REFERENCES Building(name)
+                                      mapName TEXT,
+                                      FOREIGN KEY(categoryPassword) REFERENCES Category(password)
+                                      FOREIGN KEY(brandPassword) REFERENCES Brand(password),
+                                      FOREIGN KEY(zoneName, buildingName, mapName) REFERENCES Zone
                                     );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS User(
@@ -75,20 +70,11 @@ Item{
                                 FOREIGN KEY(zoneName, buildingName, mapName) REFERENCES Zone
                               );")
 
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS BuildingZone(
-                                buildingName TEXT,
-                                zoneName TEXT,
-                                PRIMARY KEY(buildingName, zoneName)
-                                FOREIGN KEY(buildingName) REFERENCES Building(name),
-                                FOREIGN KEY(zoneName) REFERENCES Zone(name)
-
-                              );")
-
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Arrive(
                                 year INTEGER NOT NULL,
                                 month INTEGER NOT NULL,
                                 day INTEGER NOT NULL,
-                                numberControl INTEGER NOT NULL,
+                                serialNumber INTEGER NOT NULL,
                                 labUser TEXT,
                                 plantUser TEXT,
                                 PRIMARY KEY(year, month, day, numberControl),
@@ -99,7 +85,7 @@ Item{
                                 year INTEGER NOT NULL,
                                 month INTEGER NOT NULL,
                                 day INTEGER NOT NULL,
-                                numberControl INTEGER NOT NULL,
+                                serialNumber INTEGER NOT NULL,
                                 labUser TEXT,
                                 plantUser TEXT,
                                 PRIMARY KEY(year, month, day, numberControl),
