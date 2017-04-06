@@ -1,4 +1,4 @@
-import QtQuick 2.7
+﻿import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.3
 import QtWebView 1.1
@@ -32,14 +32,15 @@ ApplicationWindow {
     ListModel {
         id: moduleListModel
         ListElement { title: "Report"; source: "qrc:/modules/report/main.qml" }
+        ListElement { title: "Type"; source: "qrc:/modules/type/main.qml"}
         ListElement { title: "Component"; source:"qrc:/modules/component/main.qml" }
         ListElement { title: "Device"; source:"qrc:/modules/device/main.qml" }        
         ListElement { title: "Category"; source:"qrc:/modules/category/main.qml" }
         ListElement { title: "Brand"; source:"qrc:/modules/brand/main.qml" }
         ListElement { title: "User"; source: "qrc:/modules/user/main.qml" }
-        ListElement { title: "Map"; source:"qrc:/modules/map/main.qml" }
-        ListElement { title: "Type"; source: "qrc:/modules/type/main.qml"}
+        ListElement { title: "Map"; source:"qrc:/modules/map/main.qml" }        
         ListElement { title: "Wiki"; source: "qrc:/modules/wiki/main.qml"}
+        ListElement { title: "Bar Code"; source: "qrc:/modules/barCode/main.qml"}
     }
 
     //Pages StackView
