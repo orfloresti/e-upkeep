@@ -16,6 +16,7 @@ Drawer {
         model: moduleListModel
         ScrollIndicator.vertical: ScrollIndicator { }
     }
+
     Component{
         id: moduleDelegate
         ItemDelegate {

@@ -2,6 +2,8 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 
+import Qt.labs.calendar 1.0
+
 import "qrc:/dialogs/"
 import "qrc:/settings"
 
@@ -18,11 +20,12 @@ Page{
     //property to password
     property string categoryPassword
     property string brandPassword
+    //property string numberPassword
 
     signal updatePasswordDevice()
 
     onUpdatePasswordDevice: {
-        passwordField.text = categoryPassword + brandPassword
+        passwordField.text = categoryPassword + brandPassword + numberField.text
 
     }
 
@@ -35,7 +38,7 @@ Page{
         newState = true
 
         passwordField.clear()
-        spinBox.value = 1
+        //spinBox.value = 1
         categoryComboBox.currentIndex = -1
         brandComboBox.currentIndex =-1
         mapComboBox.currentIndex = -1
@@ -43,7 +46,7 @@ Page{
         zoneComboBox.currentIndex = -1
 
         button.text = "Save"
-        passwordField.enabled = true
+        //passwordField.enabled = true
     }
 
     onUpdateItem:{
@@ -54,7 +57,7 @@ Page{
         //nameField.text = varName
 
         button.text = "Update"
-        passwordField.enabled = false
+        //passwordField.enabled = false
     }
 
     //Create the dialog to show problems or complete operations
@@ -95,49 +98,34 @@ Page{
                 }
             }
 
-            RowLayout{
-                ColumnLayout{
-                    Label {
-                        text: "Password"
-                        Layout.fillWidth: true
-                        Layout.leftMargin: space
-                        //Layout.rightMargin: space
-                    }
-                    TextField {
-                        id: passwordField
-                        selectByMouse: true
-                        placeholderText: "Password"
-                        Layout.fillWidth: true
-                        Layout.leftMargin: space
-                        //Layout.rightMargin: space
-                        //enabled: false
-                    }
-                }
-
-                ColumnLayout{
-                    Label {
-                        text: "Stock"
-                        //Layout.fillWidth: true
-                        Layout.leftMargin: space
-                        Layout.rightMargin: space
-                    }
-
-                    SpinBox{
-                        id: spinBox
-                        Layout.leftMargin: space
-                        Layout.rightMargin: space
-                    }
-                }
-
+            Label {
+                text: "<b>Device information</b>"
+                Layout.topMargin: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
             }
-
-
 
             GridLayout{
                 Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 columns: 2
+
+                Label {
+                    text: "Password"
+                    Layout.rightMargin: space
+                }
+                TextField {
+                    id: passwordField
+                    selectByMouse: true
+                    placeholderText: "Password"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
+                    enabled: false
+                }
 
                 Label {
                     text: "Category"
@@ -176,51 +164,138 @@ Page{
                 }
 
                 Label {
-                    text: "Map"
+                    text: "Number"
                     Layout.rightMargin: space
+                }
+                TextField {
+                    id: numberField
+                    selectByMouse: true
+                    placeholderText: "Number"
+                    Layout.fillWidth: true
+                    Layout.rightMargin: space
+                    onCursorPositionChanged: {
+                        updatePasswordDevice()
 
+                    }
                 }
 
-                ComboBox{
-                    id: mapComboBox
-                    model:mapListModel
+                Label {
+                    text: "Description"
+                    Layout.rightMargin: space
+                }
+                TextField {
+                    id: descriptionField
+                    selectByMouse: true
+                    placeholderText: "Description"
                     Layout.fillWidth: true
-                    onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
+                    Layout.rightMargin: space
 
                 }
 
                 Label {
-                    text: "Building"
+                    text: "Model"
                     Layout.rightMargin: space
-
                 }
-
-                ComboBox{
-                    id: buildingComboBox
-                    model:buildingListModel
+                TextField {
+                    id: modelField
+                    selectByMouse: true
+                    placeholderText: "Model"
                     Layout.fillWidth: true
-                    onCurrentTextChanged: Def.loadZoneList(buildingComboBox.currentText,
-                                                           mapComboBox.currentText)
+                    Layout.rightMargin: space
 
                 }
 
                 Label {
-                    text: "Zone"
+                    text: "Serial number"
                     Layout.rightMargin: space
-
                 }
-
-                ComboBox{
-                    id: zoneComboBox
-                    model:zoneListModel
+                TextField {
+                    id: serialNumberField
+                    selectByMouse: true
+                    placeholderText: "Serial number"
                     Layout.fillWidth: true
+                    Layout.rightMargin: space
 
                 }
             }
 
+            Label {
+                text: "<b>Device location</b>"
+                Layout.topMargin: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+            }
+
+            GridLayout{
+                Layout.topMargin: space
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                columns: 1
+
+                ColumnLayout{
+                    Layout.fillWidth: true
+
+                    Label {
+                        text: "Map"
+                        Layout.rightMargin: space
+                        Layout.fillWidth: true
+                    }
+
+                    ComboBox{
+                        id: mapComboBox
+                        model:mapListModel
+                        Layout.fillWidth: true
+                        onCurrentTextChanged: Def.loadBuildingList(mapComboBox.currentText)
+
+                    }
+
+                    Label {
+                        text: "Building"
+                        Layout.rightMargin: space
+                        Layout.fillWidth: true
+
+                    }
+
+                    ComboBox{
+                        id: buildingComboBox
+                        model:buildingListModel
+                        Layout.fillWidth: true
+                        onCurrentTextChanged: Def.loadZoneList(buildingComboBox.currentText,
+                                                               mapComboBox.currentText)
+
+                    }
+
+                    Label {
+                        text: "Zone"
+                        Layout.rightMargin: space
+                        Layout.fillWidth: true
+                    }
+
+                    ComboBox{
+                        id: zoneComboBox
+                        model:zoneListModel
+                        Layout.fillWidth: true
+
+                    }
+
+                }
+
+
+                ColumnLayout{
+                    //Layout.fillWidth: true
+                    DayOfWeekRow {
+                        locale: Qt.locale("en_US")
+                        Layout.fillWidth: true
+                    }
+                    MonthGrid{
+                        Layout.fillWidth: true
+                    }
+                }
 
 
 
+            }
 
             Button{
                 Label{
