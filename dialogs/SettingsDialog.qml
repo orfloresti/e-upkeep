@@ -51,7 +51,7 @@ Dialog {
             TextField {
                 id: ipField
                 selectByMouse: true
-                placeholderText: "0.0.0.0"
+                placeholderText: "192.168.56.102"
                 Layout.fillWidth: true
                 onAccepted: serverIp = ipField.text
             }
