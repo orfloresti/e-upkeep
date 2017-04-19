@@ -282,19 +282,6 @@ Page{
                 }
 
 
-                ColumnLayout{
-                    //Layout.fillWidth: true
-                    DayOfWeekRow {
-                        locale: Qt.locale("en_US")
-                        Layout.fillWidth: true
-                    }
-                    MonthGrid{
-                        Layout.fillWidth: true
-                    }
-                }
-
-
-
             }
 
             Button{
