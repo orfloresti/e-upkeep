@@ -40,7 +40,7 @@ Page {
             width: parent.width
             Label {
                 width: column.width - space
-                text: "In this module you can create new types for reports and devices. Remenber the types used can't be delete."
+                text: "In this module you can create new types for reports. Remenber the types used can't be delete."
                 wrapMode: Label.Wrap
                 Layout.fillWidth: true
                 Layout.leftMargin: space

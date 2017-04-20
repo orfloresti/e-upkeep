@@ -365,7 +365,13 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.bottomMargin: space
-                onClicked: Def.saving(newState)
+                onClicked: Def.saveLocation(passwordField.text,
+                                            monthTextField.text,
+                                            dayTextField.text,
+                                            yearTextField.text,
+                                            zoneComboBox.currentText,
+                                            buildingComboBox.currentText,
+                                            mapComboBox.currentText)
             }
 
 

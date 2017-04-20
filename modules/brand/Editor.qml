@@ -75,21 +75,6 @@ Page{
             }
 
             Label {
-                text: "Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-            TextField {
-                id: passwordField
-                selectByMouse: true
-                placeholderText: "Brand Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-
-            Label {
                 text: "Name"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
@@ -99,6 +84,21 @@ Page{
                 id: nameField
                 selectByMouse: true
                 placeholderText: "Brand name"
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+            }
+
+            Label {
+                text: "Password"
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+            }
+            TextField {
+                id: passwordField
+                selectByMouse: true
+                placeholderText: "Brand Password"
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space

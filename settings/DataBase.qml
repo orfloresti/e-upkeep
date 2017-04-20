@@ -50,13 +50,12 @@ Item{
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS Device(
                                 password TEXT,
-                                numberControl TEXT,
                                 description TEXT,
                                 categoryPassword TEXT,
                                 brandPassword TEXT,
                                 model Text,
                                 serialNumber TEXT,
-                                PRIMARY KEY(password, numberControl),
+                                PRIMARY KEY(password),
                                 FOREIGN KEY(categoryPassword) REFERENCES Category(password),
                                 FOREIGN KEY(brandPassword) REFERENCES Brand(password)
                               );")

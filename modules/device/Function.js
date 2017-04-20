@@ -87,15 +87,33 @@ function loadZoneList(varBuilding, varMap){
     }
 }
 
+//Save new log location
+
+function saveLocation(varDevicePassword, varMonth, varDay, varYear, varZone, varBuilding, varMap){
+    try{
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("INSERT INTO LogDeviceLocation VALUES (?, ?, ?, ?, ?, ?,?);",
+                                      [varDevicePassword, varMonth, varDay, varYear, varZone, varBuilding, varMap]);
+                        dialog.setSettings("Saved","New "+ varDevicePassword + " saved correctly");
+                        dialog.open();
+                        errorSaving = false;
+
+                    }
+                    )
+    }catch(err){
+        errorMessage(err)
+    }
+}
 
 //Save new item in data base
-function saveItem(varPassword, varStock, varCategory, varBrand, varZone, varBuilding, varMap){
+function saveItem(varPassword,varDescription,varCategory,varBrand,varModel,varSerial){
 
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("INSERT INTO Device VALUES (?, ?, ?, ?, ?, ?, ?);",
-                                      [varPassword, varStock, varCategory, varBrand, varZone, varBuilding, varMap]);
+                        tx.executeSql("INSERT INTO Device VALUES (?, ?, ?, ?, ?, ?);",
+                                      [varPassword,varDescription,varCategory,varBrand,varModel,varSerial]);
                         dialog.setSettings("Saved","New "+ varPassword + " saved correctly");
                         dialog.open();
                         errorSaving = false;
@@ -139,7 +157,13 @@ function errorSavingItem(){
 //Depending the flag newUserState state, save new user or update one
 function saving(newState){
     if(newState === true){
-        saveItem(passwordField.text)
+        saveItem(passwordField.text,
+                 descriptionField.text,
+                 categoryComboBox.currentText,
+                 brandComboBox.currentText,
+                 modelField.text,
+                 serialNumberField.text
+                 )
     }else{
         updateItem(nameField.text)
     }
