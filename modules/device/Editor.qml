@@ -112,6 +112,7 @@ Page{
                 Layout.rightMargin: space
                 columns: 2
 
+
                 Label {
                     text: "Password"
                     Layout.rightMargin: space
@@ -122,7 +123,7 @@ Page{
                     placeholderText: "Password"
                     Layout.fillWidth: true
                     //Layout.leftMargin: space
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
                     //Layout.rightMargin: space
                     enabled: false
                 }
@@ -172,7 +173,7 @@ Page{
                     selectByMouse: true
                     placeholderText: "Number"
                     Layout.fillWidth: true
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
                     onCursorPositionChanged: {
                         updatePasswordDevice()
 
@@ -188,7 +189,7 @@ Page{
                     selectByMouse: true
                     placeholderText: "Description"
                     Layout.fillWidth: true
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
 
                 }
 
@@ -201,7 +202,7 @@ Page{
                     selectByMouse: true
                     placeholderText: "Model"
                     Layout.fillWidth: true
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
 
                 }
 
@@ -214,9 +215,23 @@ Page{
                     selectByMouse: true
                     placeholderText: "Serial number"
                     Layout.fillWidth: true
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
 
                 }
+            }
+
+            Button{
+                Label{
+                    id: button
+                    anchors.centerIn: parent
+                    color: "Black"
+                }
+                Layout.topMargin: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.bottomMargin: space
+                onClicked: Def.saving(newState)
             }
 
             Label {
@@ -224,7 +239,7 @@ Page{
                 Layout.topMargin: space
                 Layout.fillWidth: true
                 Layout.leftMargin: space
-                Layout.rightMargin: space
+                //Layout.rightMargin: space
             }
 
             GridLayout{
@@ -232,6 +247,61 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 columns: 1
+
+
+
+                RowLayout{
+
+                    ColumnLayout{
+                        Label {
+                            text: "Month"
+                        }
+
+                        TextField{
+                            id: monthTextField
+                            selectByMouse: true
+                            placeholderText: "MM"
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    ColumnLayout{
+                        Label {
+                            text: "Day"
+                        }
+
+                        TextField{
+                            id: dayTextField
+                            selectByMouse: true
+                            placeholderText: "DD"
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    ColumnLayout{
+                        Label {
+                            text: "Year"
+                        }
+
+                        TextField{
+                            id: yearTextField
+                            selectByMouse: true
+                            placeholderText: "YYYY"
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    Button{
+                        text: "Today"
+                        onClicked: {
+                            var date = new Date();
+                            yearTextField.text = date.getFullYear();
+                            dayTextField.text = date.getDate();
+                            monthTextField.text = date.getMonth() + 1;
+                        }
+                    }
+
+                }
 
                 ColumnLayout{
                     Layout.fillWidth: true
@@ -281,12 +351,12 @@ Page{
 
                 }
 
-
             }
 
             Button{
                 Label{
-                    id: button
+                    text: "New location"
+                    id: saveLocation
                     anchors.centerIn: parent
                     color: "Black"
                 }
@@ -297,6 +367,7 @@ Page{
                 Layout.bottomMargin: space
                 onClicked: Def.saving(newState)
             }
+
 
         }
     }

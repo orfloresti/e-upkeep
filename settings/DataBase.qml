@@ -56,16 +56,16 @@ Item{
                                 brandPassword TEXT,
                                 model Text,
                                 serialNumber TEXT,
-                                PRIMARY KEY(password, number),
+                                PRIMARY KEY(password, numberControl),
                                 FOREIGN KEY(categoryPassword) REFERENCES Category(password),
                                 FOREIGN KEY(brandPassword) REFERENCES Brand(password)
                               );")
 
                         tx.executeSql("CREATE TABLE IF NOT EXISTS LogDeviceLocation(
-                                devicePassword TEXT,
-                                year INTEGER,
+                                devicePassword TEXT,                                
                                 month INTEGER,
                                 day INTEGER,
+                                year INTEGER,
                                 zoneName TEXT,
                                 buildingName TEXT,
                                 mapName TEXT,
@@ -82,10 +82,10 @@ Item{
                                 FOREIGN KEY(zoneName, buildingName, mapName) REFERENCES Zone
                               );")
 
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS Arrive(
-                                year INTEGER,
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Arrive(                                
                                 month INTEGER,
                                 day INTEGER,
+                                year INTEGER,
                                 numberControl INTEGER NOT NULL,
                                 labUser TEXT,
                                 plantUser TEXT,
@@ -93,10 +93,10 @@ Item{
                                 FOREIGN KEY(labUser, plantUser) REFERENCES User(password, password)
                               );")
 
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS Out(
-                                year INTEGER,
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS Out(                                
                                 month INTEGER,
                                 day INTEGER,
+                                year INTEGER,
                                 numberControl INTEGER,
                                 labUser TEXT,
                                 plantUser TEXT,

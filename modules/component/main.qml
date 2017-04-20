@@ -124,7 +124,8 @@ Page{
                 focus: true
                 model: componentListModel
                 delegate: componentDelegate
-                ScrollIndicator.vertical: ScrollIndicator { }
+                //ScrollIndicator.vertical: ScrollIndicator { }
+                ScrollBar.vertical: ScrollBar { }
             }
         }
     }
