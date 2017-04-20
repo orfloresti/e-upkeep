@@ -88,7 +88,6 @@ function loadZoneList(varBuilding, varMap){
 }
 
 //Save new log location
-
 function saveLocation(varDevicePassword, varMonth, varDay, varYear, varZone, varBuilding, varMap){
     try{
         db.transaction(

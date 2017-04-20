@@ -45,7 +45,7 @@ Page{
         buildingComboBox.currentIndex = -1
         zoneComboBox.currentIndex = -1
 
-        button.text = "Save"
+        button.text = "Save device information"
         //passwordField.enabled = true
     }
 
@@ -56,7 +56,7 @@ Page{
         //actualName = varName
         //nameField.text = varName
 
-        button.text = "Update"
+        button.text = "Update device information"
         //passwordField.enabled = false
     }
 
@@ -218,21 +218,7 @@ Page{
                     //Layout.rightMargin: space
 
                 }
-            }
-
-            Button{
-                Label{
-                    id: button
-                    anchors.centerIn: parent
-                    color: "Black"
-                }
-                Layout.topMargin: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-                Layout.bottomMargin: space
-                onClicked: Def.saving(newState)
-            }
+            }            
 
             Label {
                 text: "<b>Device location</b>"
@@ -355,7 +341,7 @@ Page{
 
             Button{
                 Label{
-                    text: "New location"
+                    text: "Save new location"
                     id: saveLocation
                     anchors.centerIn: parent
                     color: "Black"
@@ -364,7 +350,7 @@ Page{
                 Layout.fillWidth: true
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-                Layout.bottomMargin: space
+                //Layout.bottomMargin: space
                 onClicked: Def.saveLocation(passwordField.text,
                                             monthTextField.text,
                                             dayTextField.text,
@@ -372,6 +358,20 @@ Page{
                                             zoneComboBox.currentText,
                                             buildingComboBox.currentText,
                                             mapComboBox.currentText)
+            }
+
+            Button{
+                Label{
+                    id: button
+                    anchors.centerIn: parent
+                    color: "Black"
+                }
+                //Layout.topMargin: space
+                Layout.fillWidth: true
+                Layout.leftMargin: space
+                Layout.rightMargin: space
+                Layout.bottomMargin: space
+                onClicked: Def.saving(newState)
             }
 
 
