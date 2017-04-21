@@ -5,8 +5,6 @@
         <file>icons/back.png</file>
         <file>icons/drawer.png</file>
         <file>icons/menu.png</file>
-        <file>icons/emblem-synchronizing.png</file>
-        <file>emblem-synchronizing.ico</file>
         <file>settings/AddButton.qml</file>
         <file>settings/DataBase.qml</file>
         <file>dialogs/SettingsDialog.qml</file>

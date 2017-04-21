@@ -11,7 +11,7 @@ ApplicationWindow {
     property int space: 20
 
     //property to design the url of the server
-    property string serverIp: "192.168.56.102"
+    property string serverIp: "192.168.56.101"
 
     //Module name and module index
     property string appName: "Feedback"
