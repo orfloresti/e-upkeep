@@ -14,7 +14,7 @@ ApplicationWindow {
     property string serverIp: "192.168.56.101"
 
     //Module name and module index
-    property string appName: "Feedback"
+    property string appName: "eUpkeep"
     property string moduleName: appName
     property int moduleIdex
 
@@ -39,7 +39,7 @@ ApplicationWindow {
         ListElement { title: "Brand"; source:"qrc:/modules/brand/main.qml" }
         ListElement { title: "User"; source: "qrc:/modules/user/main.qml" }
         ListElement { title: "Map"; source:"qrc:/modules/map/main.qml" }        
-        ListElement { title: "Wiki"; source: "qrc:/modules/wiki/main.qml"}
+        //ListElement { title: "Wiki"; source: "qrc:/modules/wiki/main.qml"}
         ListElement { title: "Bar Code"; source: "qrc:/modules/barCode/main.qml"}
     }
 

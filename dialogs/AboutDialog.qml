@@ -6,8 +6,8 @@ Dialog {
 
     focus: true
     modal: true
-    width: parent.width/1.5
-    height: parent.height/1.5
+    width: parent.width/1.1
+    height: parent.height/1.1
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
     title: "About"
@@ -18,9 +18,14 @@ Dialog {
         id: aboutColumn
         spacing: 20
 
+
+        Image {
+            source: "qrc:/icons/logo.png"
+        }
+
         Label {
             width: aboutDialog.availableWidth
-            text: "Feedback is an application tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
+            text: "eUpkeep is an application tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }

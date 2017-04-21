@@ -40,5 +40,6 @@
         <file>modules/category/Function.js</file>
         <file>modules/category/main.qml</file>
         <file>images/edit-paste.png</file>
+        <file>icons/logo.png</file>
     </qresource>
 </RCC>
