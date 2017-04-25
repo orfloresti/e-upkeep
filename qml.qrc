@@ -42,7 +42,6 @@
         <file>images/edit-paste.png</file>
         <file>icons/logo.png</file>
         <file>eUpkeep.svg</file>
-        <file>icons/shallow.png</file>
         <file>icons/addButtonShallow.png</file>
     </qresource>
 </RCC>

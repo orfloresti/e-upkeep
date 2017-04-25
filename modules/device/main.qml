@@ -21,7 +21,7 @@ Page{
     //Load list and order showed
     //ListModel{id:listModel}
     Component.onCompleted: {
-        Def.loadList()
+        //Def.loadList()
         Def.loadMapList()
         Def.loadDescriptionList()
         Def.loadBrandList()

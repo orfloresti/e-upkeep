@@ -34,7 +34,7 @@ Dialog {
             }
         }
 
-        //Don´t work yet
+        /*
         RowLayout{
             spacing: space
             Layout.fillWidth: true
@@ -55,7 +55,7 @@ Dialog {
                 Layout.fillWidth: true
                 onAccepted: serverIp = ipField.text
             }
-        }
+        }*/
     }
 
 }

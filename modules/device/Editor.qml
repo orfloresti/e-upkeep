@@ -234,8 +234,6 @@ Page{
                 Layout.rightMargin: space
                 columns: 1
 
-
-
                 RowLayout{
 
                     ColumnLayout{
