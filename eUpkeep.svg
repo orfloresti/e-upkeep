@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="54mm"
+   height="54mm"
+   viewBox="0 0 43.200001 43.199998"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="eUpkeep.svg"
+   inkscape:export-filename="C:\Users\orflores\Documents\QtProjects\eupkeep\icons\icon.png"
+   inkscape:export-xdpi="240.83"
+   inkscape:export-ydpi="240.83">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient291"
+       inkscape:collect="always">
+      <stop
+         id="stop287"
+         offset="0"
+         style="stop-color:#ececec;stop-opacity:1" />
+      <stop
+         id="stop289"
+         offset="1"
+         style="stop-color:#cccccc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1062">
+      <stop
+         style="stop-color:#333333;stop-opacity:1"
+         offset="0"
+         id="stop1058" />
+      <stop
+         style="stop-color:#b3b3b3;stop-opacity:1"
+         offset="1"
+         id="stop1060" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1062"
+       id="linearGradient1064"
+       x1="44.952137"
+       y1="113.327"
+       x2="45.589306"
+       y2="83.54248"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient291"
+       id="linearGradient1569-6"
+       x1="58.104614"
+       y1="142.89273"
+       x2="58.712967"
+       y2="143.41441"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.47213231,0,0,0.65277821,41.417177,-18.182453)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.8605062"
+     inkscape:cx="104.36675"
+     inkscape:cy="98.51738"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:window-width="1360"
+     inkscape:window-height="706"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:guide-bbox="true"
+     scale-x="0.8"
+     fit-margin-top="2"
+     fit-margin-left="2"
+     fit-margin-right="2"
+     fit-margin-bottom="2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-46.299876,-51.458392)">
+    <rect
+       style="opacity:1;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1.37289965;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect1561-0-1"
+       width="40"
+       height="40"
+       x="47.899876"
+       y="53.058392"
+       ry="3.788326"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:url(#linearGradient1569-6);fill-opacity:1;stroke:none;stroke-width:1.11031115;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect1561-2"
+       width="35.226971"
+       height="29.706846"
+       x="50.286388"
+       y="61.010456"
+       ry="2.624495"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <path
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.93013895;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 79.912584,73.712033 a 2.3731001,2.3731001 0 0 0 -2.37303,2.373029 2.3731001,2.3731001 0 0 0 2.37303,2.373032 2.3731001,2.3731001 0 0 0 2.373032,-2.373032 2.3731001,2.3731001 0 0 0 -2.373032,-2.373029 z m 0,1.453523 a 0.91974917,0.91974917 0 0 1 0.919987,0.919506 0.91974917,0.91974917 0 0 1 -0.919987,0.91999 0.91974917,0.91974917 0 0 1 -0.919509,-0.91999 0.91974917,0.91974917 0 0 1 0.919509,-0.919506 z"
+       id="path4646-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.67341048;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4665-69"
+       width="1.8"
+       height="4.0491953"
+       x="75.091782"
+       y="-78.154427"
+       transform="rotate(90)"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.80641901;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4665-1"
+       width="1.8"
+       height="5.8067145"
+       x="-75.905228"
+       y="-76.891777"
+       transform="scale(-1)"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="fill:#4d4d4d;stroke:none;stroke-width:1.26146567;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4665-6-7"
+       width="1.8"
+       height="14.208876"
+       x="71.085068"
+       y="-75.905228"
+       transform="rotate(90)"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <path
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.93013895;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 62.754505,62.640812 a 2.3731001,2.3731001 0 0 0 -2.373029,2.373031 2.3731001,2.3731001 0 0 0 2.373029,2.373032 2.3731001,2.3731001 0 0 0 2.373032,-2.373032 2.3731001,2.3731001 0 0 0 -2.373032,-2.373031 z m 0,1.453523 a 0.91974917,0.91974917 0 0 1 0.919989,0.919508 0.91974917,0.91974917 0 0 1 -0.919989,0.919988 0.91974917,0.91974917 0 0 1 -0.919507,-0.919988 0.91974917,0.91974917 0 0 1 0.919507,-0.919508 z"
+       id="path4646-60"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.8503837;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4665-9"
+       width="1.8"
+       height="6.457119"
+       x="61.696354"
+       y="66.427948"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <path
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.93013895;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 71.507683,84.345295 a 2.3731001,2.3731001 0 0 0 -2.373032,2.373032 2.3731001,2.3731001 0 0 0 2.373032,2.373031 2.3731001,2.3731001 0 0 0 2.373512,-2.373031 2.3731001,2.3731001 0 0 0 -2.373512,-2.373032 z m 0,1.453523 a 0.91974917,0.91974917 0 0 1 0.919988,0.919509 0.91974917,0.91974917 0 0 1 -0.919988,0.919987 0.91974917,0.91974917 0 0 1 -0.919508,-0.919987 0.91974917,0.91974917 0 0 1 0.919508,-0.919509 z"
+       id="path4646"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.99442303;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4665"
+       width="1.8"
+       height="8.8298092"
+       x="-72.409966"
+       y="-85.05426"
+       transform="scale(-1)"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="fill:#4d4d4d;stroke:none;stroke-width:1.30821669;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4665-6"
+       width="1.8"
+       height="15.281584"
+       x="76.224449"
+       y="-72.409966"
+       transform="rotate(90)"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <path
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.93013895;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 55.595184,74.678743 a 2.3731001,2.3731001 0 0 0 -2.373032,2.373032 2.3731001,2.3731001 0 0 0 2.373032,2.373031 2.3731001,2.3731001 0 0 0 2.373511,-2.373031 2.3731001,2.3731001 0 0 0 -2.373511,-2.373032 z m 0,1.453523 a 0.91974918,0.91974918 0 0 1 0.919988,0.919509 0.91974918,0.91974918 0 0 1 -0.919988,0.919987 0.91974918,0.91974918 0 0 1 -0.919508,-0.919987 0.91974918,0.91974918 0 0 1 0.919508,-0.919509 z"
+       id="path4646-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.24609925"
+       id="rect108"
+       width="7.6879334"
+       height="3.3508317"
+       x="65.338028"
+       y="70.30423"
+       ry="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:#ffb380;fill-opacity:1;stroke:none;stroke-width:0.1077565"
+       id="rect108-3"
+       width="1.4739267"
+       height="3.3508317"
+       x="65.338028"
+       y="70.30423"
+       ry="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:#ffb380;fill-opacity:1;stroke:none;stroke-width:0.1077565"
+       id="rect108-3-7"
+       width="1.4739268"
+       height="3.3508317"
+       x="71.552032"
+       y="70.30423"
+       ry="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.24609925"
+       id="rect108-5"
+       width="7.6879334"
+       height="3.3508317"
+       x="61.812019"
+       y="75.435364"
+       ry="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:#ffb380;fill-opacity:1;stroke:none;stroke-width:0.1077565"
+       id="rect108-3-3"
+       width="1.4739268"
+       height="3.3508317"
+       x="61.812019"
+       y="75.435364"
+       ry="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <rect
+       style="opacity:1;fill:#ffb380;fill-opacity:1;stroke:none;stroke-width:0.1077565"
+       id="rect108-3-7-5"
+       width="1.4739269"
+       height="3.3508317"
+       x="68.026031"
+       y="75.435364"
+       ry="0"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <circle
+       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       id="path355"
+       cx="83.361839"
+       cy="57.337048"
+       r="2.1515198"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <circle
+       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       id="path355-3"
+       cx="77.939423"
+       cy="57.337048"
+       r="2.1515198"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+    <circle
+       style="opacity:1;fill:#00aad4;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       id="path355-6"
+       cx="72.516998"
+       cy="57.337048"
+       r="2.1515198"
+       inkscape:export-filename="/home/orlando/QtProjects/eupkeep/icons/icon.png"
+       inkscape:export-xdpi="325.12"
+       inkscape:export-ydpi="325.12" />
+  </g>
+</svg>

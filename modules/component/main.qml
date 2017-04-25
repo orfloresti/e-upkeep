@@ -64,9 +64,12 @@ Page{
                                 color: "white"
                                 anchors.centerIn: parent
                             }
-                            SwipeDelegate.onClicked: Comp.updateOrDetele(swipe.position,index)                        }
+                            SwipeDelegate.onClicked: Comp.updateOrDetele(swipe.position,index)
+                        }
                     }
-                    contentItem: RowLayout{
+                    contentItem:
+
+                        RowLayout{
                         Item{
                             width: componentImage.width
                             height: componentImage.height
@@ -84,35 +87,37 @@ Page{
                             Label{
                                 text: password
                                 wrapMode: Label.Wrap
-                                font.pixelSize: 16
+                                //font.pixelSize: 16
                                 font.bold: true
                                 Layout.fillWidth: true
 
                             }
                             Label{
-                                text: "<b>" + description + "</b>" +
+                                text: "<b>" + description + "</b>" /*+
                                       ", Stock: " + stock +
-                                      ", Min: " + min
+                                      ", Min: " + min*/
                                 wrapMode: Label.Wrap
                                 font.pixelSize: 12
                                 Layout.fillWidth: true
                                 color: "grey"
 
                             }
-                            Label{
+                            /*Label{
                                 text: "<b> $" + cost + "</b>"
                                 wrapMode: Label.Wrap
-                                font.pixelSize: 14
+                                //font.pixelSize: 14
                                 Layout.fillWidth: true
                                 color: "grey"
 
-                            }
+                            }*/
                             Rectangle {
                                 height: 1
-                                color: "#E6E6E6"
+                                color: "#EAEAEA"
                                 Layout.fillWidth: true
                             }
                         }
+
+
                     }
                     onClicked: Comp.updateOrDetele(swipe.position,index)
                 }

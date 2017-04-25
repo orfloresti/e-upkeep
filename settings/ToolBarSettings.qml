@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 import "qrc:/settings/ToolbarFunction.js" as Def
 
 ToolBar{
-    background: Rectangle{ color: "Orange" }
+    //background: Rectangle{ color: "Orange" }
 
     RowLayout{
         spacing: 20

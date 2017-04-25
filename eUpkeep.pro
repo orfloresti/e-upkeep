@@ -1,4 +1,4 @@
-QT += qml quick sql #webengine
+QT += qml quick sql svg #webengine
 
 CONFIG += c++11
 
@@ -28,7 +28,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_ICONS = icon.ico
+RC_ICONS = eUpkeep.ico
 
 DISTFILES += \
     android/AndroidManifest.xml \
