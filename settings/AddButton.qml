@@ -13,8 +13,8 @@ MouseArea{
 
     Image {
         id: shallowImage
-        source: "qrc:/icons/shallow.png"
-        sourceSize.width: 65
+        source: "qrc:/icons/addButtonShallow.png"
+        sourceSize.width: 70
         anchors.centerIn: parent
     }
 

@@ -89,6 +89,7 @@ Page {
         //boundsBehavior: Flickable.StopAtBounds
         ScrollIndicator.vertical: ScrollIndicator { }
 
+
         ColumnLayout{
             id: columnUser
             width: parent.width
@@ -111,7 +112,7 @@ Page {
                 }
             }
 
-            RowLayout{
+            ColumnLayout{
                 spacing: space
                 Layout.fillWidth: true
                 Layout.leftMargin: space
@@ -120,13 +121,13 @@ Page {
                 ColumnLayout{
                     Label {
                         text: "Password"
-                        //Layout.fillWidth: true
+                        Layout.fillWidth: true
                     }
                     TextField {
                         id: passwordField
                         selectByMouse: true
                         placeholderText: "Password"
-                        //Layout.fillWidth: true
+                        Layout.fillWidth: true
                     }
                 }
 
@@ -134,16 +135,16 @@ Page {
                     Label {
                         text: "Name"
                         Layout.fillWidth: true
-                        Layout.leftMargin: space
-                        Layout.rightMargin: space
+                        //Layout.leftMargin: space
+                        //Layout.rightMargin: space
                     }
                     TextField {
                         id: nameField
                         selectByMouse: true
                         placeholderText: "Name"
                         Layout.fillWidth: true
-                        Layout.leftMargin: space
-                        Layout.rightMargin: space
+                        //Layout.leftMargin: space
+                        //Layout.rightMargin: space
                     }
                 }
 
@@ -219,5 +220,6 @@ Page {
             }
 
         }
+
     }
 }

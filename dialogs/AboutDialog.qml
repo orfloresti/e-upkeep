@@ -20,7 +20,7 @@ Dialog {
 
 
         Image {
-            source: "qrc:/icons/logo.png"
+            source: "qrc:/eUpkeep.svg"
         }
 
         Label {

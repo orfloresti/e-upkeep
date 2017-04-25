@@ -87,7 +87,7 @@ Page{
                             Label{
                                 text: password
                                 wrapMode: Label.Wrap
-                                //font.pixelSize: 16
+                                font.pixelSize: 16
                                 font.bold: true
                                 Layout.fillWidth: true
 

@@ -39,7 +39,6 @@ Page{
         anchors.fill: parent
         contentHeight: columnUser.height
         ScrollIndicator.vertical: ScrollIndicator { }
-
         ColumnLayout{
             id: columnUser
             width: parent.width
@@ -154,6 +153,7 @@ Page{
                 Layout.bottomMargin: space
                 onClicked: Comp.savingComponent(newComponentState)
             }
+
 
         }
     }

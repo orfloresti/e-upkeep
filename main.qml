@@ -48,6 +48,15 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
         initialItem:Page{
+            Rectangle{
+                width: parent.width
+                height: 300
+                Image {
+                    anchors.fill: parent
+                    id: name
+                    source: "qrc:/icons/shallow.png"
+                }
+            }
 
         }        
     }
