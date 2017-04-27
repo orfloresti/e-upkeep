@@ -74,34 +74,43 @@ Page{
                 }
             }
 
-            Label {
-                text: "Description"
-                Layout.fillWidth: true
+            GridLayout{
+                //Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-            }
-            TextField {
-                id: descriptionField
-                selectByMouse: true
-                placeholderText: "Category description"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
+                columnSpacing:space
+                columns: 2
 
-            Label {
-                text: "Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-            TextField {
-                id: passwordField
-                selectByMouse: true
-                placeholderText: "Category Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
+                Label {
+                    text: "Description"
+                    //Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+                TextField {
+                    id: descriptionField
+                    selectByMouse: true
+                    placeholderText: "Category description"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+
+                Label {
+                    text: "Password"
+                    //Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+                TextField {
+                    id: passwordField
+                    selectByMouse: true
+                    placeholderText: "Category Password"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+
             }
 
             Button{

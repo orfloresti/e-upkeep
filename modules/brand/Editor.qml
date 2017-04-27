@@ -53,6 +53,7 @@ Page{
         contentHeight: columnLayout.height
         ScrollIndicator.vertical: ScrollIndicator { }
 
+
         ColumnLayout{
             id: columnLayout
             width: parent.width
@@ -63,7 +64,7 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.topMargin: space
-                Layout.bottomMargin: space
+                //Layout.bottomMargin: space
 
                 Image {
                     width: 150
@@ -74,34 +75,43 @@ Page{
                 }
             }
 
-            Label {
-                text: "Name"
-                Layout.fillWidth: true
+            GridLayout{
+                //Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
-            }
-            TextField {
-                id: nameField
-                selectByMouse: true
-                placeholderText: "Brand name"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
+                columnSpacing:space
+                columns: 2
 
-            Label {
-                text: "Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-            TextField {
-                id: passwordField
-                selectByMouse: true
-                placeholderText: "Brand Password"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
+                Label {
+                    text: "Name"
+                    //Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+                TextField {
+                    id: nameField
+                    selectByMouse: true
+                    placeholderText: "Brand name"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+
+                Label {
+                    text: "Password"
+                    //Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+                TextField {
+                    id: passwordField
+                    selectByMouse: true
+                    placeholderText: "Brand Password"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+
             }
 
             Button{
