@@ -1,5 +1,23 @@
 //load the lists
 
+function loadList(){
+    listModel.clear()
+    try{
+        db.transaction(
+                    function(tx) {
+                        var qry = "SELECT * FROM Device"
+                        var results = tx.executeSql(qry)
+                        for(var i = 0; i < results.rows.length; i++){
+                            listModel.append({"password":results.rows.item(i).password,
+                                                "description":results.rows.item(i).description})
+
+                        }
+                    })
+    }catch(err){
+        errorMessage(err)
+    }
+}
+
 function loadDescriptionList(){
     categoryListModel.clear()
     try{

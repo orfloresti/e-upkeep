@@ -93,7 +93,7 @@ Page{
 
                             }
                             Label{
-                                text: "<b>" + description + "</b>" /*+
+                                text: description /*+
                                       ", Stock: " + stock +
                                       ", Min: " + min*/
                                 wrapMode: Label.Wrap

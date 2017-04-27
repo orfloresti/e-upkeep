@@ -112,97 +112,72 @@ Page {
                 }
             }
 
-            ColumnLayout{
-                spacing: space
-                Layout.fillWidth: true
+            GridLayout{
+                //Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
+                columnSpacing:space
+                columns: 2
 
-                ColumnLayout{
-                    Label {
-                        text: "Password"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: passwordField
-                        selectByMouse: true
-                        placeholderText: "Password"
-                        Layout.fillWidth: true
-                    }
+                Label {
+                    text: "Password"
+                    //Layout.fillWidth: true
+                }
+                TextField {
+                    id: passwordField
+                    selectByMouse: true
+                    placeholderText: "Password"
+                    Layout.fillWidth: true
+                }
+                Label {
+                    text: "Name"
+                    //Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+                TextField {
+                    id: nameField
+                    selectByMouse: true
+                    placeholderText: "Name"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
                 }
 
-                ColumnLayout{
-                    Label {
-                        text: "Name"
-                        Layout.fillWidth: true
-                        //Layout.leftMargin: space
-                        //Layout.rightMargin: space
-                    }
-                    TextField {
-                        id: nameField
-                        selectByMouse: true
-                        placeholderText: "Name"
-                        Layout.fillWidth: true
-                        //Layout.leftMargin: space
-                        //Layout.rightMargin: space
-                    }
+                Label {
+                    text: "Map"
+                    //Layout.fillWidth: true
+                }
+                ComboBox{
+                    id: mapComboBox
+                    model:mapListModel
+                    Layout.fillWidth: true
+                    onCurrentTextChanged: User.loadBuildingList(mapComboBox.currentText)
                 }
 
+                Label {
+                    text: "Building"
+                    //Layout.fillWidth: true
+                }
+                ComboBox{
+                    id: buildingComboBox
+                    model:buildingListModel
+                    Layout.fillWidth: true
+                    onCurrentTextChanged: User.loadZoneList(buildingComboBox.currentText,
+                                                            mapComboBox.currentText)
 
+                }
+
+                Label {
+                    text: "Zone"
+                    //Layout.fillWidth: true
+                }
+                ComboBox{
+                    id: zoneComboBox
+                    model:zoneListModel
+                    Layout.fillWidth: true
+                }
             }
-
-
-
-
-
-                ColumnLayout{
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-                    Label {
-                        text: "Map"
-                        Layout.fillWidth: true
-                    }
-                    ComboBox{
-                        id: mapComboBox
-                        model:mapListModel
-                        Layout.fillWidth: true
-                        onCurrentTextChanged: User.loadBuildingList(mapComboBox.currentText)
-                    }
-                }
-
-                ColumnLayout{
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-                    Label {
-                        text: "Building"
-                        Layout.fillWidth: true
-                    }
-                    ComboBox{
-                        id: buildingComboBox
-                        model:buildingListModel
-                        Layout.fillWidth: true
-                        onCurrentTextChanged: User.loadZoneList(buildingComboBox.currentText,
-                                                                mapComboBox.currentText)
-
-                    }
-                }
-
-                ColumnLayout{
-                    Layout.fillWidth: true
-                    Layout.leftMargin: space
-                    Layout.rightMargin: space
-                    Label {
-                        text: "Zone"
-                        Layout.fillWidth: true
-                    }
-                    ComboBox{
-                        id: zoneComboBox
-                        model:zoneListModel
-                        Layout.fillWidth: true
-                    }
-                }
 
 
 

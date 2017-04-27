@@ -60,86 +60,76 @@ Page{
                 }
             }
 
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
+            GridLayout{
+                //Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
+                columnSpacing:space
+                columns: 2
 
-                ColumnLayout{
-                    Label {
-                        text: "Password"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: passwordField
-                        selectByMouse: true
-                        placeholderText: "Password"
-                        Layout.fillWidth: true
-                    }
+                Label {
+                    text: "Password"
+                    //Layout.fillWidth: true
+                }
+                TextField {
+                    id: passwordField
+                    selectByMouse: true
+                    placeholderText: "Password"
+                    Layout.fillWidth: true
                 }
 
-                ColumnLayout{
-                    Label {
-                        text: "Cost"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: costField
-                        selectByMouse: true
-                        placeholderText: "$"
-                        Layout.fillWidth: true
-                    }
+                Label {
+                    text: "Cost"
+                    //Layout.fillWidth: true
                 }
-            }
-
-            Label {
-                text: "Description"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-            TextField {
-                id: descriptionField
-                selectByMouse: true
-                placeholderText: "Component description"
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-            }
-
-            RowLayout{
-                spacing: space
-                Layout.fillWidth: true
-                Layout.leftMargin: space
-                Layout.rightMargin: space
-
-                ColumnLayout{
-                    Label {
-                        text: "Stock"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: stockField
-                        selectByMouse: true
-                        placeholderText: "Actual stock"
-                        Layout.fillWidth: true
-                    }
+                TextField {
+                    id: costField
+                    selectByMouse: true
+                    placeholderText: "$"
+                    Layout.fillWidth: true
                 }
 
-                ColumnLayout{
-                    Label {
-                        text: "Minimum"
-                        Layout.fillWidth: true
-                    }
-                    TextField {
-                        id: minimumField
-                        selectByMouse: true
-                        placeholderText: "Minimum stock"
-                        Layout.fillWidth: true
-                    }
+
+                Label {
+                    text: "Description"
+                    //Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
                 }
+                TextField {
+                    id: descriptionField
+                    selectByMouse: true
+                    placeholderText: "Component description"
+                    Layout.fillWidth: true
+                    //Layout.leftMargin: space
+                    //Layout.rightMargin: space
+                }
+
+
+                Label {
+                    text: "Stock"
+                    //Layout.fillWidth: true
+                }
+                TextField {
+                    id: stockField
+                    selectByMouse: true
+                    placeholderText: "Actual stock"
+                    Layout.fillWidth: true
+                }
+
+                Label {
+                    text: "Minimum"
+                    //Layout.fillWidth: true
+                }
+                TextField {
+                    id: minimumField
+                    selectByMouse: true
+                    placeholderText: "Minimum stock"
+                    Layout.fillWidth: true
+                }
+
             }
+
 
             Button{
                 Label{

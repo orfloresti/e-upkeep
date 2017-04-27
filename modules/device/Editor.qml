@@ -41,11 +41,11 @@ Page{
         //spinBox.value = 1
         categoryComboBox.currentIndex = -1
         brandComboBox.currentIndex =-1
-        mapComboBox.currentIndex = -1
-        buildingComboBox.currentIndex = -1
-        zoneComboBox.currentIndex = -1
+        //mapComboBox.currentIndex = -1
+        //buildingComboBox.currentIndex = -1
+        //zoneComboBox.currentIndex = -1
 
-        button.text = "Save device information"
+        button.text = "Save"
         //passwordField.enabled = true
     }
 
@@ -97,7 +97,7 @@ Page{
                     source: "qrc:/images/media-flash.png"
                 }
             }
-
+/*
             Label {
                 text: "<b>Device information</b>"
                 Layout.topMargin: space
@@ -105,17 +105,18 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
             }
-
+*/
             GridLayout{
                 Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
+                columnSpacing: space
                 columns: 2
 
 
                 Label {
                     text: "Password"
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
                 }
                 TextField {
                     id: passwordField
@@ -130,7 +131,7 @@ Page{
 
                 Label {
                     text: "Category"
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
 
                 }
 
@@ -148,7 +149,7 @@ Page{
 
                 Label {
                     text: "Brand"
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
 
                 }
 
@@ -166,7 +167,7 @@ Page{
 
                 Label {
                     text: "Number"
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
                 }
                 TextField {
                     id: numberField
@@ -182,7 +183,7 @@ Page{
 
                 Label {
                     text: "Description"
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
                 }
                 TextField {
                     id: descriptionField
@@ -195,7 +196,7 @@ Page{
 
                 Label {
                     text: "Model"
-                    Layout.rightMargin: space
+                    //Layout.rightMargin: space
                 }
                 TextField {
                     id: modelField
@@ -207,8 +208,8 @@ Page{
                 }
 
                 Label {
-                    text: "Serial number"
-                    Layout.rightMargin: space
+                    text: "S/N"
+                    //Layout.rightMargin: space
                 }
                 TextField {
                     id: serialNumberField
@@ -219,7 +220,7 @@ Page{
 
                 }
             }            
-
+            /*
             Label {
                 text: "<b>Device location</b>"
                 Layout.topMargin: space
@@ -356,7 +357,7 @@ Page{
                                             zoneComboBox.currentText,
                                             buildingComboBox.currentText,
                                             mapComboBox.currentText)
-            }
+            }*/
 
             Button{
                 Label{

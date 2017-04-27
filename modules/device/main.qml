@@ -19,9 +19,9 @@ Page{
     }
 
     //Load list and order showed
-    //ListModel{id:listModel}
+
     Component.onCompleted: {
-        //Def.loadList()
+        Def.loadList()
         Def.loadMapList()
         Def.loadDescriptionList()
         Def.loadBrandList()
@@ -32,6 +32,7 @@ Page{
     ListModel{id:mapListModel}
     ListModel{id:buildingListModel}
     ListModel{id:zoneListModel}
+    ListModel{id:listModel}
 
     //Create editor to new or update one
     Editor{
@@ -83,11 +84,19 @@ Page{
                         id: columnDescription
                         Layout.leftMargin: 10
                         Label{
-                            text: name
+                            text: password
                             wrapMode: Label.Wrap
                             font.pixelSize: 16
                             font.bold: true
                             Layout.fillWidth: true
+
+                        }
+                        Label{
+                            text: description
+                            wrapMode: Label.Wrap
+                            font.pixelSize: 12
+                            Layout.fillWidth: true
+                            color: "grey"
 
                         }
                         Rectangle {
@@ -105,7 +114,7 @@ Page{
             Layout.fillWidth: true
             height: page.height
             focus: true
-            //model: listModel
+            model: listModel
             delegate: delegate
             ScrollIndicator.vertical: ScrollIndicator { }
         }
