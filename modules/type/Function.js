@@ -15,13 +15,13 @@ function loadList(varType){
     }
 }
 
-function saveType(varType, varDescription){
+function saveType(varDescription){
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "INSERT INTO " + varType +" VALUES (?);"
+                        var qry = "INSERT INTO ReportType VALUES (?);"
                         tx.executeSql(qry, [varDescription])
-                        dialogType.setSettings("Saved","New " + varType + " "+ varDescription + " saved correctly")
+                        dialogType.setSettings("Saved","New "+ varDescription + " saved correctly")
 
                         typeListModel.append({"description":varDescription})
                         dialogType.open()
@@ -34,14 +34,14 @@ function saveType(varType, varDescription){
     }
 }
 
-function deleteType(varType, varDescription, varIndex){
+function deleteType(varDescription, varIndex){
     try{
         db.transaction(
                     function(tx) {
-                        var qry = "DELETE FROM " + varType + " WHERE description = ?;"
+                        var qry = "DELETE FROM ReportType WHERE description = ?;"
                         tx.executeSql(qry,[varDescription])
                         dialogType.setSettings("Delete",
-                                               "You delete the "+ varType + " " + varDescription + " correctly")
+                                               "You delete the type " +  varDescription + " correctly")
                         typeField.text = ""
                         typeListModel.remove(varIndex)
                         dialogType.open()
@@ -58,6 +58,7 @@ function blankSpace(){
         dialogType.setSettings("Error","The TextField is blank")
         dialogType.open()
     }else{
-        saveType(definedTypes.get(typeSelect.currentIndex).table, typeField.text)
+        //saveType(definedTypes.get(typeSelect.currentIndex).table, typeField.text)
+        saveType(typeField.text)
     }
 }

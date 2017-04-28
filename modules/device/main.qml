@@ -119,7 +119,7 @@ Page{
                             id: optionsMenu
                             //transformOrigin: deviceToolButton
                             MenuItem {
-                                text: "History"
+                                text: "Location"
                                 //onTriggered: aboutDialog.open()
                             }
 

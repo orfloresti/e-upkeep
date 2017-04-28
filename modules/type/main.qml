@@ -115,9 +115,7 @@ Page {
                         color: "Black"
                     }
                     Layout.rightMargin: space
-                    onClicked: Type.deleteType(definedTypes.get(typeSelect.currentIndex).table,
-                                                       typeUserComboBox.currentText,
-                                                       typeUserComboBox.currentIndex)
+                    onClicked: Type.deleteType(typeUserComboBox.currentText,typeUserComboBox.currentIndex)
                 }
             }
         }
