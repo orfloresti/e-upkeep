@@ -48,10 +48,10 @@ ToolBar{
             text: "About"
             onTriggered: aboutDialog.open()
         }
-        /*MenuItem{
+        MenuItem{
             text:"Settings"
             onTriggered: settingsDialog.open()
-        }*/
+        }
         MenuItem {
             text: "Close"
             onTriggered: close()

@@ -33,6 +33,7 @@ ApplicationWindow {
         id: moduleListModel
         ListElement { title: "Report"; source: "qrc:/modules/report/main.qml" }
         ListElement { title: "  » Type"; source: "qrc:/modules/type/main.qml"}
+        //ListElement { title: "  » History"; source: ""}
         ListElement { title: "Device"; source:"qrc:/modules/device/main.qml" }
         ListElement { title: "  » Category"; source:"qrc:/modules/category/main.qml" }
         ListElement { title: "  » Brand"; source:"qrc:/modules/brand/main.qml" }
@@ -49,7 +50,7 @@ ApplicationWindow {
         anchors.fill: parent
         initialItem:Page{
 
-        }        
+        }
     }
 
     //Load the data base

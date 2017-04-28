@@ -47,9 +47,9 @@ Page{
 
                 SwipeDelegate{
                     id: swipeDelegate
-                    width: parent.width
+                    width: page.width
                     height: componentDescription.height + 20
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    //anchors.horizontalCenter: parent.horizontalCenter
 
                     swipe.left: Component {
                         Rectangle {

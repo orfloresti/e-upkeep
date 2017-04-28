@@ -66,8 +66,8 @@ Page{
                 Layout.bottomMargin: space
 
                 Image {
-                    width: 150
-                    height: 150
+                    width: 100
+                    height: 100
                     id: image
                     anchors.centerIn: parent
                     source: "qrc:/images/edit-paste.png"
@@ -87,11 +87,12 @@ Page{
                     //Layout.leftMargin: space
                     //Layout.rightMargin: space
                 }
-                TextField {
+                TextArea {
                     id: descriptionField
                     selectByMouse: true
                     placeholderText: "Category description"
                     Layout.fillWidth: true
+                    wrapMode: TextArea.Wrap
                     //Layout.leftMargin: space
                     //Layout.rightMargin: space
                 }

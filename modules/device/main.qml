@@ -73,8 +73,8 @@ Page{
                         width: image.width
                         height: image.height
                         Image {
-                            width: columnDescription.height
-                            height: columnDescription.height
+                            width: 50
+                            height: 50
                             id: image
                             anchors.centerIn: parent
                             source: "qrc:/images/media-flash.png"
@@ -105,6 +105,26 @@ Page{
                             Layout.fillWidth: true
                         }
                     }
+                    ToolButton{
+                        id:deviceToolButton
+                        contentItem: Image {
+                            fillMode: Image.Pad
+                            horizontalAlignment: Image.AlignHCenter
+                            verticalAlignment: Image.AlignVCenter
+                            source: "qrc:/icons/menu.png"
+                        }
+                        onClicked: optionsMenu.open()
+
+                        Menu {
+                            id: optionsMenu
+                            //transformOrigin: deviceToolButton
+                            MenuItem {
+                                text: "History"
+                                //onTriggered: aboutDialog.open()
+                            }
+
+                        }
+                    }
                 }
                 onClicked: Def.modeEditor(swipe.position,index)
             }
@@ -119,6 +139,8 @@ Page{
             ScrollIndicator.vertical: ScrollIndicator { }
         }
     }
+
+
 
     AddButton{
         id: addUserButton

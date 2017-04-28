@@ -26,24 +26,28 @@ Page{
 
     onUpdatePasswordDevice: {
         passwordField.text = categoryPassword + brandPassword + numberField.text
-
     }
 
     //Signals to create new user or update new one
     signal newItem()
-    signal updateItem()
+    signal updateItem(string varPassword,string varCategory,string varBrand,string varDescription,string varModel,string varSerial)
 
     onNewItem: {
         moduleName = "New Device"
         newState = true
 
-        passwordField.clear()
-        //spinBox.value = 1
+        numberField.enabled = true
+        numberField.clear()
+        descriptionField.clear()
+        modelField.clear()
+        serialNumberField.clear()
         categoryComboBox.currentIndex = -1
-        brandComboBox.currentIndex =-1
-        //mapComboBox.currentIndex = -1
-        //buildingComboBox.currentIndex = -1
-        //zoneComboBox.currentIndex = -1
+        brandComboBox.currentIndex = -1
+        categoryComboBox.enabled = true
+        brandComboBox.enabled = true
+        brandPassword = ""
+        categoryPassword = ""
+        passwordField.clear()
 
         button.text = "Save"
         //passwordField.enabled = true
@@ -53,10 +57,32 @@ Page{
         moduleName = "Update Device"
         newState = false
 
-        //actualName = varName
-        //nameField.text = varName
+        numberField.enabled = false
+        descriptionField.text = varDescription
+        modelField.text = varModel
+        serialNumberField.text = varSerial
 
-        button.text = "Update device information"
+        //Determine the index of the listModel
+        var i = 0;
+
+        for(i = 0; i < categoryListModel.count; i++){
+            if(varCategory === categoryListModel.get(i).description){
+                categoryComboBox.currentIndex = parseInt(i);
+            }
+        }
+
+        for(i = 0; i < brandListModel.count; i++){
+            if(varBrand === brandListModel.get(i).name){
+                brandComboBox.currentIndex = parseInt(i);
+            }
+        }
+
+        categoryComboBox.enabled = false
+        brandComboBox.enabled = false
+
+        passwordField.text = varPassword
+
+        button.text = "Update"
         //passwordField.enabled = false
     }
 
@@ -87,11 +113,11 @@ Page{
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.topMargin: space
-                Layout.bottomMargin: space
+                //Layout.bottomMargin: space
 
                 Image {
-                    width: 150
-                    height: 150
+                    width: 100
+                    height: 100
                     id: newUserImage
                     anchors.centerIn: parent
                     source: "qrc:/images/media-flash.png"
@@ -107,7 +133,7 @@ Page{
             }
 */
             GridLayout{
-                Layout.topMargin: space
+                //Layout.topMargin: space
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 columnSpacing: space
@@ -141,16 +167,16 @@ Page{
                     textRole: "description"
                     Layout.fillWidth: true
                     onCurrentTextChanged: {
-                        categoryPassword = categoryListModel.get(categoryComboBox.currentIndex).password;
-                        updatePasswordDevice()
+                        if(categoryComboBox.currentIndex != -1){
+                            categoryPassword = categoryListModel.get(categoryComboBox.currentIndex).password;
+                            updatePasswordDevice()
+                        }
                     }
-
                 }
 
                 Label {
                     text: "Brand"
                     //Layout.rightMargin: space
-
                 }
 
                 ComboBox{
@@ -159,10 +185,11 @@ Page{
                     textRole: "name"
                     Layout.fillWidth: true
                     onCurrentTextChanged: {
-                        brandPassword = brandListModel.get(brandComboBox.currentIndex).password;
-                        updatePasswordDevice()
+                        if(brandComboBox.currentIndex != -1){
+                            brandPassword = brandListModel.get(brandComboBox.currentIndex).password;
+                            updatePasswordDevice()
+                        }
                     }
-
                 }
 
                 Label {
@@ -185,11 +212,12 @@ Page{
                     text: "Description"
                     //Layout.rightMargin: space
                 }
-                TextField {
+                TextArea {
                     id: descriptionField
                     selectByMouse: true
                     placeholderText: "Description"
                     Layout.fillWidth: true
+                    wrapMode: TextArea.Wrap
                     //Layout.rightMargin: space
 
                 }

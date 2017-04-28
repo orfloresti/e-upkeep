@@ -26,6 +26,7 @@ Page {
     //Clear the type list on the beginning
     Component.onCompleted: {
         typeListModel.clear()
+        Type.loadList("ReportType")
     }
 
     //Main page
@@ -47,7 +48,7 @@ Page {
                 Layout.rightMargin: space
                 Layout.topMargin: space
             }
-
+/*
             Label {
                 text: "Select the category"
                 Layout.fillWidth: true
@@ -66,10 +67,10 @@ Page {
                 textRole: "title"
                 onCurrentTextChanged: {
                     //console.log(definedTypes.get(typeSelect.currentIndex).table)
-                    Type.loadList(definedTypes.get(typeSelect.currentIndex).table)
+                    //Type.loadList(definedTypes.get(typeSelect.currentIndex).table)
                 }
             }
-
+*/
             Label {
                 text: "Type Settings"
                 Layout.fillWidth: true

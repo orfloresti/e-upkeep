@@ -101,11 +101,11 @@ Page {
                 Layout.leftMargin: space
                 Layout.rightMargin: space
                 Layout.topMargin: space
-                Layout.bottomMargin: space
+                //Layout.bottomMargin: space
 
                 Image {
-                    width: 150
-                    height: 150
+                    width: 100
+                    height: 100
                     id: newUserImage
                     anchors.centerIn: parent
                     source: "qrc:/images/avatar-default.png"
@@ -135,11 +135,12 @@ Page {
                     //Layout.leftMargin: space
                     //Layout.rightMargin: space
                 }
-                TextField {
+                TextArea {
                     id: nameField
                     selectByMouse: true
-                    placeholderText: "Name"
+                    placeholderText: "Full name"
                     Layout.fillWidth: true
+                    wrapMode: TextArea.Wrap
                     //Layout.leftMargin: space
                     //Layout.rightMargin: space
                 }

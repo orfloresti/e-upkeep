@@ -1,5 +1,4 @@
 //load the lists
-
 function loadList(){
     listModel.clear()
     try{
@@ -9,7 +8,11 @@ function loadList(){
                         var results = tx.executeSql(qry)
                         for(var i = 0; i < results.rows.length; i++){
                             listModel.append({"password":results.rows.item(i).password,
-                                                "description":results.rows.item(i).description})
+                                             "description":results.rows.item(i).description,
+                                             "category":results.rows.item(i).categoryPassword,
+                                             "brand":results.rows.item(i).brandPassword,
+                                             "model":results.rows.item(i).model,
+                                             "serialNumber":results.rows.item(i).serialNumber})
 
                         }
                     })
@@ -124,7 +127,7 @@ function saveLocation(varDevicePassword, varMonth, varDay, varYear, varZone, var
 }
 
 //Save new item in data base
-function saveItem(varPassword,varDescription,varCategory,varBrand,varModel,varSerial){
+function saveItem(varPassword,varCategory,varBrand,varDescription,varModel,varSerial){
 
     try{
         db.transaction(
@@ -143,13 +146,13 @@ function saveItem(varPassword,varDescription,varCategory,varBrand,varModel,varSe
 }
 
 //Update item in data base
-function updateItem(varName) {
+function updateItem(varPassword,varCategory,varBrand,varDescription,varModel,varSerial) {
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("UPDATE Device SET password=? stock=? categoryPassword=? brandPassword=? zoneName=? buildingName=? mapName=? WHERE name=?",
-                                      [varName, actualName]);
-                        dialog.setSettings("Updated","Component with password "+ varName + " saved correctly");
+                        tx.executeSql("UPDATE Device SET password=?, description=?, categoryPassword=?, brandPassword=?, model=?, serialNumber=? WHERE password=?",
+                                      [varPassword,varDescription,varCategory,varBrand,varModel,varSerial,varPassword,]);
+                        dialog.setSettings("Updated","Devicet with password "+ varPassword + " saved correctly");
                         dialog.open();
                         errorSaving = false;
 
@@ -175,24 +178,35 @@ function errorSavingItem(){
 function saving(newState){
     if(newState === true){
         saveItem(passwordField.text,
-                 descriptionField.text,
                  categoryComboBox.currentText,
                  brandComboBox.currentText,
+                 descriptionField.text,
                  modelField.text,
                  serialNumberField.text
                  )
     }else{
-        updateItem(nameField.text)
+        updateItem(passwordField.text,
+                   categoryComboBox.currentText,
+                   brandComboBox.currentText,
+                   descriptionField.text,
+                   modelField.text,
+                   serialNumberField.text
+                   )
     }
 }
 
 //Option to update or delete
 function modeEditor(position,index){
     if(position === 0){
-        editor.updateItem(listModel.get(index).name)
+        editor.updateItem(listModel.get(index).password,                          
+                          listModel.get(index).category,
+                          listModel.get(index).brand,
+                          listModel.get(index).description,
+                          listModel.get(index).model,
+                          listModel.get(index).serialNumber)
         stackView.push(editor)
     }else{
-        deleteItem(listModel.get(index).name)
+        deleteItem(listModel.get(index).password)
         listModel.remove(index)
     }
 }
@@ -202,9 +216,9 @@ function deleteItem(varName){
     try{
         db.transaction(
                     function(tx) {
-                        tx.executeSql("DELETE FROM Brand WHERE name = ?;",[varName])
+                        tx.executeSql("DELETE FROM Device WHERE password = ?;",[varName])
                         dialog.setSettings("Delete",
-                                               "You delete the brand named " + varName + " correctly")
+                                               "You delete the device " + varName + " correctly")
                         dialog.open()
                     })
 
