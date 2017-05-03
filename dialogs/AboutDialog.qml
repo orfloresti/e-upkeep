@@ -20,12 +20,12 @@ Dialog {
 
 
         Image {
-            source: "qrc:/eUpkeep.svg"
+            source: "qrc:/eRassini.svg"
         }
 
         Label {
             width: aboutDialog.availableWidth
-            text: "eUpkeep is an application tool for the maintenance of electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
+            text: "eRassini is a CMMS (Computerized Maintenance Management System) for electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }
