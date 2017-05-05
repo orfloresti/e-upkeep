@@ -20,7 +20,7 @@ Dialog {
 
 
         Image {
-            source: "qrc:/eRassini.svg"
+            source: "qrc:/icons/logo.png"
         }
 
         Label {

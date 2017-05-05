@@ -267,6 +267,19 @@ Page{
 
                     ColumnLayout{
                         Label {
+                            text: "Year"
+                        }
+
+                        TextField{
+                            id: yearTextField
+                            selectByMouse: true
+                            placeholderText: "YYYY"
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    ColumnLayout{
+                        Label {
                             text: "Month"
                         }
 
@@ -287,19 +300,6 @@ Page{
                             id: dayTextField
                             selectByMouse: true
                             placeholderText: "DD"
-                            Layout.fillWidth: true
-                        }
-                    }
-
-                    ColumnLayout{
-                        Label {
-                            text: "Year"
-                        }
-
-                        TextField{
-                            id: yearTextField
-                            selectByMouse: true
-                            placeholderText: "YYYY"
                             Layout.fillWidth: true
                         }
                     }
