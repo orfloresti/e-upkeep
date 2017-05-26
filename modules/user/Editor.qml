@@ -128,6 +128,7 @@ Page {
                     selectByMouse: true
                     placeholderText: "Password"
                     Layout.fillWidth: true
+                    inputMethodHints: Qt.ImhDialableCharactersOnly
                 }
                 Label {
                     text: "Name"

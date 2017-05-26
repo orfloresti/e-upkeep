@@ -11,7 +11,17 @@ Page {
         currentIndex: tabBar.currentIndex
 
         Item {
+            /*RoundButton {
+                text: qsTr("+")
+                highlighted: true
+                anchors.margins: 10
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                onClicked: {
+                    console.log("Click")
 
+                }
+            }*/
         }
         Item {
 

@@ -105,7 +105,7 @@ Page{
                             Layout.fillWidth: true
                         }
                     }
-                    /*ToolButton{
+                    ToolButton{
                         id:deviceToolButton
                         contentItem: Image {
                             fillMode: Image.Pad
@@ -124,7 +124,7 @@ Page{
                             }
 
                         }
-                    }*/
+                    }
                 }
                 onClicked: Def.modeEditor(swipe.position,index)
             }
