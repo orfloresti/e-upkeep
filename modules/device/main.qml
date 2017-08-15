@@ -105,6 +105,8 @@ Page{
                             Layout.fillWidth: true
                         }
                     }
+
+
                     ToolButton{
                         id:deviceToolButton
                         contentItem: Image {
@@ -120,7 +122,9 @@ Page{
                             //transformOrigin: deviceToolButton
                             MenuItem {
                                 text: "Location"
-                                //onTriggered: aboutDialog.open()
+                                onTriggered: {
+                                    console.log("Location")                                }
+
                             }
 
                         }
@@ -154,4 +158,4 @@ Page{
         }
     }
 }
-
+// r b v n
