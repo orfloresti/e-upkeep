@@ -42,6 +42,5 @@
         <file>images/edit-paste.png</file>
         <file>icons/logo.png</file>
         <file>icons/addButtonShallow.png</file>
-        <file>eRassini.svg</file>
     </qresource>
 </RCC>

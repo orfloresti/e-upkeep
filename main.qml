@@ -14,7 +14,7 @@ ApplicationWindow {
     property string serverIp: "192.168.56.101"
 
     //Module name and module index
-    property string appName: "eRassini"
+    property string appName: "eUpkeep"
     property string moduleName: appName
     property int moduleIdex
 

@@ -25,13 +25,7 @@ Dialog {
 
         Label {
             width: aboutDialog.availableWidth
-            text: "eRassini is a CMMS (Computerized Maintenance Management System) for electronics boards, inventory control, report creator and more modules to make the electronics easy and fun."
-            wrapMode: Label.Wrap
-            font.pixelSize: 12
-        }
-        Label {
-            width: aboutDialog.availableWidth
-            text: "Language: Qt 5.8"
+            text: "eUpkeep is a CMMS (Computerized Maintenance Management System)"
             wrapMode: Label.Wrap
             font.pixelSize: 12
         }
